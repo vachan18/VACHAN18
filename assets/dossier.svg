@@ -1,182 +1,681 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1040" viewBox="0 0 1500 1040">
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
 <defs>
-<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0%" stop-color="#050811"/>
-  <stop offset="45%" stop-color="#0A1021"/>
-  <stop offset="100%" stop-color="#04060D"/>
+<linearGradient id="bg-canvas" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0%" stop-color="#04060E"/>
+  <stop offset="50%" stop-color="#070C1A"/>
+  <stop offset="100%" stop-color="#03050B"/>
 </linearGradient>
-<linearGradient id="glow-cyan" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0%" stop-color="#00F0FF"/>
-  <stop offset="100%" stop-color="#0080FF"/>
+<linearGradient id="grad-cyan" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0%" stop-color="#00E5FF"/>
+  <stop offset="100%" stop-color="#0088FF"/>
 </linearGradient>
-<linearGradient id="glow-magenta" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="grad-magenta" x1="0" y1="0" x2="1" y2="0">
   <stop offset="0%" stop-color="#FF168A"/>
-  <stop offset="100%" stop-color="#9A00FF"/>
+  <stop offset="100%" stop-color="#8B35FF"/>
 </linearGradient>
-<linearGradient id="glow-duo" x1="0" y1="0" x2="1" y2="1">
+<linearGradient id="grad-duo" x1="0" y1="0" x2="1" y2="1">
   <stop offset="0%" stop-color="#FF168A"/>
-  <stop offset="50%" stop-color="#7B2CBF"/>
-  <stop offset="100%" stop-color="#20E8FF"/>
+  <stop offset="45%" stop-color="#8B35FF"/>
+  <stop offset="100%" stop-color="#00E5FF"/>
 </linearGradient>
 <pattern id="cyber-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-  <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#162A3E" stroke-width="0.8" opacity="0.32"/>
+  <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#101F33" stroke-width="0.8" opacity="0.32"/>
 </pattern>
-<filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
-  <feGaussianBlur stdDeviation="3" result="blur"/>
-  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-</filter>
 </defs>
-<rect width="1500" height="1040" fill="url(#bg)"/>
-<rect width="1500" height="1040" fill="url(#cyber-grid)"/>
-<rect x="12" y="12" width="1476" height="1016" rx="10" fill="none" stroke="url(#glow-duo)" stroke-width="1.8" opacity="0.85"/>
-<text x="36" y="22" fill="#5F7D95" font-size="10" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="2">SYS-ID: VACHAN-18 // PROTOCOL: CYBER-ENG // NODE: BANGALORE-IN</text>
-<text x="1464" y="22" fill="#5F7D95" font-size="10" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="2" text-anchor="end">STATUS: OPERATIONAL // SYNC: 2026-11-15 08:05 UTC</text>
-<path d="M 46 36 H 710 L 728 54 V 362 L 710 380 H 46 L 28 362 V 54 Z" fill="#080D17" stroke="#FF168A" stroke-width="1.6" opacity="0.95"/><path d="M 30 68 H 726" stroke="#FF168A" stroke-width="0.8" opacity="0.4"/><path d="M 34 52 L 44 42" stroke="#20E8FF" stroke-width="2" fill="none"/><path d="M 712 374 L 722 364" stroke="#20E8FF" stroke-width="2" fill="none"/><text x="52" y="59" fill="#FF168A" font-size="14" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1.5">PANEL 01 // OPERATOR IDENTITY</text><text x="704" y="59" fill="#6C879B" font-size="11" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end" letter-spacing="1">CLEARANCE: LVL-4</text>
-<rect x="52" y="84" width="88" height="88" rx="8" fill="#0C1524" stroke="#20E8FF" stroke-width="1.4"/>
-<text x="96" y="130" fill="#20E8FF" font-size="34" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="middle">V</text>
-<text x="96" y="158" fill="#FF168A" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="middle">EXE.01</text>
-<text x="156" y="112" fill="#FFFFFF" font-size="30" font-weight="800" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" letter-spacing="0.5">Vachan U S</text>
-<text x="156" y="138" fill="#20E8FF" font-size="13" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1">SOFTWARE ENGINEER @ SYNAPX</text>
-<text x="156" y="160" fill="#FF4BA8" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">Bangalore, India · Computer Science &amp; Engineering</text>
-<text x="52" y="198" fill="#D5E5F2" font-size="13" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Building intelligent applications, engineering reliable systems,</text>
-<text x="52" y="218" fill="#D5E5F2" font-size="13" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">and exploring the next generation of software.</text>
-<rect x="52" y="244" width="316" height="40" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
-<text x="64" y="260" fill="#7693A8" font-size="10" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-weight="600">ORGANIZATION</text>
-<text x="64" y="275" fill="#20E8FF" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-weight="700">Synapx</text>
-<rect x="384" y="244" width="316" height="40" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
-<text x="396" y="260" fill="#7693A8" font-size="10" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-weight="600">LOCATION</text>
-<text x="396" y="275" fill="#FF4BA8" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-weight="700">Bangalore, India</text>
-<rect x="52" y="292" width="316" height="40" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
-<text x="64" y="308" fill="#7693A8" font-size="10" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-weight="600">EDUCATION</text>
-<text x="64" y="323" fill="#20E8FF" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-weight="700">Dr. Ambedkar Inst. of Tech (2022-26)</text>
-<rect x="384" y="292" width="316" height="40" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
-<text x="396" y="308" fill="#7693A8" font-size="10" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-weight="600">SYSTEM STATUS</text>
-<text x="396" y="323" fill="#00FF9D" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" font-weight="700">ACTIVE // DEPLOYED IN PROD</text>
-<text x="52" y="362" fill="#5F7D95" font-size="10.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1">CORE FOCUS: AI SYSTEMS · BACKEND INFRASTRUCTURE · CLOUD &amp; DATA PIPELINES</text>
-<path d="M 774 36 H 1454 L 1472 54 V 362 L 1454 380 H 774 L 756 362 V 54 Z" fill="#080D17" stroke="#20E8FF" stroke-width="1.6" opacity="0.95"/><path d="M 758 68 H 1470" stroke="#20E8FF" stroke-width="0.8" opacity="0.4"/><path d="M 762 52 L 772 42" stroke="#20E8FF" stroke-width="2" fill="none"/><path d="M 1456 374 L 1466 364" stroke="#20E8FF" stroke-width="2" fill="none"/><text x="780" y="59" fill="#20E8FF" font-size="14" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1.5">PANEL 02 // TECHNOLOGY CAPABILITY MATRIX</text><text x="1448" y="59" fill="#6C879B" font-size="11" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end" letter-spacing="1">CAP-MATRIX.SYS</text>
-<text x="780" y="98" fill="#FF168A" font-size="11.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1">LANGUAGES</text>
-<text x="780" y="118" fill="#E2F0FB" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">Python  ·  JavaScript  ·  Java  ·  TypeScript  ·  HTML  ·  CSS</text>
-<path d="M 780 130 H 1448" stroke="#1A2D3E" stroke-width="0.8"/>
-<text x="780" y="154" fill="#20E8FF" font-size="11.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1">FRAMEWORKS</text>
-<text x="780" y="174" fill="#E2F0FB" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">Django  ·  Flask  ·  React  ·  Node.js  ·  Tailwind CSS</text>
-<path d="M 780 186 H 1448" stroke="#1A2D3E" stroke-width="0.8"/>
-<text x="780" y="210" fill="#00FF9D" font-size="11.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1">AI &amp; MACHINE LEARNING</text>
-<text x="780" y="230" fill="#E2F0FB" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">OpenAI API  ·  Claude API  ·  Gemini API  ·  LangChain  ·  LangGraph  ·  CrewAI</text>
-<path d="M 780 242 H 1448" stroke="#1A2D3E" stroke-width="0.8"/>
-<text x="780" y="266" fill="#20E8FF" font-size="11.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1">CLOUD &amp; DATA</text>
-<text x="780" y="286" fill="#E2F0FB" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">AWS  ·  MySQL  ·  MongoDB  ·  Firebase  ·  Docker  ·  Kubernetes</text>
-<path d="M 780 298 H 1448" stroke="#1A2D3E" stroke-width="0.8"/>
-<text x="780" y="322" fill="#FF4BA8" font-size="11.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1">ENGINEERING &amp; DEVOPS</text>
-<text x="780" y="342" fill="#E2F0FB" font-size="11.5" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">Linux  ·  Git  ·  GitHub Actions  ·  Nginx  ·  PM2  ·  REST APIs</text>
-<path d="M 46 396 H 946 L 964 414 V 994 L 946 1012 H 46 L 28 994 V 414 Z" fill="#080D17" stroke="#FF168A" stroke-width="1.6" opacity="0.95"/><path d="M 30 428 H 962" stroke="#FF168A" stroke-width="0.8" opacity="0.4"/><path d="M 34 412 L 44 402" stroke="#20E8FF" stroke-width="2" fill="none"/><path d="M 948 1006 L 958 996" stroke="#20E8FF" stroke-width="2" fill="none"/><text x="52" y="419" fill="#FF168A" font-size="14" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1.5">PANEL 03 // CLASSIFIED PROJECT ARCHIVE</text><text x="940" y="419" fill="#6C879B" font-size="11" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end" letter-spacing="1">6 CORE BUILDS</text>
-<rect x="52" y="442" width="286" height="265" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
-<rect x="52" y="442" width="286" height="3" rx="1.5" fill="#FF168A"/>
-<text x="66" y="466" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">SYS-01</text>
-<text x="324" y="466" fill="#FF4BA8" font-size="9.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">COMPUTER VISION / IOT</text>
-<text x="66" y="492" fill="#FFFFFF" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">AI-Powered Pesticide</text>
-<text x="66" y="511" fill="#FFFFFF" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Spraying Robot</text>
-<text x="66" y="536" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Solar-powered autonomous</text>
-<text x="66" y="553" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">agricultural robot for plant</text>
-<text x="66" y="570" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">disease detection and precision</text>
-<rect x="64" y="653" width="262" height="22" rx="4" fill="#132032" stroke="#1F364E" stroke-width="0.8"/>
-<text x="70" y="668" fill="#20E8FF" font-size="10" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">Python · YOLOv8 · PyTorch</text>
-<text x="66" y="693" fill="#FF168A" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="0.5">OPEN REPOSITORY ↗</text>
-<rect x="353" y="442" width="286" height="265" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
-<rect x="353" y="442" width="286" height="3" rx="1.5" fill="#FF168A"/>
-<text x="367" y="466" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">SYS-02</text>
-<text x="625" y="466" fill="#FF4BA8" font-size="9.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">GENERATIVE AI</text>
-<text x="367" y="492" fill="#FFFFFF" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">GenAI Banking Agent</text>
-<text x="367" y="536" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Conversational AI banking</text>
-<text x="367" y="553" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">assistant designed to support</text>
-<text x="367" y="570" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">intelligent banking</text>
-<rect x="365" y="653" width="262" height="22" rx="4" fill="#132032" stroke="#1F364E" stroke-width="0.8"/>
-<text x="371" y="668" fill="#20E8FF" font-size="10" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">Python · Generative AI · LLMs</text>
-<text x="367" y="693" fill="#FF168A" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="0.5">OPEN REPOSITORY ↗</text>
-<rect x="654" y="442" width="286" height="265" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
-<rect x="654" y="442" width="286" height="3" rx="1.5" fill="#FF168A"/>
-<text x="668" y="466" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">SYS-03</text>
-<text x="926" y="466" fill="#FF4BA8" font-size="9.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">AI LEARNING</text>
-<text x="668" y="492" fill="#FFFFFF" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">StudyMind</text>
-<text x="668" y="536" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">AI-powered learning platform</text>
-<text x="668" y="553" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">designed to improve learning</text>
-<text x="668" y="570" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">through intelligent study</text>
-<rect x="666" y="653" width="262" height="22" rx="4" fill="#132032" stroke="#1F364E" stroke-width="0.8"/>
-<text x="672" y="668" fill="#20E8FF" font-size="10" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">Python · Generative AI · JavaSc...</text>
-<text x="668" y="693" fill="#FF168A" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="0.5">OPEN REPOSITORY ↗</text>
-<rect x="52" y="723" width="286" height="265" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
-<rect x="52" y="723" width="286" height="3" rx="1.5" fill="#20E8FF"/>
-<text x="66" y="747" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">SYS-04</text>
-<text x="324" y="747" fill="#FF4BA8" font-size="9.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">MULTI-AGENT AI</text>
-<text x="66" y="773" fill="#FFFFFF" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">HireLens AI</text>
-<text x="66" y="817" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Multi-agent job rejection</text>
-<text x="66" y="834" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">analyzer that extracts insights</text>
-<text x="66" y="851" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">from recruitment outcomes.</text>
-<rect x="64" y="934" width="262" height="22" rx="4" fill="#132032" stroke="#1F364E" stroke-width="0.8"/>
-<text x="70" y="949" fill="#20E8FF" font-size="10" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">Python · Streamlit · CrewAI</text>
-<text x="66" y="974" fill="#FF168A" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="0.5">OPEN REPOSITORY ↗</text>
-<rect x="353" y="723" width="286" height="265" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
-<rect x="353" y="723" width="286" height="3" rx="1.5" fill="#20E8FF"/>
-<text x="367" y="747" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">SYS-05</text>
-<text x="625" y="747" fill="#FF4BA8" font-size="9.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">AI LEARNING</text>
-<text x="367" y="773" fill="#FFFFFF" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Lumiq</text>
-<text x="367" y="817" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Transforms study materials into</text>
-<text x="367" y="834" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">summaries, flashcards, quizzes</text>
-<text x="367" y="851" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">and mind maps.</text>
-<rect x="365" y="934" width="262" height="22" rx="4" fill="#132032" stroke="#1F364E" stroke-width="0.8"/>
-<text x="371" y="949" fill="#20E8FF" font-size="10" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">AI · Python · JavaScript</text>
-<text x="367" y="974" fill="#FF168A" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="0.5">OPEN REPOSITORY ↗</text>
-<rect x="654" y="723" width="286" height="265" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
-<rect x="654" y="723" width="286" height="3" rx="1.5" fill="#20E8FF"/>
-<text x="668" y="747" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">SYS-06</text>
-<text x="926" y="747" fill="#FF4BA8" font-size="9.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">WORKFLOW AUTOMATION</text>
-<text x="668" y="773" fill="#FFFFFF" font-size="14.5" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">AI Resume Analyzer</text>
-<text x="668" y="817" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Automated resume analysis</text>
-<text x="668" y="834" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">workflow using AI-powered</text>
-<text x="668" y="851" fill="#A6BFD2" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">processing and structured</text>
-<rect x="666" y="934" width="262" height="22" rx="4" fill="#132032" stroke="#1F364E" stroke-width="0.8"/>
-<text x="672" y="949" fill="#20E8FF" font-size="10" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">n8n · LLMs · Workflow Automation</text>
-<text x="668" y="974" fill="#FF168A" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="0.5">OPEN REPOSITORY ↗</text>
-<path d="M 1006 396 H 1454 L 1472 414 V 994 L 1454 1012 H 1006 L 988 994 V 414 Z" fill="#080D17" stroke="#20E8FF" stroke-width="1.6" opacity="0.95"/><path d="M 990 428 H 1470" stroke="#20E8FF" stroke-width="0.8" opacity="0.4"/><path d="M 994 412 L 1004 402" stroke="#20E8FF" stroke-width="2" fill="none"/><path d="M 1456 1006 L 1466 996" stroke="#20E8FF" stroke-width="2" fill="none"/><text x="1012" y="419" fill="#20E8FF" font-size="14" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1.5">PANEL 04 // GITHUB TELEMETRY</text><text x="1448" y="419" fill="#6C879B" font-size="11" font-weight="600" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end" letter-spacing="1">LIVE METRICS</text>
-<rect x="1012" y="442" width="206" height="76" rx="6" fill="#0C1524" stroke="#1F3347" stroke-width="1.2"/>
-<text x="1026" y="464" fill="#7B9BB2" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">PUBLIC REPOS</text>
-<text x="1026" y="500" fill="#20E8FF" font-size="28" font-weight="800" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">15</text>
-<rect x="1242" y="442" width="206" height="76" rx="6" fill="#0C1524" stroke="#1F3347" stroke-width="1.2"/>
-<text x="1256" y="464" fill="#7B9BB2" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">TOTAL STARS</text>
-<text x="1256" y="500" fill="#FF168A" font-size="28" font-weight="800" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">0</text>
-<rect x="1012" y="532" width="206" height="76" rx="6" fill="#0C1524" stroke="#1F3347" stroke-width="1.2"/>
-<text x="1026" y="554" fill="#7B9BB2" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">FOLLOWERS</text>
-<text x="1026" y="590" fill="#20E8FF" font-size="28" font-weight="800" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">1</text>
-<rect x="1242" y="532" width="206" height="76" rx="6" fill="#0C1524" stroke="#1F3347" stroke-width="1.2"/>
-<text x="1256" y="554" fill="#7B9BB2" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">FOLLOWING</text>
-<text x="1256" y="590" fill="#00FF9D" font-size="28" font-weight="800" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">4</text>
-<text x="1012" y="638" fill="#FF168A" font-size="12.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1">CODEBASE LANGUAGE DISTRIBUTION</text>
-<text x="1012" y="682" fill="#FFFFFF" font-size="11.5" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Python</text>
-<text x="1180" y="682" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">89.7%</text>
-<rect x="1194" y="672" width="230" height="10" rx="5" fill="#142132"/>
-<rect x="1194" y="672" width="206" height="10" rx="5" fill="url(#glow-magenta)"/>
-<text x="1012" y="723" fill="#FFFFFF" font-size="11.5" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">C++</text>
-<text x="1180" y="723" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">5.0%</text>
-<rect x="1194" y="713" width="230" height="10" rx="5" fill="#142132"/>
-<rect x="1194" y="713" width="11" height="10" rx="5" fill="url(#glow-cyan)"/>
-<text x="1012" y="764" fill="#FFFFFF" font-size="11.5" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">HTML</text>
-<text x="1180" y="764" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">2.3%</text>
-<rect x="1194" y="754" width="230" height="10" rx="5" fill="#142132"/>
-<rect x="1194" y="754" width="6" height="10" rx="5" fill="url(#glow-magenta)"/>
-<text x="1012" y="805" fill="#FFFFFF" font-size="11.5" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Cython</text>
-<text x="1180" y="805" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">2.0%</text>
-<rect x="1194" y="795" width="230" height="10" rx="5" fill="#142132"/>
-<rect x="1194" y="795" width="6" height="10" rx="5" fill="url(#glow-cyan)"/>
-<text x="1012" y="846" fill="#FFFFFF" font-size="11.5" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">C</text>
-<text x="1180" y="846" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">0.6%</text>
-<rect x="1194" y="836" width="230" height="10" rx="5" fill="#142132"/>
-<rect x="1194" y="836" width="6" height="10" rx="5" fill="url(#glow-magenta)"/>
-<text x="1012" y="887" fill="#FFFFFF" font-size="11.5" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">PHP</text>
-<text x="1180" y="887" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">0.1%</text>
-<rect x="1194" y="877" width="230" height="10" rx="5" fill="#142132"/>
-<rect x="1194" y="877" width="6" height="10" rx="5" fill="url(#glow-cyan)"/>
-<rect x="1012" y="930" width="436" height="62" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
-<text x="1024" y="949" fill="#00FF9D" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">● NODE STATUS: ONLINE [200 OK]</text>
-<text x="1024" y="966" fill="#7B9BB2" font-size="10" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">ENGINE: PYTHON 3.12 // GITHUB ACTIONS</text>
-<text x="1024" y="981" fill="#7B9BB2" font-size="10" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">SYNC: 2026-11-15 08:05 UTC</text>
+<rect width="1536" height="1024" fill="url(#bg-canvas)"/>
+<rect width="1536" height="1024" fill="url(#cyber-grid)"/>
+<rect x="12" y="10" width="1512" height="1004" rx="10" fill="none" stroke="url(#grad-duo)" stroke-width="1.8" opacity="0.85"/>
+<rect x="18" y="14" width="1500" height="32" rx="4" fill="#070D18" stroke="#16273C" stroke-width="1"/>
+<circle cx="34" cy="30" r="4" fill="#00FF9D"/>
+<circle cx="48" cy="30" r="4" fill="#00E5FF"/>
+<circle cx="62" cy="30" r="4" fill="#FF168A"/>
+<text x="82" y="34" fill="#00E5FF" font-size="11" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" letter-spacing="1.5">SYS.VACHAN.EXE // CYBERPUNK COMMAND CENTER v4.2</text>
+<text x="768" y="34" fill="#7898B0" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700" text-anchor="middle" letter-spacing="2">SECURITY CLEARANCE: LEVEL 5 // NODE: BLR-IN [12.97° N, 77.59° E]</text>
+<text x="1502" y="34" fill="#FF168A" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700" text-anchor="end" letter-spacing="1">STATUS: ONLINE [200 OK] // SYNC: 2026-11-15 08:30 UTC</text>
+<path d="M 40 56 H 384 L 400 72 V 454 L 384 470 H 40 L 24 454 V 72 Z" fill="#070B16" stroke="#00E5FF" stroke-width="1.4" opacity="0.96"/><path d="M 26 84 H 398" stroke="#00E5FF" stroke-width="0.8" opacity="0.35"/><path d="M 29 70 L 38 61" stroke="#FF168A" stroke-width="2" fill="none"/><path d="M 386 465 L 395 456" stroke="#FF168A" stroke-width="2" fill="none"/><text x="44" y="76" fill="#00E5FF" font-size="12" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">OPERATOR DOSSIER // IDENTITY</text><text x="380" y="76" fill="#6C879B" font-size="9.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end" letter-spacing="1">VACHAN.EXE</text>
+<text x="44" y="106" fill="#FFFFFF" font-size="24" font-weight="900" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" letter-spacing="0.5">VACHAN U S</text>
+<text x="380" y="104" fill="#00E5FF" font-size="14" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">V18</text>
+<text x="44" y="124" fill="#FF168A" font-size="10.5" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">ENGINEERING DIVISION // AI &amp; CLOUD SYSTEMS</text>
+<rect x="44" y="136" width="336" height="196" rx="6" fill="#060A14" stroke="#1A2D46" stroke-width="1.2"/><path d="M 44 312 L 64 312 L 64 267 L 82 267 L 82 292 L 94 292 L 94 242 L 102 222 L 110 242 L 110 297 L 124 297 L 124 257 L 149 257 L 149 307 L 164 307 L 164 232 L 180 232 L 180 287 L 199 287 L 199 252 L 219 252 L 219 302 L 239 302 L 239 217 L 246 202 L 254 217 L 254 282 L 274 282 L 274 247 L 294 247 L 294 297 L 314 297 L 314 262 L 339 262 L 339 302 L 359 302 L 359 237 L 374 237 L 374 312 L 380 312 L 380 332 L 44 332 Z" fill="#0A1322" opacity="0.75"/><circle cx="102" cy="220" r="2" fill="#00E5FF"/><circle cx="246" cy="200" r="2" fill="#FF168A"/><line x1="44" y1="317" x2="380" y2="317" stroke="#00E5FF" stroke-width="0.7" opacity="0.22999999999999998"/><line x1="44" y1="322" x2="380" y2="322" stroke="#00E5FF" stroke-width="0.7" opacity="0.31"/><line x1="44" y1="327" x2="380" y2="327" stroke="#00E5FF" stroke-width="0.7" opacity="0.39"/><line x1="44" y1="332" x2="380" y2="332" stroke="#00E5FF" stroke-width="0.7" opacity="0.47"/><path d="M 137 328 L 152 287 L 177 277 L 212 284 L 247 277 L 272 287 L 287 328 Z" fill="#091220" stroke="#1F3652" stroke-width="1.4"/><path d="M 137 328 L 152 287 L 177 277 L 212 284" stroke="#00E5FF" stroke-width="2" fill="none" opacity="0.9"/><path d="M 212 284 L 247 277 L 272 287 L 287 328" stroke="#FF168A" stroke-width="2" fill="none" opacity="0.9"/><rect x="196" y="256" width="32" height="26" fill="#0B1626"/><path d="M 182 258 L 180 228 C 178 194 246 194 244 228 L 242 258 Z" fill="#0D192C" stroke="#1D3654" stroke-width="1.3"/><path d="M 182 258 L 180 228 C 178 194 212 194" stroke="#00E5FF" stroke-width="1.8" fill="none"/><path d="M 212 194 C 246 194 244 228 L 242 258" stroke="#FF168A" stroke-width="1.8" fill="none"/><polygon points="184,230 240,230 236,244 188,244" fill="#00E5FF" opacity="0.85"/><line x1="186" y1="237" x2="238" y2="237" stroke="#FFFFFF" stroke-width="1.4"/><circle cx="220" cy="237" r="3.5" fill="#FF168A"/><circle cx="220" cy="237" r="1.5" fill="#FFFFFF"/><rect x="241" y="224" width="6" height="12" rx="2" fill="#FF168A"/><path d="M 247 230 Q 264 240 270 264" stroke="#FF168A" stroke-width="1.4" fill="none" stroke-dasharray="3 2"/><circle cx="212" cy="232" r="48" fill="none" stroke="#00E5FF" stroke-width="0.8" stroke-dasharray="4 6" opacity="0.45"/><path d="M 156 232 H 164 M 260 232 H 268 M 212 176 V 212 M 212 280 V 288" stroke="#00E5FF" stroke-width="1"/><path d="M 54 158 V 146 H 66" stroke="#00E5FF" stroke-width="1.5" fill="none"/><path d="M 358 146 H 370 V 158" stroke="#FF168A" stroke-width="1.5" fill="none"/><path d="M 54 310 V 322 H 66" stroke="#FF168A" stroke-width="1.5" fill="none"/><path d="M 358 322 H 370 V 310" stroke="#00E5FF" stroke-width="1.5" fill="none"/><rect x="54" y="308" width="316" height="16" fill="#070D1A" opacity="0.85"/><text x="60" y="320" fill="#00E5FF" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">BIOMETRIC: VERIFIED // ID: V18-EXEC</text><text x="364" y="320" fill="#FF168A" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700" text-anchor="end">CLEARANCE: LVL-5 ALPHA</text>
+<text x="44" y="358" fill="#627E94" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">ORGANIZATION:</text>
+<text x="160" y="358" fill="#00E5FF" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">Software Engineer @ Synapx</text>
+<path d="M 44 366 H 380" stroke="#132338" stroke-width="0.8"/>
+<text x="44" y="386" fill="#627E94" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">LOCATION:</text>
+<text x="160" y="386" fill="#FF168A" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">Bangalore, India</text>
+<path d="M 44 394 H 380" stroke="#132338" stroke-width="0.8"/>
+<text x="44" y="414" fill="#627E94" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">ACADEMICS:</text>
+<text x="160" y="414" fill="#00E5FF" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">B.Tech CSE (2022-26) · Dr. AIT</text>
+<path d="M 44 422 H 380" stroke="#132338" stroke-width="0.8"/>
+<text x="44" y="442" fill="#627E94" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">OPERATIONAL FOCUS:</text>
+<text x="160" y="442" fill="#00FF9D" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">Intelligent AI Agents &amp; Cloud Infra</text>
+<path d="M 44 450 H 380" stroke="#132338" stroke-width="0.8"/>
+<path d="M 40 480 H 384 L 400 496 V 794 L 384 810 H 40 L 24 794 V 496 Z" fill="#070B16" stroke="#FF168A" stroke-width="1.4" opacity="0.96"/><path d="M 26 508 H 398" stroke="#FF168A" stroke-width="0.8" opacity="0.35"/><path d="M 29 494 L 38 485" stroke="#FF168A" stroke-width="2" fill="none"/><path d="M 386 805 L 395 796" stroke="#FF168A" stroke-width="2" fill="none"/><text x="44" y="500" fill="#FF168A" font-size="12" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">MISSION TIMELINE // SERVICE RECORD</text><text x="380" y="500" fill="#6C879B" font-size="9.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end" letter-spacing="1">CAREER MATRIX</text>
+<line x1="60" y1="526" x2="60" y2="780" stroke="#1D3854" stroke-width="2"/>
+<line x1="60" y1="526" x2="60" y2="780" stroke="url(#grad-magenta)" stroke-width="1.2" opacity="0.8"/>
+<circle cx="60" cy="536" r="5.5" fill="#070C1A" stroke="#00E5FF" stroke-width="2"/>
+<circle cx="60" cy="536" r="2" fill="#00E5FF"/>
+<text x="76" y="532" fill="#00E5FF" font-size="9.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" letter-spacing="1">2026 – PRESENT</text>
+<text x="76" y="547" fill="#FFFFFF" font-size="11" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">Software Engineer @ Synapx</text>
+<text x="76" y="561" fill="#7F9BB2" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Intelligent AI applications &amp; backend architecture</text>
+<circle cx="60" cy="604" r="5.5" fill="#070C1A" stroke="#FF168A" stroke-width="2"/>
+<circle cx="60" cy="604" r="2" fill="#FF168A"/>
+<text x="76" y="600" fill="#FF168A" font-size="9.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" letter-spacing="1">FEB – MAY 2026</text>
+<text x="76" y="615" fill="#FFFFFF" font-size="11" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">Python Full Stack + GenAI @ Dhee</text>
+<text x="76" y="629" fill="#7F9BB2" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Full-stack development, Django, REST APIs &amp; LLMs</text>
+<circle cx="60" cy="672" r="5.5" fill="#070C1A" stroke="#8B35FF" stroke-width="2"/>
+<circle cx="60" cy="672" r="2" fill="#8B35FF"/>
+<text x="76" y="668" fill="#8B35FF" font-size="9.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" letter-spacing="1">AUG 2024 – JAN 2025</text>
+<text x="76" y="683" fill="#FFFFFF" font-size="11" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">Ethical Hacking Intern @ Studio</text>
+<text x="76" y="697" fill="#7F9BB2" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Vulnerability assessment &amp; web app security</text>
+<circle cx="60" cy="740" r="5.5" fill="#070C1A" stroke="#00E5FF" stroke-width="2"/>
+<circle cx="60" cy="740" r="2" fill="#00E5FF"/>
+<text x="76" y="736" fill="#00E5FF" font-size="9.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" letter-spacing="1">2022 – 2026</text>
+<text x="76" y="751" fill="#FFFFFF" font-size="11" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">B.Tech CSE @ Dr. Ambedkar Inst. of Tech</text>
+<text x="76" y="765" fill="#7F9BB2" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Computer Science &amp; Engineering · Bangalore</text>
+<path d="M 40 820 H 384 L 400 836 V 992 L 384 1008 H 40 L 24 992 V 836 Z" fill="#070B16" stroke="#00E5FF" stroke-width="1.4" opacity="0.96"/><path d="M 26 848 H 398" stroke="#00E5FF" stroke-width="0.8" opacity="0.35"/><path d="M 29 834 L 38 825" stroke="#FF168A" stroke-width="2" fill="none"/><path d="M 386 1003 L 395 994" stroke="#FF168A" stroke-width="2" fill="none"/><text x="44" y="840" fill="#00E5FF" font-size="12" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">ENGINEERING PHILOSOPHY // DIRECTIVE</text><text x="380" y="840" fill="#6C879B" font-size="9.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end" letter-spacing="1">DOCTRINE</text>
+<text x="48" y="882" fill="#00E5FF" font-size="16" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="900" letter-spacing="1.5">&gt; THINK DIFFERENTLY.</text>
+<text x="48" y="914" fill="#FFFFFF" font-size="16" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="900" letter-spacing="1.5">&gt; BUILD INTELLIGENTLY.</text>
+<text x="48" y="946" fill="#FF168A" font-size="16" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="900" letter-spacing="1.5">&gt; ENGINEER RELIABLY.</text>
+<rect x="44" y="966" width="336" height="24" rx="3" fill="#0C1626" stroke="#162D46" stroke-width="1"/>
+<text x="54" y="982" fill="#00FF9D" font-size="9.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">MISSION: ZERO-COMPROMISE PRODUCTION ARCHITECTURE</text>
+<path d="M 428 56 H 1132 L 1148 72 V 336 L 1132 352 H 428 L 412 336 V 72 Z" fill="#070B16" stroke="#00E5FF" stroke-width="1.4" opacity="0.96"/><path d="M 414 84 H 1146" stroke="#00E5FF" stroke-width="0.8" opacity="0.35"/><path d="M 417 70 L 426 61" stroke="#FF168A" stroke-width="2" fill="none"/><path d="M 1134 347 L 1143 338" stroke="#FF168A" stroke-width="2" fill="none"/><text x="432" y="76" fill="#00E5FF" font-size="12" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">CAPABILITY SPECTRUM &amp; TECH LOADOUT</text><text x="1128" y="76" fill="#6C879B" font-size="9.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end" letter-spacing="1">LOADOUT.SYS</text>
+<text x="432" y="108" fill="#FFFFFF" font-size="10" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">AI / ML</text>
+<text x="768" y="108" fill="#00E5FF" font-size="8.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">SPECIALIZED // MULTI-AGENT &amp; LLMS</text>
+<rect x="432" y="114" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="466" y="114" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="500" y="114" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="534" y="114" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="568" y="114" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="602" y="114" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="636" y="114" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="670" y="114" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="704" y="114" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="738" y="114" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<text x="784" y="108" fill="#FFFFFF" font-size="10" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">BACKEND ENGINEERING</text>
+<text x="1120" y="108" fill="#FF168A" font-size="8.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">CORE // DISTRIBUTED ARCHITECTURE</text>
+<rect x="784" y="114" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="818" y="114" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="852" y="114" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="886" y="114" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="920" y="114" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="954" y="114" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="988" y="114" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="1022" y="114" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="1056" y="114" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="1090" y="114" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<text x="432" y="144" fill="#FFFFFF" font-size="10" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">FULL-STACK DEV</text>
+<text x="768" y="144" fill="#00E5FF" font-size="8.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">PRODUCTION // DJANGO &amp; REACT</text>
+<rect x="432" y="150" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="466" y="150" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="500" y="150" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="534" y="150" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="568" y="150" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="602" y="150" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="636" y="150" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="670" y="150" width="30" height="6" rx="1.5" fill="#00E5FF" opacity="0.9"/>
+<rect x="704" y="150" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<rect x="738" y="150" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<text x="784" y="144" fill="#FFFFFF" font-size="10" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">CLOUD &amp; DEVOPS</text>
+<text x="1120" y="144" fill="#8B35FF" font-size="8.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">INFRASTRUCTURE // DOCKER &amp; AWS</text>
+<rect x="784" y="150" width="30" height="6" rx="1.5" fill="#8B35FF" opacity="0.9"/>
+<rect x="818" y="150" width="30" height="6" rx="1.5" fill="#8B35FF" opacity="0.9"/>
+<rect x="852" y="150" width="30" height="6" rx="1.5" fill="#8B35FF" opacity="0.9"/>
+<rect x="886" y="150" width="30" height="6" rx="1.5" fill="#8B35FF" opacity="0.9"/>
+<rect x="920" y="150" width="30" height="6" rx="1.5" fill="#8B35FF" opacity="0.9"/>
+<rect x="954" y="150" width="30" height="6" rx="1.5" fill="#8B35FF" opacity="0.9"/>
+<rect x="988" y="150" width="30" height="6" rx="1.5" fill="#8B35FF" opacity="0.9"/>
+<rect x="1022" y="150" width="30" height="6" rx="1.5" fill="#8B35FF" opacity="0.9"/>
+<rect x="1056" y="150" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<rect x="1090" y="150" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<text x="432" y="180" fill="#FFFFFF" font-size="10" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">CYBERSECURITY</text>
+<text x="768" y="180" fill="#FF168A" font-size="8.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">HARDENED // ETHICAL HACKING</text>
+<rect x="432" y="186" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="466" y="186" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="500" y="186" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="534" y="186" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="568" y="186" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="602" y="186" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="636" y="186" width="30" height="6" rx="1.5" fill="#FF168A" opacity="0.9"/>
+<rect x="670" y="186" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<rect x="704" y="186" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<rect x="738" y="186" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<text x="784" y="180" fill="#FFFFFF" font-size="10" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">SYSTEM DESIGN</text>
+<text x="1120" y="180" fill="#00FF9D" font-size="8.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">HIGH-RELIABILITY ARCHITECTURES</text>
+<rect x="784" y="186" width="30" height="6" rx="1.5" fill="#00FF9D" opacity="0.9"/>
+<rect x="818" y="186" width="30" height="6" rx="1.5" fill="#00FF9D" opacity="0.9"/>
+<rect x="852" y="186" width="30" height="6" rx="1.5" fill="#00FF9D" opacity="0.9"/>
+<rect x="886" y="186" width="30" height="6" rx="1.5" fill="#00FF9D" opacity="0.9"/>
+<rect x="920" y="186" width="30" height="6" rx="1.5" fill="#00FF9D" opacity="0.9"/>
+<rect x="954" y="186" width="30" height="6" rx="1.5" fill="#00FF9D" opacity="0.9"/>
+<rect x="988" y="186" width="30" height="6" rx="1.5" fill="#00FF9D" opacity="0.9"/>
+<rect x="1022" y="186" width="30" height="6" rx="1.5" fill="#00FF9D" opacity="0.9"/>
+<rect x="1056" y="186" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<rect x="1090" y="186" width="30" height="6" rx="1.5" fill="#132134" opacity="0.3"/>
+<path d="M 432 218 H 1128" stroke="#162D46" stroke-width="1"/>
+<text x="432" y="234" fill="#FF168A" font-size="10.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" letter-spacing="1">AUTHENTIC TECH STACK LOADOUT // EQUIPMENT MATRIX</text>
+<text x="432" y="260" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">LANGUAGES:</text>
+<text x="552" y="260" fill="#D8E8F5" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">Python · JavaScript · Java · TypeScript · HTML5 · CSS3</text>
+<text x="432" y="278" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">FRAMEWORKS:</text>
+<text x="552" y="278" fill="#D8E8F5" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">Django · Flask · React · Node.js · Tailwind CSS</text>
+<text x="432" y="296" fill="#00FF9D" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">AI / ML:</text>
+<text x="552" y="296" fill="#D8E8F5" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">OpenAI · Claude · Gemini · LangChain · CrewAI · PyTorch · YOLOv8</text>
+<text x="432" y="314" fill="#8B35FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">INFRASTRUCTURE:</text>
+<text x="552" y="314" fill="#D8E8F5" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">AWS · MySQL · MongoDB · Firebase · Docker · Kubernetes</text>
+<text x="432" y="332" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">ENGINEERING:</text>
+<text x="552" y="332" fill="#D8E8F5" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">Linux · Git · GitHub Actions · Nginx · PM2 · n8n · Make.com</text>
+<path d="M 428 362 H 1132 L 1148 378 V 768 L 1132 784 H 428 L 412 768 V 378 Z" fill="#070B16" stroke="#FF168A" stroke-width="1.4" opacity="0.96"/><path d="M 414 390 H 1146" stroke="#FF168A" stroke-width="0.8" opacity="0.35"/><path d="M 417 376 L 426 367" stroke="#FF168A" stroke-width="2" fill="none"/><path d="M 1134 779 L 1143 770" stroke="#FF168A" stroke-width="2" fill="none"/><text x="432" y="382" fill="#FF168A" font-size="12" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">FEATURED PROJECTS ARCHIVE // 6 CORE BUILDS</text><text x="1128" y="382" fill="#6C879B" font-size="9.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end" letter-spacing="1">PROJECTS P1-P6</text>
+<rect x="426" y="400" width="226" height="176" rx="6" fill="#080F1D" stroke="#1D344E" stroke-width="1.2"/>
+<rect x="426" y="400" width="226" height="2.5" rx="1" fill="#00E5FF"/>
+<text x="436" y="416" fill="#00E5FF" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">P1</text>
+<text x="642" y="416" fill="#7F9CB4" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700" text-anchor="end">COMPUTER VISION</text>
+<rect x="436" y="422" width="206" height="62" rx="4" fill="#0A1020" stroke="#182A40" stroke-width="1"/><path d="M 436 453 H 642 M 487 422 V 484 M 539 422 V 484 M 590 422 V 484" stroke="#132338" stroke-width="0.8"/><rect x="511" y="443" width="56" height="20" rx="3" fill="#0E1D32" stroke="#00E5FF" stroke-width="1.2"/><rect x="507" y="431" width="64" height="8" rx="2" fill="#152B46" stroke="#FF168A" stroke-width="1"/><circle cx="519" cy="467" r="6" fill="#1A2D44" stroke="#00E5FF" stroke-width="1.2"/><circle cx="559" cy="467" r="6" fill="#1A2D44" stroke="#00E5FF" stroke-width="1.2"/><circle cx="553" cy="449" r="12" fill="none" stroke="#FF168A" stroke-width="1" stroke-dasharray="2 2"/><path d="M 553 435 V 463 M 539 449 H 567" stroke="#FF168A" stroke-width="1.2"/><polygon points="553,449 626,474 614,474" fill="#00E5FF" opacity="0.25"/><text x="444" y="436" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">YOLOv8 // CV-ROVER</text>
+<text x="436" y="498" fill="#FFFFFF" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">AI-Powered Pesticide</text>
+<text x="436" y="512" fill="#FFFFFF" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">Spraying Robot</text>
+<text x="436" y="530" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Solar-powered autonomous</text>
+<text x="436" y="542" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">agricultural robot for plant</text>
+<text x="436" y="566" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">Python · YOLOv8 · PyTorch</text>
+<text x="642" y="566" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="end">OPEN ↗</text>
+<rect x="667" y="400" width="226" height="176" rx="6" fill="#080F1D" stroke="#1D344E" stroke-width="1.2"/>
+<rect x="667" y="400" width="226" height="2.5" rx="1" fill="#00E5FF"/>
+<text x="677" y="416" fill="#00E5FF" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">P2</text>
+<text x="883" y="416" fill="#7F9CB4" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700" text-anchor="end">GENERATIVE AI</text>
+<rect x="677" y="422" width="206" height="62" rx="4" fill="#0A1020" stroke="#182A40" stroke-width="1"/><path d="M 677 453 H 883 M 728 422 V 484 M 780 422 V 484 M 831 422 V 484" stroke="#132338" stroke-width="0.8"/><polygon points="780,429 804,441 804,465 780,477 756,465 756,441" fill="#0D1A30" stroke="#FF168A" stroke-width="1.4"/><text x="780" y="459" fill="#00E5FF" font-size="16" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="middle">₹</text><path d="M 738 443 Q 748 453 738 463" stroke="#00E5FF" stroke-width="1.5" fill="none"/><path d="M 730 437 Q 742 453 730 469" stroke="#8B35FF" stroke-width="1.2" fill="none"/><path d="M 822 443 Q 812 453 822 463" stroke="#00E5FF" stroke-width="1.5" fill="none"/><path d="M 830 437 Q 818 453 830 469" stroke="#8B35FF" stroke-width="1.2" fill="none"/><text x="685" y="436" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">FIN-LLM // SECURE</text>
+<text x="677" y="498" fill="#FFFFFF" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">GenAI Banking Agent</text>
+<text x="677" y="528" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Conversational AI banking</text>
+<text x="677" y="540" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">assistant designed to support</text>
+<text x="677" y="566" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">Python · Generative AI · LLMs</text>
+<text x="883" y="566" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="end">OPEN ↗</text>
+<rect x="908" y="400" width="226" height="176" rx="6" fill="#080F1D" stroke="#1D344E" stroke-width="1.2"/>
+<rect x="908" y="400" width="226" height="2.5" rx="1" fill="#00E5FF"/>
+<text x="918" y="416" fill="#00E5FF" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">P3</text>
+<text x="1124" y="416" fill="#7F9CB4" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700" text-anchor="end">AI LEARNING</text>
+<rect x="918" y="422" width="206" height="62" rx="4" fill="#0A1020" stroke="#182A40" stroke-width="1"/><path d="M 918 453 H 1124 M 969 422 V 484 M 1021 422 V 484 M 1072 422 V 484" stroke="#132338" stroke-width="0.8"/><path d="M 1007 437 C 987 433 979 459 997 471 C 1007 475 1015 467 1015 439 Z" fill="#0F1F38" stroke="#00E5FF" stroke-width="1.2"/><path d="M 1035 437 C 1055 433 1063 459 1045 471 C 1035 475 1027 467 1027 439 Z" fill="#0F1F38" stroke="#FF168A" stroke-width="1.2"/><line x1="997" y1="453" x2="975" y2="441" stroke="#8B35FF" stroke-width="1.2"/><circle cx="975" cy="441" r="3.5" fill="#00E5FF"/><line x1="1045" y1="453" x2="1067" y2="441" stroke="#8B35FF" stroke-width="1.2"/><circle cx="1067" cy="441" r="3.5" fill="#FF168A"/><line x1="1021" y1="467" x2="1021" y2="477" stroke="#00E5FF" stroke-width="1.2"/><circle cx="1021" cy="477" r="3.5" fill="#00FF9D"/><text x="926" y="436" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">COGNITIVE // AI-LEARN</text>
+<text x="918" y="498" fill="#FFFFFF" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">StudyMind</text>
+<text x="918" y="528" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">AI-powered learning platform</text>
+<text x="918" y="540" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">designed to improve learning</text>
+<text x="918" y="566" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">Python · Generative AI · Jav…</text>
+<text x="1124" y="566" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="end">OPEN ↗</text>
+<rect x="426" y="592" width="226" height="176" rx="6" fill="#080F1D" stroke="#1D344E" stroke-width="1.2"/>
+<rect x="426" y="592" width="226" height="2.5" rx="1" fill="#FF168A"/>
+<text x="436" y="608" fill="#FF168A" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">P4</text>
+<text x="642" y="608" fill="#7F9CB4" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700" text-anchor="end">MULTI-AGENT AI</text>
+<rect x="436" y="614" width="206" height="62" rx="4" fill="#0A1020" stroke="#182A40" stroke-width="1"/><path d="M 436 645 H 642 M 487 614 V 676 M 539 614 V 676 M 590 614 V 676" stroke="#132338" stroke-width="0.8"/><circle cx="539" cy="645" r="26" fill="#0B162B" stroke="#8B35FF" stroke-width="1.2"/><circle cx="539" cy="645" r="16" fill="none" stroke="#00E5FF" stroke-width="0.8" stroke-dasharray="2 2"/><circle cx="539" cy="645" r="6" fill="#FF168A"/><polygon points="539,645 563,633 563,621" fill="#00E5FF" opacity="0.35"/><circle cx="527" cy="637" r="2.5" fill="#00E5FF"/><circle cx="549" cy="657" r="2.5" fill="#FF168A"/><circle cx="531" cy="659" r="2.5" fill="#00FF9D"/><text x="444" y="628" fill="#8B35FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">MULTI-AGENT // RADAR</text>
+<text x="436" y="690" fill="#FFFFFF" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">HireLens AI</text>
+<text x="436" y="720" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Multi-agent job rejection</text>
+<text x="436" y="732" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">analyzer that extracts</text>
+<text x="436" y="758" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">Python · Streamlit · CrewAI</text>
+<text x="642" y="758" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="end">OPEN ↗</text>
+<rect x="667" y="592" width="226" height="176" rx="6" fill="#080F1D" stroke="#1D344E" stroke-width="1.2"/>
+<rect x="667" y="592" width="226" height="2.5" rx="1" fill="#FF168A"/>
+<text x="677" y="608" fill="#FF168A" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">P5</text>
+<text x="883" y="608" fill="#7F9CB4" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700" text-anchor="end">AI LEARNING</text>
+<rect x="677" y="614" width="206" height="62" rx="4" fill="#0A1020" stroke="#182A40" stroke-width="1"/><path d="M 677 645 H 883 M 728 614 V 676 M 780 614 V 676 M 831 614 V 676" stroke="#132338" stroke-width="0.8"/><polygon points="780,621 798,639 792,665 768,665 762,639" fill="#111B34" stroke="#00E5FF" stroke-width="1.3"/><polygon points="780,621 792,665 780,669 768,665" fill="#1A2D50" opacity="0.6"/><line x1="695" y1="645" x2="762" y2="639" stroke="#FFFFFF" stroke-width="1.8" stroke-dasharray="4 2"/><line x1="798" y1="639" x2="865" y2="627" stroke="#FF168A" stroke-width="1.5"/><line x1="796" y1="645" x2="865" y2="645" stroke="#00E5FF" stroke-width="1.5"/><line x1="792" y1="651" x2="865" y2="663" stroke="#8B35FF" stroke-width="1.5"/><text x="685" y="628" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">SYNTHESIS // PRISM</text>
+<text x="677" y="690" fill="#FFFFFF" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">Lumiq</text>
+<text x="677" y="720" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Transforms study materials</text>
+<text x="677" y="732" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">into summaries, flashcards,</text>
+<text x="677" y="758" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">AI · Python · JavaScript</text>
+<text x="883" y="758" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="end">OPEN ↗</text>
+<rect x="908" y="592" width="226" height="176" rx="6" fill="#080F1D" stroke="#1D344E" stroke-width="1.2"/>
+<rect x="908" y="592" width="226" height="2.5" rx="1" fill="#FF168A"/>
+<text x="918" y="608" fill="#FF168A" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">P6</text>
+<text x="1124" y="608" fill="#7F9CB4" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700" text-anchor="end">WORKFLOW AUTOMATION</text>
+<rect x="918" y="614" width="206" height="62" rx="4" fill="#0A1020" stroke="#182A40" stroke-width="1"/><path d="M 918 645 H 1124 M 969 614 V 676 M 1021 614 V 676 M 1072 614 V 676" stroke="#132338" stroke-width="0.8"/><rect x="977" y="633" width="24" height="24" rx="4" fill="#0D1A30" stroke="#FF168A" stroke-width="1.2"/><rect x="1013" y="633" width="24" height="24" rx="4" fill="#0D1A30" stroke="#00E5FF" stroke-width="1.2"/><rect x="1049" y="633" width="24" height="24" rx="4" fill="#0D1A30" stroke="#8B35FF" stroke-width="1.2"/><line x1="1001" y1="645" x2="1013" y2="645" stroke="#00E5FF" stroke-width="1.5"/><line x1="1037" y1="645" x2="1049" y2="645" stroke="#FF168A" stroke-width="1.5"/><circle cx="989" cy="645" r="3" fill="#FF168A"/><circle cx="1025" cy="645" r="3" fill="#00E5FF"/><circle cx="1061" cy="645" r="3" fill="#00FF9D"/><text x="926" y="628" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">PIPELINE // n8n-NLP</text>
+<text x="918" y="690" fill="#FFFFFF" font-size="11.5" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="700">AI Resume Analyzer</text>
+<text x="918" y="720" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Automated resume analysis</text>
+<text x="918" y="732" fill="#89A5BA" font-size="9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">workflow using AI-powered</text>
+<text x="918" y="758" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="700">n8n · LLMs · Workflow Automa…</text>
+<text x="1124" y="758" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="end">OPEN ↗</text>
+<path d="M 428 794 H 1132 L 1148 810 V 992 L 1132 1008 H 428 L 412 992 V 810 Z" fill="#070B16" stroke="#00E5FF" stroke-width="1.4" opacity="0.96"/><path d="M 414 822 H 1146" stroke="#00E5FF" stroke-width="0.8" opacity="0.35"/><path d="M 417 808 L 426 799" stroke="#FF168A" stroke-width="2" fill="none"/><path d="M 1134 1003 L 1143 994" stroke="#FF168A" stroke-width="2" fill="none"/><text x="432" y="814" fill="#00E5FF" font-size="12" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">CONTRIBUTION MATRIX // NEON ACTIVITY STREAM</text><text x="1128" y="814" fill="#6C879B" font-size="9.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end" letter-spacing="1">REAL-TIME TELEMETRY</text>
+<rect x="456.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="456.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="456.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="456.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="456.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="456.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="456.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="468.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="468.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="468.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="468.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="468.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="468.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="468.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="480.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="480.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="480.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="480.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="480.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="480.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="480.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="492.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="492.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="492.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="492.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="492.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="492.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="492.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="504.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="504.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="504.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="504.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="504.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="504.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="504.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="517.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="517.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="517.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="517.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="517.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="517.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="517.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="529.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="529.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="529.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="529.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="529.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="529.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="529.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="541.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="541.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="541.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="541.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="541.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="541.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="541.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="553.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="553.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="553.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="553.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="553.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="553.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="553.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="565.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="565.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="565.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="565.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="565.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="565.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="565.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="578.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="578.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="578.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="578.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="578.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="578.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="578.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="590.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="590.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="590.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="590.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="590.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="590.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="590.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="602.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="602.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="602.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="602.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="602.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="602.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="602.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="614.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="614.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="614.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="614.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="614.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="614.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="614.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="626.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="626.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="626.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="626.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="626.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="626.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="626.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="639.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="639.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="639.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="639.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="639.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="639.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="639.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="651.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="651.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="651.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="651.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="651.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="651.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="651.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="663.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#43144A" stroke="none" stroke-width="0"/>
+<rect x="663.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="663.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="663.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="663.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="663.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#43144A" stroke="none" stroke-width="0"/>
+<rect x="663.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="675.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="675.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="675.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="675.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="675.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="675.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="675.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="687.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="687.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="687.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="687.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="687.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="687.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="687.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="700.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#43144A" stroke="none" stroke-width="0"/>
+<rect x="700.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="700.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="700.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="700.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="700.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="700.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="712.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="712.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="712.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="712.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="712.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="712.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="712.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="724.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="724.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="724.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#43144A" stroke="none" stroke-width="0"/>
+<rect x="724.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="724.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="724.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="724.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="736.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="736.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="736.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="736.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="736.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="736.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="736.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="748.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="748.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="748.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="748.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="748.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="748.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="748.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="761.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="761.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="761.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="761.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="761.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="761.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#7B2CBF" stroke="none" stroke-width="0"/>
+<rect x="761.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="773.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="773.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="773.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="773.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="773.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="773.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="773.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="785.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="785.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="785.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="785.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="785.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="785.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="785.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="797.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="797.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="797.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="797.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="797.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="797.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="797.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="809.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="809.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="809.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="809.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#43144A" stroke="none" stroke-width="0"/>
+<rect x="809.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="809.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="809.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="822.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="822.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="822.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="822.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="822.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="822.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="822.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="834.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="834.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="834.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="834.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="834.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="834.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="834.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="846.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="846.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="846.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="846.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="846.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="846.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="846.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="858.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="858.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="858.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="858.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="858.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="858.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="858.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="870.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="870.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="870.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="870.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="870.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="870.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="870.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="883.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="883.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="883.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="883.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="883.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="883.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="883.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="895.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="895.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="895.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="895.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="895.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="895.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="895.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="907.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="907.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="907.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="907.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="907.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="907.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="907.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="919.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="919.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="919.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="919.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="919.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="919.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="919.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="931.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="931.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="931.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="931.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="931.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="931.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="931.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="944.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="944.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="944.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="944.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="944.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="944.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="944.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="956.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="956.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="956.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="956.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="956.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="956.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="956.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="968.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="968.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="968.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="968.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="968.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="968.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="968.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="980.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="980.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="980.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="980.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="980.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="980.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="980.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="992.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="992.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="992.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="992.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="992.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="992.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="992.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1005.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1005.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1005.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1005.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1005.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1005.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1005.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1017.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1017.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1017.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1017.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1017.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1017.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1017.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1029.4" y="838.0" width="9.8" height="9.8" rx="2" fill="#7B2CBF" stroke="none" stroke-width="0"/>
+<rect x="1029.4" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1029.4" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1029.4" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1029.4" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1029.4" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1029.4" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1041.6" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1041.6" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1041.6" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1041.6" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1041.6" y="886.8" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1041.6" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1041.6" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1053.8" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1053.8" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1053.8" y="862.4" width="9.8" height="9.8" rx="2" fill="#00E5FF" stroke="#00E5FF" stroke-width="1"/>
+<rect x="1053.8" y="874.6" width="9.8" height="9.8" rx="2" fill="#43144A" stroke="none" stroke-width="0"/>
+<rect x="1053.8" y="886.8" width="9.8" height="9.8" rx="2" fill="#7B2CBF" stroke="none" stroke-width="0"/>
+<rect x="1053.8" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1053.8" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1066.0" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1066.0" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1066.0" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1066.0" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1066.0" y="886.8" width="9.8" height="9.8" rx="2" fill="#43144A" stroke="none" stroke-width="0"/>
+<rect x="1066.0" y="899.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1066.0" y="911.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1078.2" y="838.0" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1078.2" y="850.2" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1078.2" y="862.4" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1078.2" y="874.6" width="9.8" height="9.8" rx="2" fill="#0D1726" stroke="none" stroke-width="0"/>
+<rect x="1078.2" y="886.8" width="9.8" height="9.8" rx="2" fill="#00E5FF" stroke="#00E5FF" stroke-width="1"/>
+<rect x="1078.2" y="899.0" width="9.8" height="9.8" rx="2" fill="#00E5FF" stroke="#00E5FF" stroke-width="1"/>
+<rect x="1078.2" y="911.2" width="9.8" height="9.8" rx="2" fill="#00E5FF" stroke="#00E5FF" stroke-width="1"/>
+<text x="442" y="857" fill="#54728A" font-size="8" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">M</text>
+<text x="442" y="881" fill="#54728A" font-size="8" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">W</text>
+<text x="442" y="905" fill="#54728A" font-size="8" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">F</text>
+<text x="436" y="982" fill="#00E5FF" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">TOTAL COMMITS (1Y): 251</text>
+<text x="632" y="982" fill="#FF168A" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">CURRENT STREAK: 3 DAYS</text>
+<text x="822" y="982" fill="#00FF9D" font-size="10" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">RECORD: 3 DAYS</text>
+<text x="998" y="982" fill="#54728A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">LESS</text>
+<rect x="1028" y="974" width="10" height="10" rx="2" fill="#0D1726"/>
+<rect x="1042" y="974" width="10" height="10" rx="2" fill="#43144A"/>
+<rect x="1056" y="974" width="10" height="10" rx="2" fill="#7B2CBF"/>
+<rect x="1070" y="974" width="10" height="10" rx="2" fill="#FF168A"/>
+<rect x="1084" y="974" width="10" height="10" rx="2" fill="#00E5FF"/>
+<text x="1106" y="982" fill="#54728A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">MORE</text>
+<path d="M 1176 56 H 1496 L 1512 72 V 410 L 1496 426 H 1176 L 1160 410 V 72 Z" fill="#070B16" stroke="#00E5FF" stroke-width="1.4" opacity="0.96"/><path d="M 1162 84 H 1510" stroke="#00E5FF" stroke-width="0.8" opacity="0.35"/><path d="M 1165 70 L 1174 61" stroke="#FF168A" stroke-width="2" fill="none"/><path d="M 1498 421 L 1507 412" stroke="#FF168A" stroke-width="2" fill="none"/><text x="1180" y="76" fill="#00E5FF" font-size="12" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">GITHUB TELEMETRY // HUD</text><text x="1492" y="76" fill="#6C879B" font-size="9.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end" letter-spacing="1">ANALYTICS</text>
+<rect x="1178" y="96" width="148" height="68" rx="6" fill="#08101E" stroke="#1B324C" stroke-width="1.2"/>
+<text x="1190" y="114" fill="#69879E" font-size="9" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">PUBLIC REPOS</text>
+<text x="1190" y="146" fill="#00E5FF" font-size="22" font-weight="900" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">15</text>
+<rect x="1340" y="96" width="148" height="68" rx="6" fill="#08101E" stroke="#1B324C" stroke-width="1.2"/>
+<text x="1352" y="114" fill="#69879E" font-size="9" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">TOTAL STARS</text>
+<text x="1352" y="146" fill="#FF168A" font-size="22" font-weight="900" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">0</text>
+<rect x="1178" y="174" width="148" height="68" rx="6" fill="#08101E" stroke="#1B324C" stroke-width="1.2"/>
+<text x="1190" y="192" fill="#69879E" font-size="9" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">CONTRIBUTIONS</text>
+<text x="1190" y="224" fill="#00FF9D" font-size="22" font-weight="900" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">251</text>
+<rect x="1340" y="174" width="148" height="68" rx="6" fill="#08101E" stroke="#1B324C" stroke-width="1.2"/>
+<text x="1352" y="192" fill="#69879E" font-size="9" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">ACTIVE STREAK</text>
+<text x="1352" y="224" fill="#FF168A" font-size="22" font-weight="900" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">3 DAYS</text>
+<rect x="1178" y="264" width="316" height="142" rx="5" fill="#081120" stroke="#172C42" stroke-width="1"/>
+<text x="1190" y="286" fill="#00FF9D" font-size="9.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800">● DIAGNOSTIC STATUS: ONLINE [200 OK]</text>
+<text x="1190" y="306" fill="#6E8CA2" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">HOST NODE: api.github.com // CLOUD ENGINE</text>
+<text x="1190" y="324" fill="#6E8CA2" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">SECURITY: SHA-256 HMAC ENCRYPTED</text>
+<text x="1190" y="342" fill="#6E8CA2" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">AUTOMATION: GITHUB ACTIONS (6-HR CYCLE)</text>
+<text x="1190" y="360" fill="#6E8CA2" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">TARGET CANVAS: 1536 x 1024 CINEMATIC</text>
+<text x="1190" y="378" fill="#00E5FF" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">PROTOCOL: AUTONOMOUS REFRESH ACTIVE</text>
+<text x="1190" y="394" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">LAST DATA PROBE: 2026-11-15 08:30 UTC</text>
+<path d="M 1176 436 H 1496 L 1512 452 V 794 L 1496 810 H 1176 L 1160 794 V 452 Z" fill="#070B16" stroke="#FF168A" stroke-width="1.4" opacity="0.96"/><path d="M 1162 464 H 1510" stroke="#FF168A" stroke-width="0.8" opacity="0.35"/><path d="M 1165 450 L 1174 441" stroke="#FF168A" stroke-width="2" fill="none"/><path d="M 1498 805 L 1507 796" stroke="#FF168A" stroke-width="2" fill="none"/><text x="1180" y="456" fill="#FF168A" font-size="12" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">CODEBASE LANGUAGE DISTRIBUTION</text><text x="1492" y="456" fill="#6C879B" font-size="9.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end" letter-spacing="1">TELEMETRY</text>
+<text x="1180" y="492" fill="#FFFFFF" font-size="11" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Python</text>
+<text x="1300" y="492" fill="#00E5FF" font-size="10.5" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">89.7%</text>
+<rect x="1316" y="482" width="150" height="10" rx="5" fill="#132132"/>
+<rect x="1316" y="482" width="134" height="10" rx="5" fill="url(#grad-magenta)"/>
+<text x="1180" y="506" fill="#627E94" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">89,892 KB</text>
+<text x="1180" y="536" fill="#FFFFFF" font-size="11" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">C++</text>
+<text x="1300" y="536" fill="#00E5FF" font-size="10.5" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">5.0%</text>
+<rect x="1316" y="526" width="150" height="10" rx="5" fill="#132132"/>
+<rect x="1316" y="526" width="7" height="10" rx="5" fill="url(#grad-cyan)"/>
+<text x="1180" y="550" fill="#627E94" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">5,023 KB</text>
+<text x="1180" y="580" fill="#FFFFFF" font-size="11" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">HTML</text>
+<text x="1300" y="580" fill="#00E5FF" font-size="10.5" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">2.3%</text>
+<rect x="1316" y="570" width="150" height="10" rx="5" fill="#132132"/>
+<rect x="1316" y="570" width="6" height="10" rx="5" fill="url(#grad-magenta)"/>
+<text x="1180" y="594" fill="#627E94" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">2,297 KB</text>
+<text x="1180" y="624" fill="#FFFFFF" font-size="11" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Cython</text>
+<text x="1300" y="624" fill="#00E5FF" font-size="10.5" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">2.0%</text>
+<rect x="1316" y="614" width="150" height="10" rx="5" fill="#132132"/>
+<rect x="1316" y="614" width="6" height="10" rx="5" fill="url(#grad-cyan)"/>
+<text x="1180" y="638" fill="#627E94" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">2,053 KB</text>
+<text x="1180" y="668" fill="#FFFFFF" font-size="11" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">C</text>
+<text x="1300" y="668" fill="#00E5FF" font-size="10.5" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">0.6%</text>
+<rect x="1316" y="658" width="150" height="10" rx="5" fill="#132132"/>
+<rect x="1316" y="658" width="6" height="10" rx="5" fill="url(#grad-magenta)"/>
+<text x="1180" y="682" fill="#627E94" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">567 KB</text>
+<text x="1180" y="712" fill="#FFFFFF" font-size="11" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">PHP</text>
+<text x="1300" y="712" fill="#00E5FF" font-size="10.5" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">0.1%</text>
+<rect x="1316" y="702" width="150" height="10" rx="5" fill="#132132"/>
+<rect x="1316" y="702" width="6" height="10" rx="5" fill="url(#grad-cyan)"/>
+<text x="1180" y="726" fill="#627E94" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">128 KB</text>
+<text x="1180" y="756" fill="#FFFFFF" font-size="11" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">JavaScript</text>
+<text x="1300" y="756" fill="#00E5FF" font-size="10.5" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end">0.1%</text>
+<rect x="1316" y="746" width="150" height="10" rx="5" fill="#132132"/>
+<rect x="1316" y="746" width="6" height="10" rx="5" fill="url(#grad-magenta)"/>
+<text x="1180" y="770" fill="#627E94" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">103 KB</text>
+<path d="M 1176 820 H 1496 L 1512 836 V 992 L 1496 1008 H 1176 L 1160 992 V 836 Z" fill="#070B16" stroke="#00E5FF" stroke-width="1.4" opacity="0.96"/><path d="M 1162 848 H 1510" stroke="#00E5FF" stroke-width="0.8" opacity="0.35"/><path d="M 1165 834 L 1174 825" stroke="#FF168A" stroke-width="2" fill="none"/><path d="M 1498 1003 L 1507 994" stroke="#FF168A" stroke-width="2" fill="none"/><text x="1180" y="840" fill="#00E5FF" font-size="12" font-weight="800" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" letter-spacing="1.2">ESTABLISH CONNECTION // TRANSMISSION</text><text x="1492" y="840" fill="#6C879B" font-size="9.5" font-weight="700" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" text-anchor="end" letter-spacing="1">COMM CHANNELS</text>
+<rect x="1178" y="856" width="70" height="17" rx="3" fill="#0C182B" stroke="#00E5FF" stroke-width="0.8"/>
+<text x="1213" y="868" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="middle">GITHUB</text>
+<text x="1256" y="868" fill="#C8DCED" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">vachan18</text>
+<rect x="1178" y="880" width="70" height="17" rx="3" fill="#0C182B" stroke="#FF168A" stroke-width="0.8"/>
+<text x="1213" y="892" fill="#FF168A" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="middle">LINKEDIN</text>
+<text x="1256" y="892" fill="#C8DCED" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">vachan-u-s-0a5aa8128</text>
+<rect x="1178" y="904" width="70" height="17" rx="3" fill="#0C182B" stroke="#00E5FF" stroke-width="0.8"/>
+<text x="1213" y="916" fill="#00E5FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="middle">PORTFOLIO</text>
+<text x="1256" y="916" fill="#C8DCED" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">vachanmyportfolio.netlify.app</text>
+<rect x="1178" y="928" width="70" height="17" rx="3" fill="#0C182B" stroke="#8B35FF" stroke-width="0.8"/>
+<text x="1213" y="940" fill="#8B35FF" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="middle">DEVFOLIO</text>
+<text x="1256" y="940" fill="#C8DCED" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">@Vachanus</text>
+<rect x="1178" y="952" width="70" height="17" rx="3" fill="#0C182B" stroke="#00FF9D" stroke-width="0.8"/>
+<text x="1213" y="964" fill="#00FF9D" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace" font-weight="800" text-anchor="middle">EMAIL</text>
+<text x="1256" y="964" fill="#C8DCED" font-size="9" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">vachan.us@gmail.com</text>
+<text x="1180" y="990" fill="#627E94" font-size="8.5" font-family="ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace">PROTOCOL: TLS 1.3 // 2.4 GHz ENCRYPTED</text>
 </svg>
