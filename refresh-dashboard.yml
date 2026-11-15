@@ -1,0 +1,43 @@
+name: Refresh Cyberpunk Engineering Dossier
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "profile-data.json"
+      - "scripts/**"
+      - ".github/workflows/**"
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-profile-dashboard
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate dashboard from GitHub API
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/generate_dashboard.py
+      - name: Commit generated dashboard
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md assets/dossier.svg
+          git diff --cached --quiet || (
+            git commit -m "chore: refresh cyberpunk engineering dossier"
+            git push
+          )
