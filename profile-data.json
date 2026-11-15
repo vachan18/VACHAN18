@@ -1,0 +1,170 @@
+{
+  "username": "vachan18",
+  "name": "Vachan U S",
+  "role": "Software Engineer",
+  "company": "Synapx",
+  "location": "Bangalore, India",
+  "education": "B.Tech Computer Science & Engineering \u00b7 Dr. Ambedkar Institute of Technology \u00b7 2022\u20132026",
+  "bio": "Building intelligent applications, engineering reliable systems, and exploring the next generation of software.",
+  "email": "vachan.us@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128",
+  "portfolio": "https://vachanmyportfolio.netlify.app/",
+  "devfolio": "https://devfolio.co/@Vachanus",
+  "refresh_hours": 6,
+  "skills": {
+    "Languages": [
+      "Python",
+      "JavaScript",
+      "Java",
+      "TypeScript",
+      "HTML",
+      "CSS"
+    ],
+    "Frameworks": [
+      "Django",
+      "Flask",
+      "React",
+      "Node.js",
+      "Tailwind CSS"
+    ],
+    "AI & ML": [
+      "OpenAI API",
+      "Claude API",
+      "Gemini API",
+      "LangChain",
+      "LangGraph",
+      "CrewAI",
+      "PyTorch",
+      "OpenCV",
+      "YOLOv8"
+    ],
+    "Cloud & Data": [
+      "AWS",
+      "MySQL",
+      "MongoDB",
+      "Firebase",
+      "Docker",
+      "Kubernetes"
+    ],
+    "Engineering": [
+      "Linux",
+      "Git",
+      "GitHub Actions",
+      "Nginx",
+      "PM2",
+      "REST APIs",
+      "CI/CD",
+      "n8n",
+      "Make.com",
+      "Cloud Code"
+    ]
+  },
+  "experience": [
+    {
+      "period": "2026 \u2013 Present",
+      "title": "Software Engineer",
+      "organization": "Synapx",
+      "detail": "Software engineering and modern development workflows."
+    },
+    {
+      "period": "Feb \u2013 May 2026",
+      "title": "Python Full Stack + Generative AI",
+      "organization": "Dhee Coding Lab",
+      "detail": "Full-stack development, Django, REST APIs, SQL and AI-assisted development."
+    },
+    {
+      "period": "Aug 2024 \u2013 Jan 2025",
+      "title": "Ethical Hacking Intern",
+      "organization": "Internship Studio",
+      "detail": "Vulnerability assessment and web application security."
+    },
+    {
+      "period": "2022 \u2013 2026",
+      "title": "B.Tech, Computer Science & Engineering",
+      "organization": "Dr. Ambedkar Institute of Technology",
+      "detail": "Bangalore"
+    }
+  ],
+  "additional": [
+    "Indo-Dutch Cyber Security School \u2014 30 CPE credits",
+    "Anthropic Cloud Certified Architect Foundations credential",
+    "Organized Interrupt XIII and led a volunteer team of 20+ members"
+  ],
+  "projects": [
+    {
+      "name": "AI-Powered Pesticide Spraying Robot",
+      "category": "COMPUTER VISION / IOT",
+      "description": "Solar-powered autonomous agricultural robot for plant disease detection and precision pesticide spraying.",
+      "stack": [
+        "Python",
+        "YOLOv8",
+        "PyTorch",
+        "OpenCV",
+        "Flask",
+        "React",
+        "Firebase",
+        "ESP32"
+      ],
+      "url": "https://github.com/vachan18/AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION"
+    },
+    {
+      "name": "GenAI Banking Agent",
+      "category": "GENERATIVE AI",
+      "description": "Conversational AI banking assistant designed to support intelligent banking interactions.",
+      "stack": [
+        "Python",
+        "Generative AI",
+        "LLMs",
+        "APIs"
+      ],
+      "url": "https://github.com/vachan18/Gen-AI-banking-agent"
+    },
+    {
+      "name": "StudyMind",
+      "category": "AI LEARNING",
+      "description": "AI-powered learning platform designed to improve learning through intelligent study assistance.",
+      "stack": [
+        "Python",
+        "Generative AI",
+        "JavaScript",
+        "APIs"
+      ],
+      "url": "https://github.com/vachan18/StudyMind"
+    },
+    {
+      "name": "HireLens AI",
+      "category": "MULTI-AGENT AI",
+      "description": "Multi-agent job rejection analyzer that extracts insights from recruitment outcomes.",
+      "stack": [
+        "Python",
+        "Streamlit",
+        "CrewAI",
+        "LLMs"
+      ],
+      "url": "https://github.com/vachan18/HirelensAi"
+    },
+    {
+      "name": "Lumiq",
+      "category": "AI LEARNING",
+      "description": "Transforms study materials into summaries, flashcards, quizzes and mind maps.",
+      "stack": [
+        "AI",
+        "Python",
+        "JavaScript",
+        "APIs"
+      ],
+      "url": "https://github.com/vachan18/Lumiq---Smart-Learning-Platforms"
+    },
+    {
+      "name": "AI Resume Analyzer",
+      "category": "WORKFLOW AUTOMATION",
+      "description": "Automated resume analysis workflow using AI-powered processing and structured automation.",
+      "stack": [
+        "n8n",
+        "LLMs",
+        "Workflow Automation"
+      ],
+      "url": "https://github.com/vachan18/ai-resume-analyzer-n8n"
+    }
+  ]
+}
