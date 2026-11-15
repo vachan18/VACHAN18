@@ -2,6 +2,7 @@
 """
 VACHAN.EXE — Cyberpunk Engineering Command Center Generator
 Target Canvas: 1536 x 1024
+Strictly aligned with the visual reference design.
 Generates:
   - assets/dossier.svg   (Full cinematic cyberpunk command center dashboard)
   - assets/telemetry.svg (Dedicated real-time telemetry HUD card)
@@ -12,6 +13,7 @@ import json
 import os
 import sys
 import html
+import base64
 import urllib.request
 import urllib.error
 import subprocess
@@ -25,7 +27,9 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent if SCRIPT_DIR.name == "scripts" else SCRIPT_DIR
 PROFILE_DATA_PATH = ROOT / "profile-data.json"
 ASSETS_DIR = ROOT / "assets"
+THUMBS_DIR = ASSETS_DIR / "thumbnails"
 ASSETS_DIR.mkdir(parents=True, exist_ok=True)
+THUMBS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Standard typography stacks for SVG rendering across all client platforms
 FONT_MONO = "ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Monaco, Consolas, monospace"
@@ -88,14 +92,7 @@ def fetch_real_contributions(username):
             data = json.loads(resp.read().decode("utf-8"))
             return data
     except Exception as exc:
-        print(f"[WARN] Could not fetch live contributions API ({exc}). Trying cached backup...")
-        # Check if local fallback contributions.json exists
-        cached = ROOT / "data" / "contributions.json"
-        if cached.exists():
-            try:
-                return json.loads(cached.read_text(encoding="utf-8"))
-            except Exception:
-                pass
+        print(f"[WARN] Could not fetch live contributions API ({exc}).")
         return None
 
 def esc(s):
@@ -121,8 +118,16 @@ def wrap_text(text, max_chars):
         lines.append(" ".join(current_line))
     return lines
 
-def panel_path(x, y, w, h, notch=16):
-    """Generate an asymmetric cyberpunk chamfered polygon path."""
+def img_b64(path):
+    """Return base64 data URI for an image on disk."""
+    p = Path(path)
+    if p.exists():
+        mime = "image/png" if p.suffix.lower() == ".png" else "image/jpeg"
+        return f"data:{mime};base64,{base64.b64encode(p.read_bytes()).decode('utf-8')}"
+    return ""
+
+def panel_chamfer(x, y, w, h, notch=18):
+    """Generate chamfered path matching the reference image containers."""
     return (
         f"M {x + notch} {y} "
         f"H {x + w - notch} "
@@ -135,211 +140,18 @@ def panel_path(x, y, w, h, notch=16):
         f"Z"
     )
 
-def panel_hud(x, y, w, h, title, accent="#00E5FF", tag="CLASSIFIED // LEVEL-5"):
-    """Render a cyberpunk HUD panel frame with title bar, coordinates, and corner brackets."""
-    p_path = panel_path(x, y, w, h, notch=16)
-    corner_decor = [
-        f'<path d="{p_path}" fill="#070B16" stroke="{accent}" stroke-width="1.4" opacity="0.96"/>',
-        f'<path d="M {x+2} {y+28} H {x+w-2}" stroke="{accent}" stroke-width="0.8" opacity="0.35"/>',
-        # Top-left bracket
-        f'<path d="M {x+5} {y+14} L {x+14} {y+5}" stroke="#FF168A" stroke-width="2" fill="none"/>',
-        # Bottom-right bracket
-        f'<path d="M {x+w-14} {y+h-5} L {x+w-5} {y+h-14}" stroke="#FF168A" stroke-width="2" fill="none"/>',
-        # Title
-        f'<text x="{x+20}" y="{y+20}" fill="{accent}" font-size="12" font-weight="800" font-family="{FONT_MONO}" letter-spacing="1.2">{esc(title)}</text>',
-        # Tag
-        f'<text x="{x+w-20}" y="{y+20}" fill="#6C879B" font-size="9.5" font-weight="700" font-family="{FONT_MONO}" text-anchor="end" letter-spacing="1">{esc(tag)}</text>',
-    ]
-    return "".join(corner_decor)
+def panel_container(x, y, w, h, border="#FF168A", bg="#060A16", notch=18, glow=True):
+    """Generate chamfered HUD panel box."""
+    path_d = panel_chamfer(x, y, w, h, notch=notch)
+    elements = []
+    if glow:
+        elements.append(f'<path d="{path_d}" fill="{bg}" stroke="{border}" stroke-width="1.8" opacity="0.95"/>')
+    else:
+        elements.append(f'<path d="{path_d}" fill="{bg}" stroke="{border}" stroke-width="1.2"/>')
+    return "".join(elements)
 
 # ==============================================================================
-# PROJECT THUMBNAILS (Unique Vector Art for P1–P6)
-# ==============================================================================
-
-def get_project_thumbnail(proj_id, x, y, w, h):
-    """Render unique, domain-specific futuristic vector illustration for each project."""
-    res = []
-    # Background enclosure
-    res.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="4" fill="#0A1020" stroke="#182A40" stroke-width="1"/>')
-    # Cyber grid overlay
-    res.append(f'<path d="M {x} {y+h//2} H {x+w} M {x+w//4} {y} V {y+h} M {x+w//2} {y} V {y+h} M {x+3*w//4} {y} V {y+h}" stroke="#132338" stroke-width="0.8"/>')
-
-    if proj_id == 1:
-        # P1: Agricultural Rover & CV Laser Disease Scanner
-        # Rover body
-        res.append(f'<rect x="{x+w//2-28}" y="{y+h//2-10}" width="56" height="20" rx="3" fill="#0E1D32" stroke="#00E5FF" stroke-width="1.2"/>')
-        # Solar panel array
-        res.append(f'<rect x="{x+w//2-32}" y="{y+h//2-22}" width="64" height="8" rx="2" fill="#152B46" stroke="#FF168A" stroke-width="1"/>')
-        # Wheels
-        res.append(f'<circle cx="{x+w//2-20}" cy="{y+h//2+14}" r="6" fill="#1A2D44" stroke="#00E5FF" stroke-width="1.2"/>')
-        res.append(f'<circle cx="{x+w//2+20}" cy="{y+h//2+14}" r="6" fill="#1A2D44" stroke="#00E5FF" stroke-width="1.2"/>')
-        # Laser targeting crosshair
-        res.append(f'<circle cx="{x+w//2+14}" cy="{y+h//2-4}" r="12" fill="none" stroke="#FF168A" stroke-width="1" stroke-dasharray="2 2"/>')
-        res.append(f'<path d="M {x+w//2+14} {y+h//2-18} V {y+h//2+10} M {x+w//2} {y+h//2-4} H {x+w//2+28}" stroke="#FF168A" stroke-width="1.2"/>')
-        # Sensor beam
-        res.append(f'<polygon points="{x+w//2+14},{y+h//2-4} {x+w-16},{y+h-10} {x+w-28},{y+h-10}" fill="#00E5FF" opacity="0.25"/>')
-        res.append(f'<text x="{x+8}" y="{y+14}" fill="#00E5FF" font-size="8.5" font-family="{FONT_MONO}" font-weight="700">YOLOv8 // CV-ROVER</text>')
-
-    elif proj_id == 2:
-        # P2: GenAI Banking Agent — Cryptographic Shield & Dialogue Matrix
-        # Hexagonal secure node
-        cx, cy = x + w//2, y + h//2
-        res.append(f'<polygon points="{cx},{cy-24} {cx+24},{cy-12} {cx+24},{cy+12} {cx},{cy+24} {cx-24},{cy+12} {cx-24},{cy-12}" fill="#0D1A30" stroke="#FF168A" stroke-width="1.4"/>')
-        # Currency / AI Glyph inside shield
-        res.append(f'<text x="{cx}" y="{cy+6}" fill="#00E5FF" font-size="16" font-family="{FONT_MONO}" font-weight="800" text-anchor="middle">₹</text>')
-        # Pulse waves / Dialogue packets
-        res.append(f'<path d="M {cx-42} {cy-10} Q {cx-32} {cy} {cx-42} {cy+10}" stroke="#00E5FF" stroke-width="1.5" fill="none"/>')
-        res.append(f'<path d="M {cx-50} {cy-16} Q {cx-38} {cy} {cx-50} {cy+16}" stroke="#8B35FF" stroke-width="1.2" fill="none"/>')
-        res.append(f'<path d="M {cx+42} {cy-10} Q {cx+32} {cy} {cx+42} {cy+10}" stroke="#00E5FF" stroke-width="1.5" fill="none"/>')
-        res.append(f'<path d="M {cx+50} {cy-16} Q {cx+38} {cy} {cx+50} {cy+16}" stroke="#8B35FF" stroke-width="1.2" fill="none"/>')
-        res.append(f'<text x="{x+8}" y="{y+14}" fill="#FF168A" font-size="8.5" font-family="{FONT_MONO}" font-weight="700">FIN-LLM // SECURE</text>')
-
-    elif proj_id == 3:
-        # P3: StudyMind — Cognitive Brain Network & Synaptic Nodes
-        cx, cy = x + w//2, y + h//2
-        # Brain hemisphere arcs
-        res.append(f'<path d="M {cx-14} {cy-16} C {cx-34} {cy-20} {cx-42} {cy+6} {cx-24} {cy+18} C {cx-14} {cy+22} {cx-6} {cy+14} {cx-6} {cy-14} Z" fill="#0F1F38" stroke="#00E5FF" stroke-width="1.2"/>')
-        res.append(f'<path d="M {cx+14} {cy-16} C {cx+34} {cy-20} {cx+42} {cy+6} {cx+24} {cy+18} C {cx+14} {cy+22} {cx+6} {cy+14} {cx+6} {cy-14} Z" fill="#0F1F38" stroke="#FF168A" stroke-width="1.2"/>')
-        # Flashcard / Synapse lines
-        res.append(f'<line x1="{cx-24}" y1="{cy}" x2="{cx-46}" y2="{cy-12}" stroke="#8B35FF" stroke-width="1.2"/>')
-        res.append(f'<circle cx="{cx-46}" cy="{cy-12}" r="3.5" fill="#00E5FF"/>')
-        res.append(f'<line x1="{cx+24}" y1="{cy}" x2="{cx+46}" y2="{cy-12}" stroke="#8B35FF" stroke-width="1.2"/>')
-        res.append(f'<circle cx="{cx+46}" cy="{cy-12}" r="3.5" fill="#FF168A"/>')
-        res.append(f'<line x1="{cx}" y1="{cy+14}" x2="{cx}" y2="{cy+24}" stroke="#00E5FF" stroke-width="1.2"/>')
-        res.append(f'<circle cx="{cx}" cy="{cy+24}" r="3.5" fill="#00FF9D"/>')
-        res.append(f'<text x="{x+8}" y="{y+14}" fill="#00E5FF" font-size="8.5" font-family="{FONT_MONO}" font-weight="700">COGNITIVE // AI-LEARN</text>')
-
-    elif proj_id == 4:
-        # P4: HireLens AI — Multi-Agent Radar & Candidate Evaluation Grid
-        cx, cy = x + w//2, y + h//2
-        # Radar scope
-        res.append(f'<circle cx="{cx}" cy="{cy}" r="26" fill="#0B162B" stroke="#8B35FF" stroke-width="1.2"/>')
-        res.append(f'<circle cx="{cx}" cy="{cy}" r="16" fill="none" stroke="#00E5FF" stroke-width="0.8" stroke-dasharray="2 2"/>')
-        res.append(f'<circle cx="{cx}" cy="{cy}" r="6" fill="#FF168A"/>')
-        # Radar sweep angle
-        res.append(f'<polygon points="{cx},{cy} {cx+24},{cy-12} {cx+24},{cy-24}" fill="#00E5FF" opacity="0.35"/>')
-        # Multi-agent dots
-        res.append(f'<circle cx="{cx-12}" cy="{cy-8}" r="2.5" fill="#00E5FF"/>')
-        res.append(f'<circle cx="{cx+10}" cy="{cy+12}" r="2.5" fill="#FF168A"/>')
-        res.append(f'<circle cx="{cx-8}" cy="{cy+14}" r="2.5" fill="#00FF9D"/>')
-        res.append(f'<text x="{x+8}" y="{y+14}" fill="#8B35FF" font-size="8.5" font-family="{FONT_MONO}" font-weight="700">MULTI-AGENT // RADAR</text>')
-
-    elif proj_id == 5:
-        # P5: Lumiq — Knowledge Prism & Synthesis Crystal
-        cx, cy = x + w//2, y + h//2
-        # Central crystal prism
-        res.append(f'<polygon points="{cx},{cy-24} {cx+18},{cy-6} {cx+12},{cy+20} {cx-12},{cy+20} {cx-18},{cy-6}" fill="#111B34" stroke="#00E5FF" stroke-width="1.3"/>')
-        res.append(f'<polygon points="{cx},{cy-24} {cx+12},{cy+20} {cx},{cy+24} {cx-12},{cy+20}" fill="#1A2D50" opacity="0.6"/>')
-        # Beam in
-        res.append(f'<line x1="{x+18}" y1="{cy}" x2="{cx-18}" y2="{cy-6}" stroke="#FFFFFF" stroke-width="1.8" stroke-dasharray="4 2"/>')
-        # Beams out (refraction)
-        res.append(f'<line x1="{cx+18}" y1="{cy-6}" x2="{x+w-18}" y2="{cy-18}" stroke="#FF168A" stroke-width="1.5"/>')
-        res.append(f'<line x1="{cx+16}" y1="{cy}" x2="{x+w-18}" y2="{cy}" stroke="#00E5FF" stroke-width="1.5"/>')
-        res.append(f'<line x1="{cx+12}" y1="{cy+6}" x2="{x+w-18}" y2="{cy+18}" stroke="#8B35FF" stroke-width="1.5"/>')
-        res.append(f'<text x="{x+8}" y="{y+14}" fill="#00E5FF" font-size="8.5" font-family="{FONT_MONO}" font-weight="700">SYNTHESIS // PRISM</text>')
-
-    elif proj_id == 6:
-        # P6: AI Resume Analyzer — Workflow Pipelines & NLP Parsing Nodes
-        cx, cy = x + w//2, y + h//2
-        # Workflow Pipeline Nodes (n8n style)
-        res.append(f'<rect x="{cx-44}" y="{cy-12}" width="24" height="24" rx="4" fill="#0D1A30" stroke="#FF168A" stroke-width="1.2"/>')
-        res.append(f'<rect x="{cx-8}" y="{cy-12}" width="24" height="24" rx="4" fill="#0D1A30" stroke="#00E5FF" stroke-width="1.2"/>')
-        res.append(f'<rect x="{cx+28}" y="{cy-12}" width="24" height="24" rx="4" fill="#0D1A30" stroke="#8B35FF" stroke-width="1.2"/>')
-        # Connecting lines
-        res.append(f'<line x1="{cx-20}" y1="{cy}" x2="{cx-8}" y2="{cy}" stroke="#00E5FF" stroke-width="1.5"/>')
-        res.append(f'<line x1="{cx+16}" y1="{cy}" x2="{cx+28}" y2="{cy}" stroke="#FF168A" stroke-width="1.5"/>')
-        # Pulse dots inside nodes
-        res.append(f'<circle cx="{cx-32}" cy="{cy}" r="3" fill="#FF168A"/>')
-        res.append(f'<circle cx="{cx+4}" cy="{cy}" r="3" fill="#00E5FF"/>')
-        res.append(f'<circle cx="{cx+40}" cy="{cy}" r="3" fill="#00FF9D"/>')
-        res.append(f'<text x="{x+8}" y="{y+14}" fill="#FF168A" font-size="8.5" font-family="{FONT_MONO}" font-weight="700">PIPELINE // n8n-NLP</text>')
-
-    return "".join(res)
-
-# ==============================================================================
-# OPERATOR PORTRAIT GENERATION
-# ==============================================================================
-
-def get_operator_portrait(x, y, w, h):
-    """Generate futuristic cyberpunk character portrait with city skyline and dual rim lighting."""
-    res = []
-    # Background frame
-    res.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" fill="#060A14" stroke="#1A2D46" stroke-width="1.2"/>')
-
-    # Neo-Bangalore Skyline Silhouette
-    city = [
-        f"M {x} {y+h-20}",
-        f"L {x+20} {y+h-20} L {x+20} {y+h-65} L {x+38} {y+h-65} L {x+38} {y+h-40}",
-        f"L {x+50} {y+h-40} L {x+50} {y+h-90} L {x+58} {y+h-110} L {x+66} {y+h-90} L {x+66} {y+h-35}",
-        f"L {x+80} {y+h-35} L {x+80} {y+h-75} L {x+105} {y+h-75} L {x+105} {y+h-25}",
-        f"L {x+120} {y+h-25} L {x+120} {y+h-100} L {x+136} {y+h-100} L {x+136} {y+h-45}",
-        f"L {x+155} {y+h-45} L {x+155} {y+h-80} L {x+175} {y+h-80} L {x+175} {y+h-30}",
-        f"L {x+195} {y+h-30} L {x+195} {y+h-115} L {x+202} {y+h-130} L {x+210} {y+h-115} L {x+210} {y+h-50}",
-        f"L {x+230} {y+h-50} L {x+230} {y+h-85} L {x+250} {y+h-85} L {x+250} {y+h-35}",
-        f"L {x+270} {y+h-35} L {x+270} {y+h-70} L {x+295} {y+h-70} L {x+295} {y+h-30}",
-        f"L {x+315} {y+h-30} L {x+315} {y+h-95} L {x+330} {y+h-95} L {x+330} {y+h-20}",
-        f"L {x+w} {y+h-20} L {x+w} {y+h} L {x} {y+h} Z"
-    ]
-    res.append(f'<path d="{" ".join(city)}" fill="#0A1322" opacity="0.75"/>')
-
-    # Spire communication beacons
-    res.append(f'<circle cx="{x+58}" cy="{y+h-112}" r="2" fill="#00E5FF"/>')
-    res.append(f'<circle cx="{x+202}" cy="{y+h-132}" r="2" fill="#FF168A"/>')
-
-    # Futuristic ground perspective grid
-    for g_i in range(1, 5):
-        gy = y + h - 20 + g_i * 5
-        res.append(f'<line x1="{x}" y1="{gy}" x2="{x+w}" y2="{gy}" stroke="#00E5FF" stroke-width="0.7" opacity="{0.15 + g_i*0.08}"/>')
-
-    # Center-left Operator Silhouette with Dual Rim Lighting
-    cx = x + w//2
-    cy = y + h//2 + 8
-
-    # Shoulder armor / Tactical Collar
-    res.append(f'<path d="M {cx-75} {y+h-4} L {cx-60} {cy+45} L {cx-35} {cy+35} L {cx} {cy+42} L {cx+35} {cy+35} L {cx+60} {cy+45} L {cx+75} {y+h-4} Z" fill="#091220" stroke="#1F3652" stroke-width="1.4"/>')
-    # Cyan left rim light
-    res.append(f'<path d="M {cx-75} {y+h-4} L {cx-60} {cy+45} L {cx-35} {cy+35} L {cx} {cy+42}" stroke="#00E5FF" stroke-width="2" fill="none" opacity="0.9"/>')
-    # Magenta right rim light
-    res.append(f'<path d="M {cx} {cy+42} L {cx+35} {cy+35} L {cx+60} {cy+45} L {cx+75} {y+h-4}" stroke="#FF168A" stroke-width="2" fill="none" opacity="0.9"/>')
-
-    # Neck
-    res.append(f'<rect x="{cx-16}" y="{cy+14}" width="32" height="26" fill="#0B1626"/>')
-    # Head Base (Cybernetic helmet / cowl)
-    res.append(f'<path d="M {cx-30} {cy+16} L {cx-32} {cy-14} C {cx-34} {cy-48} {cx+34} {cy-48} {cx+32} {cy-14} L {cx+30} {cy+16} Z" fill="#0D192C" stroke="#1D3654" stroke-width="1.3"/>')
-    # Head left rim
-    res.append(f'<path d="M {cx-30} {cy+16} L {cx-32} {cy-14} C {cx-34} {cy-48} {cx} {cy-48}" stroke="#00E5FF" stroke-width="1.8" fill="none"/>')
-    # Head right rim
-    res.append(f'<path d="M {cx} {cy-48} C {cx+34} {cy-48} {cx+32} {cy-14} L {cx+30} {cy+16}" stroke="#FF168A" stroke-width="1.8" fill="none"/>')
-
-    # Cybernetic Targeting Visor (Electric Cyan glowing visor with telemetry reticle)
-    res.append(f'<polygon points="{cx-28},{cy-12} {cx+28},{cy-12} {cx+24},{cy+2} {cx-24},{cy+2}" fill="#00E5FF" opacity="0.85"/>')
-    res.append(f'<line x1="{cx-26}" y1="{cy-5}" x2="{cx+26}" y2="{cy-5}" stroke="#FFFFFF" stroke-width="1.4"/>')
-    res.append(f'<circle cx="{cx+8}" cy="{cy-5}" r="3.5" fill="#FF168A"/>')
-    res.append(f'<circle cx="{cx+8}" cy="{cy-5}" r="1.5" fill="#FFFFFF"/>')
-
-    # Neural Temple Interface Jack & Data Conduit
-    res.append(f'<rect x="{cx+29}" y="{cy-18}" width="6" height="12" rx="2" fill="#FF168A"/>')
-    res.append(f'<path d="M {cx+35} {cy-12} Q {cx+52} {cy-2} {cx+58} {cy+22}" stroke="#FF168A" stroke-width="1.4" fill="none" stroke-dasharray="3 2"/>')
-
-    # HUD Target Reticle around face
-    res.append(f'<circle cx="{cx}" cy="{cy-10}" r="48" fill="none" stroke="#00E5FF" stroke-width="0.8" stroke-dasharray="4 6" opacity="0.45"/>')
-    res.append(f'<path d="M {cx-56} {cy-10} H {cx-48} M {cx+48} {cy-10} H {cx+56} M {cx} {cy-66} V {cx} M {cx} {cy+38} V {cy+46}" stroke="#00E5FF" stroke-width="1"/>')
-
-    # HUD corner brackets for portrait box
-    res.append(f'<path d="M {x+10} {y+22} V {y+10} H {x+22}" stroke="#00E5FF" stroke-width="1.5" fill="none"/>')
-    res.append(f'<path d="M {x+w-22} {y+10} H {x+w-10} V {y+22}" stroke="#FF168A" stroke-width="1.5" fill="none"/>')
-    res.append(f'<path d="M {x+10} {y+h-22} V {y+h-10} H {x+22}" stroke="#FF168A" stroke-width="1.5" fill="none"/>')
-    res.append(f'<path d="M {x+w-22} {y+h-10} H {x+w-10} V {y+h-22}" stroke="#00E5FF" stroke-width="1.5" fill="none"/>')
-
-    # Bottom identity status readout
-    res.append(f'<rect x="{x+10}" y="{y+h-24}" width="{w-20}" height="16" fill="#070D1A" opacity="0.85"/>')
-    res.append(f'<text x="{x+16}" y="{y+h-12}" fill="#00E5FF" font-size="9" font-family="{FONT_MONO}" font-weight="700">BIOMETRIC: VERIFIED // ID: V18-EXEC</text>')
-    res.append(f'<text x="{x+w-16}" y="{y+h-12}" fill="#FF168A" font-size="9" font-family="{FONT_MONO}" font-weight="700" text-anchor="end">CLEARANCE: LVL-5 ALPHA</text>')
-
-    return "".join(res)
-
-# ==============================================================================
-# MAIN COMMAND CENTER DASHBOARD GENERATION (1536 x 1024)
+# MAIN COMMAND CENTER GENERATOR (1536 x 1024)
 # ==============================================================================
 
 def generate_dossier_svg(user, repos, stars, languages, contrib_info, stamp):
@@ -349,245 +161,379 @@ def generate_dossier_svg(user, repos, stars, languages, contrib_info, stamp):
     following_cnt = user.get("following", 0)
     total_contribs = contrib_info.get("total", 251)
     current_streak = contrib_info.get("current_streak", 3)
-    longest_streak = contrib_info.get("longest_streak", 3)
     calendar_days = contrib_info.get("days", [])
+
+    # Load base64 image assets
+    portrait_b64 = img_b64(ASSETS_DIR / "portrait.png")
+    logo_b64 = img_b64(ASSETS_DIR / "logo_v.png")
+
+    p_thumbs = [
+        img_b64(THUMBS_DIR / "p1_rover.png"),
+        img_b64(THUMBS_DIR / "p2_bank.png"),
+        img_b64(THUMBS_DIR / "p3_book.png"),
+        img_b64(THUMBS_DIR / "p4_radar.png"),
+        img_b64(THUMBS_DIR / "p5_cards.png"),
+        img_b64(THUMBS_DIR / "p6_resume.png")
+    ]
 
     svg = []
     svg.append('<?xml version="1.0" encoding="UTF-8"?>')
-    svg.append('<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">')
+    svg.append('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1536" height="1024" viewBox="0 0 1536 1024">')
     svg.append('''<defs>
-<linearGradient id="bg-canvas" x1="0" y1="0" x2="1" y2="1">
+<linearGradient id="canvas-bg" x1="0" y1="0" x2="1" y2="1">
   <stop offset="0%" stop-color="#04060E"/>
-  <stop offset="50%" stop-color="#070C1A"/>
-  <stop offset="100%" stop-color="#03050B"/>
+  <stop offset="50%" stop-color="#070C18"/>
+  <stop offset="100%" stop-color="#03050A"/>
 </linearGradient>
-<linearGradient id="grad-cyan" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="neon-cyan" x1="0" y1="0" x2="1" y2="0">
   <stop offset="0%" stop-color="#00E5FF"/>
   <stop offset="100%" stop-color="#0088FF"/>
 </linearGradient>
-<linearGradient id="grad-magenta" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="neon-magenta" x1="0" y1="0" x2="1" y2="0">
   <stop offset="0%" stop-color="#FF168A"/>
   <stop offset="100%" stop-color="#8B35FF"/>
 </linearGradient>
-<linearGradient id="grad-duo" x1="0" y1="0" x2="1" y2="1">
+<linearGradient id="duo-border" x1="0" y1="0" x2="1" y2="1">
   <stop offset="0%" stop-color="#FF168A"/>
-  <stop offset="45%" stop-color="#8B35FF"/>
+  <stop offset="50%" stop-color="#8B35FF"/>
   <stop offset="100%" stop-color="#00E5FF"/>
 </linearGradient>
-<pattern id="cyber-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-  <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#101F33" stroke-width="0.8" opacity="0.32"/>
+<pattern id="grid-dots" width="24" height="24" patternUnits="userSpaceOnUse">
+  <circle cx="12" cy="12" r="0.8" fill="#132338" opacity="0.6"/>
 </pattern>
 </defs>''')
 
-    # Background Canvas & Outer Framing
-    svg.append('<rect width="1536" height="1024" fill="url(#bg-canvas)"/>')
-    svg.append('<rect width="1536" height="1024" fill="url(#cyber-grid)"/>')
-    svg.append('<rect x="12" y="10" width="1512" height="1004" rx="10" fill="none" stroke="url(#grad-duo)" stroke-width="1.8" opacity="0.85"/>')
+    # Canvas Background
+    svg.append('<rect width="1536" height="1024" fill="url(#canvas-bg)"/>')
+    svg.append('<rect width="1536" height="1024" fill="url(#grid-dots)"/>')
+    svg.append('<rect x="10" y="8" width="1516" height="1008" rx="14" fill="none" stroke="url(#duo-border)" stroke-width="1.8" opacity="0.85"/>')
 
-    # Top Global Header Bar
-    svg.append(f'<rect x="18" y="14" width="1500" height="32" rx="4" fill="#070D18" stroke="#16273C" stroke-width="1"/>')
-    svg.append(f'<circle cx="34" cy="30" r="4" fill="#00FF9D"/>')
-    svg.append(f'<circle cx="48" cy="30" r="4" fill="#00E5FF"/>')
-    svg.append(f'<circle cx="62" cy="30" r="4" fill="#FF168A"/>')
-    svg.append(f'<text x="82" y="34" fill="#00E5FF" font-size="11" font-family="{FONT_MONO}" font-weight="800" letter-spacing="1.5">SYS.VACHAN.EXE // CYBERPUNK COMMAND CENTER v4.2</text>')
-    svg.append(f'<text x="768" y="34" fill="#7898B0" font-size="10" font-family="{FONT_MONO}" font-weight="700" text-anchor="middle" letter-spacing="2">SECURITY CLEARANCE: LEVEL 5 // NODE: BLR-IN [12.97° N, 77.59° E]</text>')
-    svg.append(f'<text x="1502" y="34" fill="#FF168A" font-size="10" font-family="{FONT_MONO}" font-weight="700" text-anchor="end" letter-spacing="1">STATUS: ONLINE [200 OK] // SYNC: {esc(stamp)} UTC</text>')
+    # Top-Right Header Decor: // DEVELOPER COMMAND CENTER //
+    svg.append(f'<path d="M 1120 22 L 1134 36 M 1134 22 L 1148 36 M 1148 22 L 1162 36" stroke="#FF168A" stroke-width="2"/>')
+    svg.append(f'<text x="1490" y="34" fill="#FF168A" font-size="11" font-family="{FONT_MONO}" font-weight="800" text-anchor="end" letter-spacing="1.5">// DEVELOPER COMMAND CENTER //</text>')
 
     # ==========================================================================
-    # LEFT COLUMN (x = 24, w = 376)
+    # 1. TOP-LEFT: OPERATOR IDENTITY (x = 22, y = 18, w = 456, h = 338)
     # ==========================================================================
-    col1_x = 24
-    col1_w = 376
+    p1_x, p1_y, p1_w, p1_h = 22, 18, 456, 338
+    svg.append(panel_container(p1_x, p1_y, p1_w, p1_h, border="#FF168A", bg="#060A16", notch=18))
 
-    # 1. Operator Identity & Character Dossier (y = 56, h = 414)
-    p1_y, p1_h = 56, 414
-    svg.append(panel_hud(col1_x, p1_y, col1_w, p1_h, "OPERATOR DOSSIER // IDENTITY", "#00E5FF", "VACHAN.EXE"))
+    # V-Emblem Logo
+    if logo_b64:
+        svg.append(f'<image href="{logo_b64}" x="{p1_x+20}" y="{p1_y+16}" width="46" height="36" preserveAspectRatio="none"/>')
+    else:
+        svg.append(f'<polygon points="{p1_x+24},{p1_y+18} {p1_x+64},{p1_y+18} {p1_x+44},{p1_y+50}" fill="#0A1628" stroke="#00E5FF" stroke-width="1.5"/>')
+        svg.append(f'<text x="{p1_x+44}" y="{p1_y+36}" fill="#FF168A" font-size="14" font-weight="900" font-family="{FONT_MONO}" text-anchor="middle">V</text>')
 
-    # Title Readout
-    svg.append(f'<text x="{col1_x+20}" y="{p1_y+50}" fill="#FFFFFF" font-size="24" font-weight="900" font-family="{FONT_SANS}" letter-spacing="0.5">VACHAN U S</text>')
-    svg.append(f'<text x="{col1_x+col1_w-20}" y="{p1_y+48}" fill="#00E5FF" font-size="14" font-weight="800" font-family="{FONT_MONO}" text-anchor="end">V18</text>')
-    svg.append(f'<text x="{col1_x+20}" y="{p1_y+68}" fill="#FF168A" font-size="10.5" font-weight="800" font-family="{FONT_MONO}" letter-spacing="1.2">ENGINEERING DIVISION // AI &amp; CLOUD SYSTEMS</text>')
+    # VACHAN.EXE & ENGINEERING DIVISION
+    svg.append(f'<text x="{p1_x+74}" y="{p1_y+32}" fill="#FFFFFF" font-size="20" font-weight="900" font-family="{FONT_SANS}" letter-spacing="1.2">VACHAN.EXE</text>')
+    svg.append(f'<text x="{p1_x+74}" y="{p1_y+48}" fill="#00E5FF" font-size="9.5" font-weight="800" font-family="{FONT_MONO}" letter-spacing="1.8">ENGINEERING DIVISION</text>')
 
-    # Character Portrait Box (Integrated with Neo-City background & rim lighting)
-    port_y = p1_y + 80
-    port_w = col1_w - 40
-    port_h = 196
-    svg.append(get_operator_portrait(col1_x+20, port_y, port_w, port_h))
+    # Large Name
+    svg.append(f'<text x="{p1_x+20}" y="{p1_y+100}" fill="#FFFFFF" font-size="34" font-weight="900" font-family="{FONT_SANS}" letter-spacing="0.8">VACHAN U S</text>')
 
-    # Operator Spec Metadata Grid (y = 336 to 456)
-    specs = [
-        ("ORGANIZATION", "Software Engineer @ Synapx", "#00E5FF"),
-        ("LOCATION", "Bangalore, India", "#FF168A"),
-        ("ACADEMICS", "B.Tech CSE (2022-26) · Dr. AIT", "#00E5FF"),
-        ("OPERATIONAL FOCUS", "Intelligent AI Agents & Cloud Infra", "#00FF9D")
+    # Pill: SOFTWARE ENGINEER // AI SYSTEMS // CLOUD
+    pill_w = p1_w - 40
+    svg.append(f'<rect x="{p1_x+20}" y="{p1_y+114}" width="{pill_w}" height="28" rx="5" fill="#0A1828" stroke="#00E5FF" stroke-width="1.2"/>')
+    svg.append(f'<text x="{p1_x+20+pill_w//2}" y="{p1_y+133}" fill="#00E5FF" font-size="11" font-weight="800" font-family="{FONT_MONO}" text-anchor="middle" letter-spacing="1.2">SOFTWARE ENGINEER  //  AI SYSTEMS  //  CLOUD</text>')
+
+    # Bio block
+    svg.append(f'<text x="{p1_x+20}" y="{p1_y+166}" fill="#FF168A" font-size="13" font-weight="900" font-family="{FONT_MONO}">&gt;</text>')
+    bio_text_lines = [
+        "Building intelligent applications,",
+        "engineering reliable systems, and",
+        "exploring the next generation of software."
     ]
-    for idx, (lbl, val, col) in enumerate(specs):
-        sy = p1_y + 290 + idx * 28
-        svg.append(f'<text x="{col1_x+20}" y="{sy+12}" fill="#627E94" font-size="9" font-family="{FONT_MONO}" font-weight="700">{lbl}:</text>')
-        svg.append(f'<text x="{col1_x+136}" y="{sy+12}" fill="{col}" font-size="10" font-family="{FONT_MONO}" font-weight="700">{esc(val)}</text>')
-        svg.append(f'<path d="M {col1_x+20} {sy+20} H {col1_x+col1_w-20}" stroke="#132338" stroke-width="0.8"/>')
+    for b_idx, b_line in enumerate(bio_text_lines):
+        svg.append(f'<text x="{p1_x+36}" y="{p1_y+166 + b_idx*17}" fill="#FFFFFF" font-size="11.5" font-family="{FONT_SANS}">{esc(b_line)}</text>')
 
-    # 2. Mission Timeline (y = 480, h = 330)
-    p2_y, p2_h = 480, 330
-    svg.append(panel_hud(col1_x, p2_y, col1_w, p2_h, "MISSION TIMELINE // SERVICE RECORD", "#FF168A", "CAREER MATRIX"))
+    # 3 Metadata Rows (ROLE, LOCATION, EDUCATION)
+    meta_rows = [
+        ("ROLE", "Software Engineer @ Synapx"),
+        ("LOCATION", "Bangalore, India"),
+        ("EDUCATION", "B.Tech CSE (2022 – 2026)")
+    ]
+    meta_icons = ["💼", "📍", "🎓"]
+    for m_idx, (m_lbl, m_val) in enumerate(meta_rows):
+        my = p1_y + 236 + m_idx * 28
+        svg.append(f'<text x="{p1_x+20}" y="{my+12}" fill="#00E5FF" font-size="12">{meta_icons[m_idx]}</text>')
+        svg.append(f'<text x="{p1_x+42}" y="{my+12}" fill="#00E5FF" font-size="10" font-weight="800" font-family="{FONT_MONO}">{m_lbl}</text>')
+        svg.append(f'<text x="{p1_x+116}" y="{my+12}" fill="#00E5FF" font-size="10" font-weight="800" font-family="{FONT_MONO}">:</text>')
+        svg.append(f'<text x="{p1_x+130}" y="{my+12}" fill="#FFFFFF" font-size="11" font-weight="600" font-family="{FONT_SANS}">{esc(m_val)}</text>')
+
+    # ==========================================================================
+    # 2. CENTER: CYBERPUNK CHARACTER PORTRAIT (x = 432, y = 18, w = 444, h = 339)
+    # ==========================================================================
+    if portrait_b64:
+        svg.append(f'<image href="{portrait_b64}" x="432" y="18" width="444" height="339" preserveAspectRatio="none"/>')
+
+    # ==========================================================================
+    # 3. TOP-RIGHT: CORE SKILLS (x = 868, y = 68, w = 296, h = 288)
+    # ==========================================================================
+    p3_x, p3_y, p3_w, p3_h = 868, 68, 296, 288
+    svg.append(panel_container(p3_x, p3_y, p3_w, p3_h, border="#FF168A", bg="#060A16", notch=16))
+
+    # Header
+    svg.append(f'<text x="{p3_x+20}" y="{p3_y+26}" fill="#00E5FF" font-size="13" font-weight="900" font-family="{FONT_MONO}" letter-spacing="1">🧠 CORE SKILLS</text>')
+
+    # 6 Skill Rows with 4 Neon Magenta Slash Indicators (////)
+    skills = [
+        ("AI / ML", "🧠"),
+        ("Backend", "🗄️"),
+        ("Full-Stack", "{/}"),
+        ("Cloud / DevOps", "☁️"),
+        ("Cybersecurity", "🛡️"),
+        ("System Design", "🕸️")
+    ]
+    for s_i, (s_name, s_icon) in enumerate(skills):
+        sy = p3_y + 42 + s_i * 38
+        # Icon
+        svg.append(f'<text x="{p3_x+20}" y="{sy+18}" fill="#00E5FF" font-size="11">{s_icon}</text>')
+        # Name
+        svg.append(f'<text x="{p3_x+44}" y="{sy+18}" fill="#FFFFFF" font-size="11" font-weight="700" font-family="{FONT_SANS}">{s_name}</text>')
+        # 4 Angled Neon Magenta Slashes (////)
+        slash_start_x = p3_x + p3_w - 76
+        for sl_i in range(4):
+            slx = slash_start_x + sl_i * 13
+            sly = sy + 8
+            svg.append(f'<polygon points="{slx+6},{sly} {slx+12},{sly} {slx+6},{sly+14} {slx},{sly+14}" fill="#FF168A"/>')
+
+    # ==========================================================================
+    # 4. FAR-TOP-RIGHT: TECHNOLOGY LOADOUT (x = 1176, y = 68, w = 338, h = 288)
+    # ==========================================================================
+    p4_x, p4_y, p4_w, p4_h = 1176, 68, 338, 288
+    svg.append(panel_container(p4_x, p4_y, p4_w, p4_h, border="#00E5FF", bg="#060A16", notch=16))
+
+    # Header
+    svg.append(f'<text x="{p4_x+20}" y="{p4_y+26}" fill="#00E5FF" font-size="13" font-weight="900" font-family="{FONT_MONO}" letter-spacing="1">💻 TECHNOLOGY LOADOUT</text>')
+
+    # 3 Rows x 5 Columns = 15 Technology Tiles
+    tiles = [
+        # Row 1
+        ("Python", "#3776AB", "#0A1728"),
+        ("Java", "#ED8B00", "#1E1408"),
+        ("JS", "#F7DF1E", "#222008"),
+        ("TS", "#3178C6", "#0A182A"),
+        ("HTML5", "#E34F26", "#200C06"),
+        # Row 2
+        ("dj", "#092E20", "#081E16"),
+        ("React", "#61DAFB", "#081C26"),
+        ("Node", "#339933", "#081E0C"),
+        ("Tailwind", "#06B6D4", "#061A22"),
+        ("Git", "#F05032", "#200B06"),
+        # Row 3
+        ("aws", "#FF9900", "#221606"),
+        ("Docker", "#2496ED", "#08182A"),
+        ("k8s", "#326CE5", "#08142A"),
+        ("GitHub", "#FFFFFF", "#12141A"),
+        ("VS Code", "#007ACC", "#061528")
+    ]
+    tile_w = 52
+    tile_h = 44
+    gap_x = 10
+    gap_y = 10
+    grid_start_x = p4_x + 20
+    grid_start_y = p4_y + 44
+
+    for t_i, (t_label, t_accent, t_bg) in enumerate(tiles):
+        t_col = t_i % 5
+        t_row = t_i // 5
+        tx = grid_start_x + t_col * (tile_w + gap_x)
+        ty = grid_start_y + t_row * (tile_h + gap_y)
+
+        svg.append(f'<rect x="{tx}" y="{ty}" width="{tile_w}" height="{tile_h}" rx="6" fill="{t_bg}" stroke="{t_accent}" stroke-width="1.2"/>')
+        svg.append(f'<text x="{tx+tile_w//2}" y="{ty+tile_h//2+4}" fill="{t_accent}" font-size="10" font-weight="800" font-family="{FONT_MONO}" text-anchor="middle">{t_label}</text>')
+
+    # Bottom subtext
+    svg.append(f'<text x="{p4_x+20}" y="{p4_y+226}" fill="#FFFFFF" font-size="9" font-family="{FONT_MONO}" font-weight="700">+ OpenAI   Claude   Gemini   LangChain   CrewAI</text>')
+
+    # ==========================================================================
+    # 5. MIDDLE-LEFT: MISSION TIMELINE (x = 22, y = 370, w = 328, h = 440)
+    # ==========================================================================
+    p5_x, p5_y, p5_w, p5_h = 22, 370, 328, 440
+    svg.append(panel_container(p5_x, p5_y, p5_w, p5_h, border="#FF168A", bg="#060A16", notch=18))
+
+    # Header
+    svg.append(f'<text x="{p5_x+20}" y="{p5_y+28}" fill="#FF168A" font-size="13" font-weight="900" font-family="{FONT_MONO}" letter-spacing="1">🎯 MISSION TIMELINE</text>')
 
     # Vertical glowing bus line
-    line_x = col1_x + 36
-    svg.append(f'<line x1="{line_x}" y1="{p2_y+46}" x2="{line_x}" y2="{p2_y+p2_h-30}" stroke="#1D3854" stroke-width="2"/>')
-    svg.append(f'<line x1="{line_x}" y1="{p2_y+46}" x2="{line_x}" y2="{p2_y+p2_h-30}" stroke="url(#grad-magenta)" stroke-width="1.2" opacity="0.8"/>')
+    line_x = p5_x + 36
+    svg.append(f'<line x1="{line_x}" y1="{p5_y+54}" x2="{line_x}" y2="{p5_y+p5_h-36}" stroke="#1E2B3E" stroke-width="2"/>')
+    svg.append(f'<line x1="{line_x}" y1="{p5_y+54}" x2="{line_x}" y2="{p5_y+p5_h-36}" stroke="url(#neon-magenta)" stroke-width="1.4"/>')
 
-    timeline_items = [
-        ("2026 – PRESENT", "Software Engineer @ Synapx", "Intelligent AI applications & backend architecture", "#00E5FF"),
-        ("FEB – MAY 2026", "Python Full Stack + GenAI @ Dhee", "Full-stack development, Django, REST APIs & LLMs", "#FF168A"),
-        ("AUG 2024 – JAN 2025", "Ethical Hacking Intern @ Studio", "Vulnerability assessment & web app security", "#8B35FF"),
-        ("2022 – 2026", "B.Tech CSE @ Dr. Ambedkar Inst. of Tech", "Computer Science & Engineering · Bangalore", "#00E5FF")
+    timeline_data = [
+        ("2026 – Present", "Software Engineer @ Synapx", "Building and shipping software solutions.", "💼"),
+        ("Feb – May 2026", "Dhee Coding Lab", "Python Full Stack with Generative AI.", "{/}"),
+        ("Aug 2024 – Jan 2025", "Internship Studio", "Ethical Hacking Intern", "🛡️"),
+        ("2022 – 2026", "B.Tech – CSE", "Dr. Ambedkar Institute of Technology.", "🎓")
     ]
-    for idx, (period, role, desc, col) in enumerate(timeline_items):
-        ty = p2_y + 44 + idx * 68
-        # Pulsing milestone node
-        svg.append(f'<circle cx="{line_x}" cy="{ty+12}" r="5.5" fill="#070C1A" stroke="{col}" stroke-width="2"/>')
-        svg.append(f'<circle cx="{line_x}" cy="{ty+12}" r="2" fill="{col}"/>')
+    for t_idx, (period, role, desc, icon) in enumerate(timeline_data):
+        ty = p5_y + 54 + t_idx * 90
+        # Node circle
+        svg.append(f'<circle cx="{line_x}" cy="{ty+8}" r="7" fill="#060A16" stroke="#FF168A" stroke-width="2"/>')
+        svg.append(f'<circle cx="{line_x}" cy="{ty+8}" r="3" fill="#00E5FF"/>')
         # Content
-        svg.append(f'<text x="{line_x+16}" y="{ty+8}" fill="{col}" font-size="9.5" font-family="{FONT_MONO}" font-weight="800" letter-spacing="1">{esc(period)}</text>')
-        svg.append(f'<text x="{line_x+16}" y="{ty+23}" fill="#FFFFFF" font-size="11" font-family="{FONT_SANS}" font-weight="700">{esc(role)}</text>')
-        svg.append(f'<text x="{line_x+16}" y="{ty+37}" fill="#7F9BB2" font-size="9" font-family="{FONT_SANS}">{esc(desc)}</text>')
-
-    # 3. Engineering Philosophy (y = 820, h = 188)
-    p3_y, p3_h = 820, 188
-    svg.append(panel_hud(col1_x, p3_y, col1_w, p3_h, "ENGINEERING PHILOSOPHY // DIRECTIVE", "#00E5FF", "DOCTRINE"))
-
-    # Glowing futuristic typography block
-    svg.append(f'<text x="{col1_x+24}" y="{p3_y+62}" fill="#00E5FF" font-size="16" font-family="{FONT_MONO}" font-weight="900" letter-spacing="1.5">&gt; THINK DIFFERENTLY.</text>')
-    svg.append(f'<text x="{col1_x+24}" y="{p3_y+94}" fill="#FFFFFF" font-size="16" font-family="{FONT_MONO}" font-weight="900" letter-spacing="1.5">&gt; BUILD INTELLIGENTLY.</text>')
-    svg.append(f'<text x="{col1_x+24}" y="{p3_y+126}" fill="#FF168A" font-size="16" font-family="{FONT_MONO}" font-weight="900" letter-spacing="1.5">&gt; ENGINEER RELIABLY.</text>')
-    svg.append(f'<rect x="{col1_x+20}" y="{p3_y+146}" width="{col1_w-40}" height="24" rx="3" fill="#0C1626" stroke="#162D46" stroke-width="1"/>')
-    svg.append(f'<text x="{col1_x+30}" y="{p3_y+162}" fill="#00FF9D" font-size="9.5" font-family="{FONT_MONO}" font-weight="700">MISSION: ZERO-COMPROMISE PRODUCTION ARCHITECTURE</text>')
+        svg.append(f'<text x="{line_x+18}" y="{ty}" fill="#00E5FF" font-size="10.5" font-weight="800" font-family="{FONT_MONO}">{period}</text>')
+        svg.append(f'<text x="{line_x+18}" y="{ty+18}" fill="#FFFFFF" font-size="11.5" font-weight="700" font-family="{FONT_SANS}">{role}</text>')
+        svg.append(f'<text x="{line_x+18}" y="{ty+34}" fill="#7F9AB0" font-size="9" font-family="{FONT_SANS}">{desc}</text>')
 
     # ==========================================================================
-    # CENTER COLUMN (x = 412, w = 736)
+    # 6. CENTER-MIDDLE: FEATURED PROJECTS (x = 362, y = 370, w = 768, h = 440)
     # ==========================================================================
-    col2_x = 412
-    col2_w = 736
+    p6_x, p6_y, p6_w, p6_h = 362, 370, 768, 440
+    svg.append(panel_container(p6_x, p6_y, p6_w, p6_h, border="#FF168A", bg="#060A16", notch=18))
 
-    # 4. Core Skills & Tech Loadout Panel (y = 56, h = 296)
-    p4_y, p4_h = 56, 296
-    svg.append(panel_hud(col2_x, p4_y, col2_w, p4_h, "CAPABILITY SPECTRUM & TECH LOADOUT", "#00E5FF", "LOADOUT.SYS"))
+    # Header
+    svg.append(f'<text x="{p6_x+20}" y="{p6_y+28}" fill="#FF168A" font-size="13" font-weight="900" font-family="{FONT_MONO}" letter-spacing="1">🚀 FEATURED PROJECTS</text>')
 
-    # 6 Horizontal Futuristic Skill Indicators (Descriptive, no fabricated numbers)
-    skill_rows = [
-        ("AI / ML", "SPECIALIZED // MULTI-AGENT & LLMS", 9, "#00E5FF"),
-        ("BACKEND ENGINEERING", "CORE // DISTRIBUTED ARCHITECTURE", 9, "#FF168A"),
-        ("FULL-STACK DEV", "PRODUCTION // DJANGO & REACT", 8, "#00E5FF"),
-        ("CLOUD & DEVOPS", "INFRASTRUCTURE // DOCKER & AWS", 8, "#8B35FF"),
-        ("CYBERSECURITY", "HARDENED // ETHICAL HACKING", 7, "#FF168A"),
-        ("SYSTEM DESIGN", "HIGH-RELIABILITY ARCHITECTURES", 8, "#00FF9D")
+    projects_meta = [
+        ("AI PESTICIDE SPRAYING ROBOT", "Autonomous robot for plant disease detection and precision spraying.", ["Python", "YOLOv8", "OpenCV"]),
+        ("GENAI BANKING AGENT", "Conversational AI assistant for intelligent banking interactions.", ["Python", "LLMs", "APIs"]),
+        ("STUDYMIND", "AI-powered learning platform for personalized study assistance.", ["Python", "GenAI", "JS"]),
+        ("HIRELENS AI", "Multi-agent job rejection analyzer with actionable insights.", ["Python", "Streamlit", "CrewAI"]),
+        ("LUMIQ", "Convert study materials into summaries, flashcards and mind maps.", ["AI", "Python", "JS"]),
+        ("AI RESUME ANALYZER", "Automated resume analysis and workflow automation.", ["n8n", "LLMs", "Automation"])
     ]
-    for idx, (name, tag, segments, col) in enumerate(skill_rows):
-        r_col = idx % 2
-        r_row = idx // 2
-        bx = col2_x + 20 + r_col * 352
-        by = p4_y + 42 + r_row * 36
 
-        svg.append(f'<text x="{bx}" y="{by+10}" fill="#FFFFFF" font-size="10" font-weight="700" font-family="{FONT_MONO}">{esc(name)}</text>')
-        svg.append(f'<text x="{bx+336}" y="{by+10}" fill="{col}" font-size="8.5" font-weight="700" font-family="{FONT_MONO}" text-anchor="end">{esc(tag)}</text>')
-        # Segmented high-tech level indicator bar (10 blocks)
-        for b_i in range(10):
-            block_x = bx + b_i * 34
-            is_lit = b_i < segments
-            b_fill = col if is_lit else "#132134"
-            b_op = "0.9" if is_lit else "0.3"
-            svg.append(f'<rect x="{block_x}" y="{by+16}" width="30" height="6" rx="1.5" fill="{b_fill}" opacity="{b_op}"/>')
-
-    # Equipment Grid / Tech Loadout Badges
-    svg.append(f'<path d="M {col2_x+20} {p4_y+162} H {col2_x+col2_w-20}" stroke="#162D46" stroke-width="1"/>')
-    svg.append(f'<text x="{col2_x+20}" y="{p4_y+178}" fill="#FF168A" font-size="10.5" font-family="{FONT_MONO}" font-weight="800" letter-spacing="1">AUTHENTIC TECH STACK LOADOUT // EQUIPMENT MATRIX</text>')
-
-    tech_categories = [
-        ("LANGUAGES", ["Python", "JavaScript", "Java", "TypeScript", "HTML5", "CSS3"], "#00E5FF"),
-        ("FRAMEWORKS", ["Django", "Flask", "React", "Node.js", "Tailwind CSS"], "#FF168A"),
-        ("AI / ML", ["OpenAI", "Claude", "Gemini", "LangChain", "CrewAI", "PyTorch", "YOLOv8"], "#00FF9D"),
-        ("INFRASTRUCTURE", ["AWS", "MySQL", "MongoDB", "Firebase", "Docker", "Kubernetes"], "#8B35FF"),
-        ("ENGINEERING", ["Linux", "Git", "GitHub Actions", "Nginx", "PM2", "n8n", "Make.com"], "#00E5FF")
-    ]
-    for c_i, (c_name, c_items, c_col) in enumerate(tech_categories):
-        cy_pos = p4_y + 196 + c_i * 18
-        svg.append(f'<text x="{col2_x+20}" y="{cy_pos+8}" fill="{c_col}" font-size="8.5" font-family="{FONT_MONO}" font-weight="700">{esc(c_name)}:</text>')
-        items_str = " · ".join(c_items)
-        svg.append(f'<text x="{col2_x+140}" y="{cy_pos+8}" fill="#D8E8F5" font-size="9" font-family="{FONT_MONO}">{esc(items_str)}</text>')
-
-    # 5. Featured Projects Archive (P1–P6) (y = 362, h = 422)
-    p5_y, p5_h = 362, 422
-    svg.append(panel_hud(col2_x, p5_y, col2_w, p5_h, "FEATURED PROJECTS ARCHIVE // 6 CORE BUILDS", "#FF168A", "PROJECTS P1-P6"))
-
-    projects = DATA.get("projects", [])[:6]
-    card_w = 226
-    card_h = 176
-    gap_x = 15
+    card_w = 236
+    card_h = 184
+    gap_x = 16
     gap_y = 16
 
-    for idx, proj in enumerate(projects):
-        p_col = idx % 3
-        p_row = idx // 3
-        cx = col2_x + 14 + p_col * (card_w + gap_x)
-        cy = p5_y + 38 + p_row * (card_h + gap_y)
+    for p_idx, (p_title, p_desc, p_tags) in enumerate(projects_meta):
+        col_i = p_idx % 3
+        row_i = p_idx // 3
+        cx = p6_x + 18 + col_i * (card_w + gap_x)
+        cy = p6_y + 44 + row_i * (card_h + gap_y)
 
         # Card container
-        svg.append(f'<rect x="{cx}" y="{cy}" width="{card_w}" height="{card_h}" rx="6" fill="#080F1D" stroke="#1D344E" stroke-width="1.2"/>')
-        # Accent top bar
-        bar_col = "#00E5FF" if p_row == 0 else "#FF168A"
-        svg.append(f'<rect x="{cx}" y="{cy}" width="{card_w}" height="2.5" rx="1" fill="{bar_col}"/>')
+        svg.append(f'<rect x="{cx}" y="{cy}" width="{card_w}" height="{card_h}" rx="8" fill="#080F1E" stroke="#1D344E" stroke-width="1.2"/>')
 
-        # Identifier P1-P6 & Domain tag
-        svg.append(f'<text x="{cx+10}" y="{cy+16}" fill="{bar_col}" font-size="10" font-family="{FONT_MONO}" font-weight="800">P{idx+1}</text>')
-        cat_short = proj.get("category", "").split("/")[0].strip()
-        svg.append(f'<text x="{cx+card_w-10}" y="{cy+16}" fill="#7F9CB4" font-size="8.5" font-family="{FONT_MONO}" font-weight="700" text-anchor="end">{esc(cat_short)}</text>')
+        # Thumbnail Image (from reference image crop)
+        thumb_img = p_thumbs[p_idx] if p_idx < len(p_thumbs) else ""
+        if thumb_img:
+            svg.append(f'<image href="{thumb_img}" x="{cx+6}" y="{cy+6}" width="{card_w-12}" height="84" preserveAspectRatio="none"/>')
+        else:
+            svg.append(f'<rect x="{cx+6}" y="{cy+6}" width="{card_w-12}" height="84" rx="4" fill="#0C1A30"/>')
 
-        # Unique Illustrative Thumbnail
-        thumb_h = 62
-        thumb_w = card_w - 20
-        svg.append(get_project_thumbnail(idx+1, cx+10, cy+22, thumb_w, thumb_h))
+        # Badge P1-P6 in top right of thumbnail
+        svg.append(f'<rect x="{cx+card_w-36}" y="{cy+10}" width="26" height="16" rx="4" fill="#FF168A"/>')
+        svg.append(f'<text x="{cx+card_w-23}" y="{cy+22}" fill="#FFFFFF" font-size="9" font-weight="900" font-family="{FONT_MONO}" text-anchor="middle">P{p_idx+1}</text>')
 
-        # Project Name
-        p_name = proj.get("name", "")
-        p_lines = wrap_text(p_name, 23)
-        for n_i, n_line in enumerate(p_lines[:2]):
-            svg.append(f'<text x="{cx+10}" y="{cy+98 + n_i*14}" fill="#FFFFFF" font-size="11.5" font-family="{FONT_SANS}" font-weight="700">{esc(n_line)}</text>')
+        # Project Title
+        title_lines = wrap_text(p_title, 24)
+        for t_li, t_line in enumerate(title_lines[:2]):
+            svg.append(f'<text x="{cx+8}" y="{cy+108 + t_li*13}" fill="#FFFFFF" font-size="10.5" font-weight="800" font-family="{FONT_SANS}">{esc(t_line)}</text>')
 
-        # Short description
-        desc_lines = wrap_text(proj.get("description", ""), 30)
-        desc_start = cy + 128 if len(p_lines) == 1 else cy + 130
-        for d_i, d_line in enumerate(desc_lines[:2]):
-            svg.append(f'<text x="{cx+10}" y="{desc_start + d_i*12}" fill="#89A5BA" font-size="9" font-family="{FONT_SANS}">{esc(d_line)}</text>')
+        # Project Description
+        desc_lines = wrap_text(p_desc, 30)
+        desc_start_y = cy + 134 if len(title_lines) == 1 else cy + 138
+        for d_li, d_line in enumerate(desc_lines[:2]):
+            svg.append(f'<text x="{cx+8}" y="{desc_start_y + d_li*11}" fill="#7F9CB4" font-size="8.5" font-family="{FONT_SANS}">{esc(d_line)}</text>')
 
-        # Tech stack pill
-        stack_str = " · ".join(proj.get("stack", [])[:3])
-        if len(stack_str) > 30:
-            stack_str = stack_str[:28] + "…"
-        svg.append(f'<text x="{cx+10}" y="{cy+card_h-10}" fill="{bar_col}" font-size="8.5" font-family="{FONT_MONO}" font-weight="700">{esc(stack_str)}</text>')
-        svg.append(f'<text x="{cx+card_w-10}" y="{cy+card_h-10}" fill="#FF168A" font-size="8.5" font-family="{FONT_MONO}" font-weight="800" text-anchor="end">OPEN ↗</text>')
+        # Tech Tags (cyan border pills)
+        tag_start_x = cx + 8
+        for tg_i, tg in enumerate(p_tags[:3]):
+            tg_w = len(tg) * 6 + 10
+            svg.append(f'<rect x="{tag_start_x}" y="{cy+card_h-22}" width="{tg_w}" height="14" rx="3" fill="#071322" stroke="#00E5FF" stroke-width="0.8"/>')
+            svg.append(f'<text x="{tag_start_x+tg_w//2}" y="{cy+card_h-12}" fill="#00E5FF" font-size="7.5" font-weight="700" font-family="{FONT_MONO}" text-anchor="middle">{esc(tg)}</text>')
+            tag_start_x += tg_w + 6
 
-    # 6. Contribution Matrix Heatmap (y = 794, h = 214)
-    p6_y, p6_h = 794, 214
-    svg.append(panel_hud(col2_x, p6_y, col2_w, p6_h, "CONTRIBUTION MATRIX // NEON ACTIVITY STREAM", "#00E5FF", "REAL-TIME TELEMETRY"))
+    # ==========================================================================
+    # 7. RIGHT-MIDDLE: GITHUB TELEMETRY (x = 1144, y = 370, w = 370, h = 440)
+    # ==========================================================================
+    p7_x, p7_y, p7_w, p7_h = 1144, 370, 370, 440
+    svg.append(panel_container(p7_x, p7_y, p7_w, p7_h, border="#FF168A", bg="#060A16", notch=18))
 
-    # Render real contribution calendar grid
-    grid_start_x = col2_x + 44
-    grid_start_y = p6_y + 44
-    cell_w = 9.8
+    # Header
+    svg.append(f'<text x="{p7_x+20}" y="{p7_y+28}" fill="#FF168A" font-size="13" font-weight="900" font-family="{FONT_MONO}" letter-spacing="1">🐱 GITHUB TELEMETRY</text>')
+
+    # 4 Stat Tiles in a row
+    stat_items = [
+        ("&lt;/&gt;", "REPOS", public_repos_cnt),
+        ("★", "STARS", stars),
+        ("👥", "FOLLOWERS", followers_cnt),
+        ("🔀", "FOLLOWING", following_cnt)
+    ]
+    tile_box_w = 74
+    tile_box_h = 60
+    for s_idx, (s_ic, s_lbl, s_val) in enumerate(stat_items):
+        stx = p7_x + 18 + s_idx * (tile_box_w + 12)
+        sty = p7_y + 44
+        svg.append(f'<rect x="{stx}" y="{sty}" width="{tile_box_w}" height="{tile_box_h}" rx="6" fill="#091526" stroke="#00E5FF" stroke-width="1.2"/>')
+        svg.append(f'<text x="{stx+tile_box_w//2}" y="{sty+22}" fill="#00E5FF" font-size="14" font-weight="800" font-family="{FONT_MONO}" text-anchor="middle">{s_ic}</text>')
+        svg.append(f'<text x="{stx+tile_box_w//2}" y="{sty+38}" fill="#FFFFFF" font-size="11" font-weight="900" font-family="{FONT_MONO}" text-anchor="middle">{s_val}</text>')
+        svg.append(f'<text x="{stx+tile_box_w//2}" y="{sty+52}" fill="#6E8CA2" font-size="7.5" font-weight="700" font-family="{FONT_MONO}" text-anchor="middle">{s_lbl}</text>')
+
+    # Language Distribution Sub-panel
+    svg.append(f'<text x="{p7_x+20}" y="{p7_y+132}" fill="#FF168A" font-size="11" font-weight="800" font-family="{FONT_MONO}" letter-spacing="1">LANGUAGE DISTRIBUTION</text>')
+
+    # Progress bars for top languages
+    total_bytes = sum(languages.values()) if languages else 1
+    top_langs = list(languages.items())[:5] if languages else [("Python", 55), ("JavaScript", 25), ("HTML", 12), ("CSS", 5), ("Other", 3)]
+    bar_colors = ["url(#neon-magenta)", "#00E5FF", "#8B35FF", "#FF168A", "#00E5FF"]
+
+    for l_idx, (lang, b_cnt) in enumerate(top_langs):
+        ly = p7_y + 154 + l_idx * 34
+        pct = (b_cnt / total_bytes) * 100 if total_bytes > 0 else 0
+        bar_len = max(int(140 * (pct / 100)), 6)
+        svg.append(f'<text x="{p7_x+20}" y="{ly+10}" fill="#FFFFFF" font-size="10" font-weight="600" font-family="{FONT_SANS}">{esc(lang)}</text>')
+        # Bar track
+        svg.append(f'<rect x="{p7_x+100}" y="{ly}" width="140" height="12" rx="6" fill="#101D2E"/>')
+        # Fill bar
+        svg.append(f'<rect x="{p7_x+100}" y="{ly}" width="{bar_len}" height="12" rx="6" fill="{bar_colors[l_idx % len(bar_colors)]}"/>')
+
+    # Donut Chart with GitHub Octocat in center (Right of language bars)
+    donut_cx = p7_x + 296
+    donut_cy = p7_y + 220
+    # Outer glowing donut ring
+    svg.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="44" fill="none" stroke="#FF168A" stroke-width="14" stroke-dasharray="140 280"/>')
+    svg.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="44" fill="none" stroke="#00E5FF" stroke-width="14" stroke-dasharray="80 280" stroke-dashoffset="-140"/>')
+    svg.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="44" fill="none" stroke="#8B35FF" stroke-width="14" stroke-dasharray="60 280" stroke-dashoffset="-220"/>')
+    # Inner center hole
+    svg.append(f'<circle cx="{donut_cx}" cy="{donut_cy}" r="34" fill="#060A16"/>')
+    # Center Octocat icon
+    svg.append(f'<text x="{donut_cx}" y="{donut_cy+6}" fill="#FFFFFF" font-size="20" text-anchor="middle">🐱</text>')
+
+    # ==========================================================================
+    # 8. BOTTOM-LEFT: ENGINEERING PHILOSOPHY (x = 22, y = 826, w = 328, h = 176)
+    # ==========================================================================
+    p8_x, p8_y, p8_w, p8_h = 22, 826, 328, 176
+    svg.append(panel_container(p8_x, p8_y, p8_w, p8_h, border="#FF168A", bg="#060A16", notch=18))
+
+    # Quotation marks
+    svg.append(f'<text x="{p8_x+18}" y="{p8_y+42}" fill="#FF168A" font-size="34" font-family="{FONT_MONO}" font-weight="900">“</text>')
+    svg.append(f'<text x="{p8_x+p8_w-34}" y="{p8_y+p8_h-18}" fill="#FF168A" font-size="34" font-family="{FONT_MONO}" font-weight="900">”</text>')
+
+    # 3 Italic bold lines
+    svg.append(f'<text x="{p8_x+42}" y="{p8_y+64}" fill="#FFFFFF" font-size="14.5" font-weight="900" font-family="{FONT_SANS}" font-style="italic" letter-spacing="1">THINK DIFFERENTLY.</text>')
+    svg.append(f'<text x="{p8_x+42}" y="{p8_y+96}" fill="#FFFFFF" font-size="14.5" font-weight="900" font-family="{FONT_SANS}" font-style="italic" letter-spacing="1">BUILD INTELLIGENTLY.</text>')
+    svg.append(f'<text x="{p8_x+42}" y="{p8_y+128}" fill="#FFFFFF" font-size="14.5" font-weight="900" font-family="{FONT_SANS}" font-style="italic" letter-spacing="1">ENGINEER RELIABLY.</text>')
+
+    # ==========================================================================
+    # 9. BOTTOM-CENTER: CONTRIBUTION MATRIX (x = 362, y = 826, w = 768, h = 176)
+    # ==========================================================================
+    p9_x, p9_y, p9_w, p9_h = 362, 826, 768, 176
+    svg.append(panel_container(p9_x, p9_y, p9_w, p9_h, border="#00E5FF", bg="#060A16", notch=18))
+
+    # Header
+    svg.append(f'<text x="{p9_x+20}" y="{p9_y+26}" fill="#00E5FF" font-size="13" font-weight="900" font-family="{FONT_MONO}" letter-spacing="1">▦ CONTRIBUTION MATRIX</text>')
+
+    # Contribution Heatmap Grid
+    grid_start_x = p9_x + 24
+    grid_start_y = p9_y + 44
+    cell_w = 11.2
     cell_gap = 2.4
 
-    # Intensity color ramp (Real GitHub data mapping)
     level_colors = {
-        0: "#0D1726",  # Zero activity
-        1: "#43144A",  # Low intensity (violet)
-        2: "#7B2CBF",  # Medium intensity (neon violet)
-        3: "#FF168A",  # High intensity (neon magenta)
-        4: "#00E5FF"   # Overload intensity (electric cyan)
+        0: "#0D1726",
+        1: "#43144A",
+        2: "#7B2CBF",
+        3: "#FF168A",
+        4: "#00E5FF"
     }
 
-    # If calendar days fetched, render 52 columns x 7 rows
     if calendar_days and len(calendar_days) >= 350:
-        # Pad or slice to 52 weeks (364 days)
         last_days = calendar_days[-364:]
         for day_idx, d in enumerate(last_days):
             col_i = day_idx // 7
@@ -596,134 +542,60 @@ def generate_dossier_svg(user, repos, stars, languages, contrib_info, stamp):
             cy = grid_start_y + row_i * (cell_w + cell_gap)
             lvl = d.get("level", 0)
             fill_col = level_colors.get(lvl, "#0D1726")
-            stroke_col = "#00E5FF" if lvl == 4 else ("#FF168A" if lvl == 3 else "none")
-            s_width = "1" if stroke_col != "none" else "0"
-            svg.append(f'<rect x="{cx:.1f}" y="{cy:.1f}" width="{cell_w}" height="{cell_w}" rx="2" fill="{fill_col}" stroke="{stroke_col}" stroke-width="{s_width}"/>')
+            svg.append(f'<rect x="{cx:.1f}" y="{cy:.1f}" width="{cell_w}" height="{cell_w}" rx="2" fill="{fill_col}"/>')
     else:
-        # Fallback grid if network unavailable
         for col_i in range(52):
             for row_i in range(7):
                 cx = grid_start_x + col_i * (cell_w + cell_gap)
                 cy = grid_start_y + row_i * (cell_w + cell_gap)
-                lvl = (col_i + row_i) % 5 if (col_i * 7 + row_i) % 3 == 0 else 0
+                lvl = (col_i + row_i) % 5 if (col_i * 7 + row_i) % 4 == 0 else 0
                 fill_col = level_colors.get(lvl, "#0D1726")
                 svg.append(f'<rect x="{cx:.1f}" y="{cy:.1f}" width="{cell_w}" height="{cell_w}" rx="2" fill="{fill_col}"/>')
 
-    # Heatmap Day Labels (M, W, F)
-    svg.append(f'<text x="{grid_start_x-14}" y="{grid_start_y+19}" fill="#54728A" font-size="8" font-family="{FONT_MONO}">M</text>')
-    svg.append(f'<text x="{grid_start_x-14}" y="{grid_start_y+43}" fill="#54728A" font-size="8" font-family="{FONT_MONO}">W</text>')
-    svg.append(f'<text x="{grid_start_x-14}" y="{grid_start_y+67}" fill="#54728A" font-size="8" font-family="{FONT_MONO}">F</text>')
-
     # Footer metrics bar inside Heatmap panel
-    foot_y = p6_y + p6_h - 26
-    svg.append(f'<text x="{col2_x+24}" y="{foot_y}" fill="#00E5FF" font-size="10" font-family="{FONT_MONO}" font-weight="800">TOTAL COMMITS (1Y): {total_contribs}</text>')
-    svg.append(f'<text x="{col2_x+220}" y="{foot_y}" fill="#FF168A" font-size="10" font-family="{FONT_MONO}" font-weight="800">CURRENT STREAK: {current_streak} DAYS</text>')
-    svg.append(f'<text x="{col2_x+410}" y="{foot_y}" fill="#00FF9D" font-size="10" font-family="{FONT_MONO}" font-weight="800">RECORD: {longest_streak} DAYS</text>')
-
-    # Legend
-    svg.append(f'<text x="{col2_x+col2_w-150}" y="{foot_y}" fill="#54728A" font-size="8.5" font-family="{FONT_MONO}">LESS</text>')
-    for l_i in range(5):
-        lx = col2_x + col2_w - 120 + l_i * 14
-        svg.append(f'<rect x="{lx}" y="{foot_y-8}" width="10" height="10" rx="2" fill="{level_colors[l_i]}"/>')
-    svg.append(f'<text x="{col2_x+col2_w-42}" y="{foot_y}" fill="#54728A" font-size="8.5" font-family="{FONT_MONO}">MORE</text>')
+    foot_y = p9_y + p9_h - 18
+    svg.append(f'<text x="{p9_x+24}" y="{foot_y}" fill="#00E5FF" font-size="9.5" font-family="{FONT_MONO}" font-weight="800">TOTAL COMMITS (1Y): {total_contribs}</text>')
+    svg.append(f'<text x="{p9_x+220}" y="{foot_y}" fill="#FF168A" font-size="9.5" font-family="{FONT_MONO}" font-weight="800">CURRENT STREAK: {current_streak} DAYS</text>')
+    svg.append(f'<text x="{p9_x+420}" y="{foot_y}" fill="#00FF9D" font-size="9.5" font-family="{FONT_MONO}" font-weight="800">LIVE SYNC: {esc(stamp)} UTC</text>')
 
     # ==========================================================================
-    # RIGHT COLUMN (x = 1160, w = 352)
+    # 10. BOTTOM-RIGHT: ESTABLISH CONNECTION (x = 1144, y = 826, w = 370, h = 176)
     # ==========================================================================
-    col3_x = 1160
-    col3_w = 352
+    p10_x, p10_y, p10_w, p10_h = 1144, 826, 370, 176
+    svg.append(panel_container(p10_x, p10_y, p10_w, p10_h, border="#00E5FF", bg="#060A16", notch=18))
 
-    # 7. GitHub Telemetry HUD (y = 56, h = 370)
-    p7_y, p7_h = 56, 370
-    svg.append(panel_hud(col3_x, p7_y, col3_w, p7_h, "GITHUB TELEMETRY // HUD", "#00E5FF", "ANALYTICS"))
+    # Header
+    svg.append(f'<text x="{p10_x+20}" y="{p10_y+26}" fill="#00E5FF" font-size="13" font-weight="900" font-family="{FONT_MONO}" letter-spacing="1">🔗 ESTABLISH CONNECTION</text>')
 
-    # 4 Holographic HUD Stat Cards (2 x 2 grid)
-    hud_stats = [
-        ("PUBLIC REPOS", public_repos_cnt, "#00E5FF"),
-        ("TOTAL STARS", stars, "#FF168A"),
-        ("CONTRIBUTIONS", total_contribs, "#00FF9D"),
-        ("ACTIVE STREAK", f"{current_streak} DAYS", "#FF168A")
+    # 5 Colored Icon Square Buttons
+    social_buttons = [
+        ("GitHub", "🐱", "#10141D", "#FFFFFF"),
+        ("LinkedIn", "in", "#0077B5", "#FFFFFF"),
+        ("Devfolio", "D", "#3770FF", "#FFFFFF"),
+        ("Portfolio", "🔗", "#0E1C30", "#00E5FF"),
+        ("Email", "✉️", "#8B35FF", "#FFFFFF")
     ]
-    box_w = 148
-    box_h = 68
-    for idx, (label, val, col) in enumerate(hud_stats):
-        h_col = idx % 2
-        h_row = idx // 2
-        bx = col3_x + 18 + h_col * 162
-        by = p7_y + 40 + h_row * 78
+    btn_w = 54
+    btn_h = 54
+    btn_gap = 16
+    btn_start_x = p10_x + 18
+    btn_start_y = p10_y + 48
 
-        svg.append(f'<rect x="{bx}" y="{by}" width="{box_w}" height="{box_h}" rx="6" fill="#08101E" stroke="#1B324C" stroke-width="1.2"/>')
-        svg.append(f'<text x="{bx+12}" y="{by+18}" fill="#69879E" font-size="9" font-weight="700" font-family="{FONT_MONO}">{label}</text>')
-        svg.append(f'<text x="{bx+12}" y="{by+50}" fill="{col}" font-size="22" font-weight="900" font-family="{FONT_MONO}">{val}</text>')
+    for b_idx, (b_name, b_sym, b_bg, b_fg) in enumerate(social_buttons):
+        bx = btn_start_x + b_idx * (btn_w + btn_gap)
+        by = btn_start_y
+        svg.append(f'<rect x="{bx}" y="{by}" width="{btn_w}" height="{btn_h}" rx="8" fill="{b_bg}" stroke="{b_fg}" stroke-width="1.2"/>')
+        svg.append(f'<text x="{bx+btn_w//2}" y="{by+btn_h//2+6}" fill="{b_fg}" font-size="18" font-weight="900" font-family="{FONT_MONO}" text-anchor="middle">{b_sym}</text>')
+        svg.append(f'<text x="{bx+btn_w//2}" y="{by+btn_h+18}" fill="#8EA4B8" font-size="8" font-family="{FONT_MONO}" font-weight="700" text-anchor="middle">{b_name}</text>')
 
-    # Real-Time Diagnostic Node Status
-    diag_y = p7_y + 208
-    svg.append(f'<rect x="{col3_x+18}" y="{diag_y}" width="{col3_w-36}" height="142" rx="5" fill="#081120" stroke="#172C42" stroke-width="1"/>')
-    svg.append(f'<text x="{col3_x+30}" y="{diag_y+22}" fill="#00FF9D" font-size="9.5" font-family="{FONT_MONO}" font-weight="800">● DIAGNOSTIC STATUS: ONLINE [200 OK]</text>')
-    svg.append(f'<text x="{col3_x+30}" y="{diag_y+42}" fill="#6E8CA2" font-size="9" font-family="{FONT_MONO}">HOST NODE: api.github.com // CLOUD ENGINE</text>')
-    svg.append(f'<text x="{col3_x+30}" y="{diag_y+60}" fill="#6E8CA2" font-size="9" font-family="{FONT_MONO}">SECURITY: SHA-256 HMAC ENCRYPTED</text>')
-    svg.append(f'<text x="{col3_x+30}" y="{diag_y+78}" fill="#6E8CA2" font-size="9" font-family="{FONT_MONO}">AUTOMATION: GITHUB ACTIONS (6-HR CYCLE)</text>')
-    svg.append(f'<text x="{col3_x+30}" y="{diag_y+96}" fill="#6E8CA2" font-size="9" font-family="{FONT_MONO}">TARGET CANVAS: 1536 x 1024 CINEMATIC</text>')
-    svg.append(f'<text x="{col3_x+30}" y="{diag_y+114}" fill="#00E5FF" font-size="9" font-family="{FONT_MONO}">PROTOCOL: AUTONOMOUS REFRESH ACTIVE</text>')
-    svg.append(f'<text x="{col3_x+30}" y="{diag_y+130}" fill="#FF168A" font-size="8.5" font-family="{FONT_MONO}">LAST DATA PROBE: {esc(stamp)} UTC</text>')
-
-    # 8. Codebase Language Distribution (y = 436, h = 374)
-    p8_y, p8_h = 436, 374
-    svg.append(panel_hud(col3_x, p8_y, col3_w, p8_h, "CODEBASE LANGUAGE DISTRIBUTION", "#FF168A", "TELEMETRY"))
-
-    total_bytes = sum(languages.values()) if languages else 0
-    top_langs = list(languages.items())[:7] if languages else []
-
-    if top_langs and total_bytes > 0:
-        bar_max_w = 150
-        for l_idx, (lang, b_cnt) in enumerate(top_langs):
-            ly = p8_y + 44 + l_idx * 44
-            pct = (b_cnt / total_bytes) * 100
-            bar_w = max(int(bar_max_w * (b_cnt / total_bytes)), 6)
-            display_lang = lang if len(lang) <= 15 else lang[:13] + "…"
-
-            # Lang name
-            svg.append(f'<text x="{col3_x+20}" y="{ly+12}" fill="#FFFFFF" font-size="11" font-weight="700" font-family="{FONT_SANS}">{esc(display_lang)}</text>')
-            # Pct
-            svg.append(f'<text x="{col3_x+140}" y="{ly+12}" fill="#00E5FF" font-size="10.5" font-weight="800" font-family="{FONT_MONO}" text-anchor="end">{pct:.1f}%</text>')
-            # Track
-            svg.append(f'<rect x="{col3_x+156}" y="{ly+2}" width="{bar_max_w}" height="10" rx="5" fill="#132132"/>')
-            # Fill bar with neon gradient
-            grad = "url(#grad-magenta)" if l_idx % 2 == 0 else "url(#grad-cyan)"
-            svg.append(f'<rect x="{col3_x+156}" y="{ly+2}" width="{bar_w}" height="10" rx="5" fill="{grad}"/>')
-            # Byte size subtext
-            kb_cnt = b_cnt / 1024
-            svg.append(f'<text x="{col3_x+20}" y="{ly+26}" fill="#627E94" font-size="8.5" font-family="{FONT_MONO}">{kb_cnt:,.0f} KB</text>')
-    else:
-        svg.append(f'<text x="{col3_x+20}" y="{p8_y+60}" fill="#7F9AB0" font-size="11" font-family="{FONT_MONO}">Language stats probe running...</text>')
-
-    # 9. Establish Connection (y = 820, h = 188)
-    p9_y, p9_h = 820, 188
-    svg.append(panel_hud(col3_x, p9_y, col3_w, p9_h, "ESTABLISH CONNECTION // TRANSMISSION", "#00E5FF", "COMM CHANNELS"))
-
-    channels = [
-        ("GITHUB", "vachan18", "#00E5FF"),
-        ("LINKEDIN", "vachan-u-s-0a5aa8128", "#FF168A"),
-        ("PORTFOLIO", "vachanmyportfolio.netlify.app", "#00E5FF"),
-        ("DEVFOLIO", "@Vachanus", "#8B35FF"),
-        ("EMAIL", "vachan.us@gmail.com", "#00FF9D")
-    ]
-    for c_idx, (channel, handle, col) in enumerate(channels):
-        cy = p9_y + 36 + c_idx * 24
-        svg.append(f'<rect x="{col3_x+18}" y="{cy}" width="70" height="17" rx="3" fill="#0C182B" stroke="{col}" stroke-width="0.8"/>')
-        svg.append(f'<text x="{col3_x+53}" y="{cy+12}" fill="{col}" font-size="8.5" font-family="{FONT_MONO}" font-weight="800" text-anchor="middle">{channel}</text>')
-        svg.append(f'<text x="{col3_x+96}" y="{cy+12}" fill="#C8DCED" font-size="9" font-family="{FONT_MONO}">{esc(handle)}</text>')
-
-    svg.append(f'<text x="{col3_x+20}" y="{p9_y+170}" fill="#627E94" font-size="8.5" font-family="{FONT_MONO}">PROTOCOL: TLS 1.3 // 2.4 GHz ENCRYPTED</text>')
-
-    # Close SVG root
+    # Close SVG
     svg.append('</svg>')
     out_svg = "\n".join(svg)
 
     # Validate XML strictly
     ET.fromstring(out_svg)
 
-    # Safe write
+    # Write output
     dossier_path = ASSETS_DIR / "dossier.svg"
     dossier_path.write_text(out_svg, encoding="utf-8")
     print(f"[OK] Master Command Center generated at {dossier_path} ({len(out_svg)} bytes, 1536x1024)")
@@ -804,7 +676,6 @@ def generate_telemetry_svg(user, repos, stars, languages, contrib_info, stamp):
 
 def generate_readme(user, repos, stars, contrib_info, stamp):
     """Generate cinematic, cyberpunk engineering README.md."""
-    # Build project rows
     proj_rows = []
     for idx, p in enumerate(DATA.get("projects", [])):
         name = esc(p.get("name", ""))
@@ -816,7 +687,6 @@ def generate_readme(user, repos, stars, contrib_info, stamp):
             f"| **P{idx+1} — {name}**<br/><sub>{cat}</sub> | {stack_str}<br/>[`{repo_slug} ↗`]({url}) |"
         )
 
-    # Build career entries
     exp_md = []
     for e in DATA.get("experience", []):
         period = esc(e.get("period", ""))
@@ -912,37 +782,6 @@ Direct repository access for all six intelligence builds featured in the Cyberpu
     readme_path.write_text(content, encoding="utf-8")
     print(f"[OK] Generated {readme_path}")
 
-def save_standalone_assets():
-    """Export dedicated standalone SVG assets for portrait and project thumbnails."""
-    thumbs_dir = ASSETS_DIR / "thumbnails"
-    thumbs_dir.mkdir(parents=True, exist_ok=True)
-
-    # Operator Portrait standalone
-    port_svg = f'''<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="340" height="220" viewBox="0 0 340 220">
-{get_operator_portrait(0, 0, 340, 220)}
-</svg>'''
-    ET.fromstring(port_svg)
-    (ASSETS_DIR / "operator_portrait.svg").write_text(port_svg, encoding="utf-8")
-
-    # Project Thumbnails standalone
-    thumb_names = [
-        "p1_robot.svg",
-        "p2_banking.svg",
-        "p3_studymind.svg",
-        "p4_hirelens.svg",
-        "p5_lumiq.svg",
-        "p6_resume.svg"
-    ]
-    for idx, t_name in enumerate(thumb_names, start=1):
-        t_svg = f'''<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="206" height="64" viewBox="0 0 206 64">
-{get_project_thumbnail(idx, 0, 0, 206, 64)}
-</svg>'''
-        ET.fromstring(t_svg)
-        (thumbs_dir / t_name).write_text(t_svg, encoding="utf-8")
-    print("[OK] Standalone portrait & thumbnail assets exported to assets/thumbnails/")
-
 def main():
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
     print(f"[*] Initializing Cyberpunk Command Center Redesign for '{USER}' at {stamp} UTC...")
@@ -997,7 +836,6 @@ def main():
             contrib_info["days"] = days
             contrib_info["total"] = sum(d.get("count", 0) for d in days)
 
-            # Compute current streak
             c_streak = 0
             for d in reversed(days):
                 if d.get("count", 0) > 0:
@@ -1008,7 +846,6 @@ def main():
                     break
             contrib_info["current_streak"] = c_streak
 
-            # Compute longest streak
             l_streak = 0
             curr = 0
             for d in days:
@@ -1023,7 +860,6 @@ def main():
     print(f"[+] User: {USER}, Repos: {len(repos)}, Stars: {stars}, Contributions: {contrib_info['total']}, Streak: {contrib_info['current_streak']}D")
 
     # Generate master outputs
-    save_standalone_assets()
     generate_dossier_svg(user, repos, stars, languages, contrib_info, stamp)
     generate_telemetry_svg(user, repos, stars, languages, contrib_info, stamp)
     generate_readme(user, repos, stars, contrib_info, stamp)
