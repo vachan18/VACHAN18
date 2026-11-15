@@ -15,41 +15,41 @@
 </linearGradient>
 </defs>
 <rect width="800" height="420" fill="url(#t-bg)" rx="12" stroke="#20E8FF" stroke-width="1.8"/>
-<text x="24" y="32" fill="#20E8FF" font-size="14" font-weight="700" font-family="monospace" letter-spacing="1.5">TELEMETRY // GITHUB LIVE METRICS</text>
-<text x="776" y="32" fill="#FF168A" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">SYNC: 2026-11-15 06:56</text>
+<text x="24" y="32" fill="#20E8FF" font-size="13" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1.5">TELEMETRY // GITHUB LIVE METRICS</text>
+<text x="776" y="32" fill="#FF168A" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">SYNC: 2026-11-15 08:04 UTC</text>
 <path d="M 24 44 H 776" stroke="#1E364C" stroke-width="1"/>
-<rect x="24" y="60" width="178" height="74" rx="6" fill="#0E192B" stroke="#1F364E" stroke-width="1"/>
-<text x="38" y="82" fill="#7898B0" font-size="10" font-weight="700" font-family="monospace">PUBLIC REPOS</text>
-<text x="38" y="116" fill="#20E8FF" font-size="28" font-weight="800" font-family="monospace">15</text>
-<rect x="214" y="60" width="178" height="74" rx="6" fill="#0E192B" stroke="#1F364E" stroke-width="1"/>
-<text x="228" y="82" fill="#7898B0" font-size="10" font-weight="700" font-family="monospace">TOTAL STARS</text>
-<text x="228" y="116" fill="#FF168A" font-size="28" font-weight="800" font-family="monospace">0</text>
-<rect x="404" y="60" width="178" height="74" rx="6" fill="#0E192B" stroke="#1F364E" stroke-width="1"/>
-<text x="418" y="82" fill="#7898B0" font-size="10" font-weight="700" font-family="monospace">FOLLOWERS</text>
-<text x="418" y="116" fill="#20E8FF" font-size="28" font-weight="800" font-family="monospace">1</text>
-<rect x="594" y="60" width="178" height="74" rx="6" fill="#0E192B" stroke="#1F364E" stroke-width="1"/>
-<text x="608" y="82" fill="#7898B0" font-size="10" font-weight="700" font-family="monospace">FOLLOWING</text>
-<text x="608" y="116" fill="#00FF9D" font-size="28" font-weight="800" font-family="monospace">4</text>
-<text x="24" y="168" fill="#FF168A" font-size="13" font-weight="700" font-family="monospace" letter-spacing="1">LANGUAGE VOLUME DISTRIBUTION</text>
-<text x="24" y="206" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">Python</text>
-<text x="180" y="206" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">89.7%</text>
-<rect x="195" y="196" width="480" height="10" rx="5" fill="#142234"/>
-<rect x="195" y="196" width="430" height="10" rx="5" fill="url(#t-magenta)"/>
-<text x="24" y="244" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">C++</text>
-<text x="180" y="244" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">5.0%</text>
-<rect x="195" y="234" width="480" height="10" rx="5" fill="#142234"/>
-<rect x="195" y="234" width="24" height="10" rx="5" fill="url(#t-cyan)"/>
-<text x="24" y="282" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">HTML</text>
-<text x="180" y="282" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">2.3%</text>
-<rect x="195" y="272" width="480" height="10" rx="5" fill="#142234"/>
-<rect x="195" y="272" width="11" height="10" rx="5" fill="url(#t-magenta)"/>
-<text x="24" y="320" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">Cython</text>
-<text x="180" y="320" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">2.0%</text>
-<rect x="195" y="310" width="480" height="10" rx="5" fill="#142234"/>
-<rect x="195" y="310" width="9" height="10" rx="5" fill="url(#t-cyan)"/>
-<text x="24" y="358" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">C</text>
-<text x="180" y="358" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">0.6%</text>
-<rect x="195" y="348" width="480" height="10" rx="5" fill="#142234"/>
-<rect x="195" y="348" width="8" height="10" rx="5" fill="url(#t-magenta)"/>
-<text x="24" y="398" fill="#5F7D95" font-size="10" font-family="monospace">DATA REFRESHED AUTOMATICALLY VIA GITHUB ACTIONS // API.GITHUB.COM</text>
+<rect x="24" y="60" width="176" height="74" rx="6" fill="#0E192B" stroke="#1F364E" stroke-width="1"/>
+<text x="38" y="82" fill="#7898B0" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">PUBLIC REPOS</text>
+<text x="38" y="116" fill="#20E8FF" font-size="28" font-weight="800" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">15</text>
+<rect x="216" y="60" width="176" height="74" rx="6" fill="#0E192B" stroke="#1F364E" stroke-width="1"/>
+<text x="230" y="82" fill="#7898B0" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">TOTAL STARS</text>
+<text x="230" y="116" fill="#FF168A" font-size="28" font-weight="800" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">0</text>
+<rect x="408" y="60" width="176" height="74" rx="6" fill="#0E192B" stroke="#1F364E" stroke-width="1"/>
+<text x="422" y="82" fill="#7898B0" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">FOLLOWERS</text>
+<text x="422" y="116" fill="#20E8FF" font-size="28" font-weight="800" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">1</text>
+<rect x="600" y="60" width="176" height="74" rx="6" fill="#0E192B" stroke="#1F364E" stroke-width="1"/>
+<text x="614" y="82" fill="#7898B0" font-size="10" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">FOLLOWING</text>
+<text x="614" y="116" fill="#00FF9D" font-size="28" font-weight="800" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">4</text>
+<text x="24" y="168" fill="#FF168A" font-size="12.5" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" letter-spacing="1">LANGUAGE VOLUME DISTRIBUTION</text>
+<text x="24" y="206" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Python</text>
+<text x="190" y="206" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">89.7%</text>
+<rect x="204" y="196" width="560" height="10" rx="5" fill="#142234"/>
+<rect x="204" y="196" width="502" height="10" rx="5" fill="url(#t-magenta)"/>
+<text x="24" y="244" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">C++</text>
+<text x="190" y="244" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">5.0%</text>
+<rect x="204" y="234" width="560" height="10" rx="5" fill="#142234"/>
+<rect x="204" y="234" width="28" height="10" rx="5" fill="url(#t-cyan)"/>
+<text x="24" y="282" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">HTML</text>
+<text x="190" y="282" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">2.3%</text>
+<rect x="204" y="272" width="560" height="10" rx="5" fill="#142234"/>
+<rect x="204" y="272" width="12" height="10" rx="5" fill="url(#t-magenta)"/>
+<text x="24" y="320" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">Cython</text>
+<text x="190" y="320" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">2.0%</text>
+<rect x="204" y="310" width="560" height="10" rx="5" fill="#142234"/>
+<rect x="204" y="310" width="11" height="10" rx="5" fill="url(#t-cyan)"/>
+<text x="24" y="358" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">C</text>
+<text x="190" y="358" fill="#20E8FF" font-size="11" font-weight="700" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" text-anchor="end">0.6%</text>
+<rect x="204" y="348" width="560" height="10" rx="5" fill="#142234"/>
+<rect x="204" y="348" width="8" height="10" rx="5" fill="url(#t-magenta)"/>
+<text x="24" y="398" fill="#5F7D95" font-size="10" font-family="ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">DATA REFRESHED AUTOMATICALLY VIA GITHUB ACTIONS // API.GITHUB.COM</text>
 </svg>
