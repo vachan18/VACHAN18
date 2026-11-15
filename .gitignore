@@ -1,3 +1,10 @@
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 .env
+.venv/
+venv/
+.vscode/
+.idea/
+.code-review-graph/
+.hover/

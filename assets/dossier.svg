@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1040" viewBox="0 0 1500 1040">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0%" stop-color="#050811"/>
+  <stop offset="45%" stop-color="#0A1021"/>
+  <stop offset="100%" stop-color="#04060D"/>
+</linearGradient>
+<linearGradient id="glow-cyan" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0%" stop-color="#00F0FF"/>
+  <stop offset="100%" stop-color="#0080FF"/>
+</linearGradient>
+<linearGradient id="glow-magenta" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0%" stop-color="#FF168A"/>
+  <stop offset="100%" stop-color="#9A00FF"/>
+</linearGradient>
+<linearGradient id="glow-duo" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0%" stop-color="#FF168A"/>
+  <stop offset="50%" stop-color="#7B2CBF"/>
+  <stop offset="100%" stop-color="#20E8FF"/>
+</linearGradient>
+<pattern id="cyber-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+  <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#162A3E" stroke-width="0.8" opacity="0.32"/>
+</pattern>
+<filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
+  <feGaussianBlur stdDeviation="3" result="blur"/>
+  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+</filter>
+</defs>
+<rect width="1500" height="1040" fill="url(#bg)"/>
+<rect width="1500" height="1040" fill="url(#cyber-grid)"/>
+<rect x="12" y="12" width="1476" height="1016" rx="10" fill="none" stroke="url(#glow-duo)" stroke-width="1.8" opacity="0.85"/>
+<text x="36" y="22" fill="#5F7D95" font-size="10" font-family="monospace" letter-spacing="2">SYS-ID: VACHAN-18 // PROTOCOL: CYBER-ENG // NODE: BANGALORE-IN</text>
+<text x="1464" y="22" fill="#5F7D95" font-size="10" font-family="monospace" letter-spacing="2" text-anchor="end">STATUS: OPERATIONAL // SYNC: 2026-11-15 06:52</text>
+<path d="M 46 36 H 710 L 728 54 V 352 L 710 370 H 46 L 28 352 V 54 Z" fill="#080D17" stroke="#FF168A" stroke-width="1.6" opacity="0.95"/><path d="M 30 68 H 726" stroke="#FF168A" stroke-width="0.8" opacity="0.4"/><path d="M 34 52 L 44 42" stroke="#20E8FF" stroke-width="2" fill="none"/><path d="M 712 364 L 722 354" stroke="#20E8FF" stroke-width="2" fill="none"/><text x="52" y="59" fill="#FF168A" font-size="14" font-weight="700" font-family="monospace" letter-spacing="1.5">PANEL 01 // OPERATOR IDENTITY</text><text x="704" y="59" fill="#6C879B" font-size="11" font-weight="600" font-family="monospace" text-anchor="end" letter-spacing="1">CLEARANCE: LVL-4</text>
+<rect x="52" y="86" width="90" height="90" rx="8" fill="#0C1524" stroke="#20E8FF" stroke-width="1.4"/>
+<text x="97" y="130" fill="#20E8FF" font-size="34" font-weight="700" font-family="monospace" text-anchor="middle">V</text>
+<text x="97" y="160" fill="#FF168A" font-size="10" font-weight="700" font-family="monospace" text-anchor="middle">EXE.01</text>
+<text x="158" y="114" fill="#FFFFFF" font-size="32" font-weight="800" font-family="system-ui, sans-serif" letter-spacing="0.5">Vachan U S</text>
+<text x="158" y="140" fill="#20E8FF" font-size="14" font-weight="700" font-family="monospace" letter-spacing="1">SOFTWARE ENGINEER @ SYNAPX</text>
+<text x="158" y="164" fill="#FF4BA8" font-size="12" font-family="monospace">Bangalore, India · Computer Science &amp; Engineering</text>
+<text x="52" y="206" fill="#D5E5F2" font-size="13" font-family="system-ui, sans-serif">Building intelligent applications, engineering reliable systems,</text>
+<text x="52" y="226" fill="#D5E5F2" font-size="13" font-family="system-ui, sans-serif">and exploring the next generation of software.</text>
+<rect x="52" y="260" width="316" height="40" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
+<text x="64" y="276" fill="#7693A8" font-size="10" font-family="monospace" font-weight="600">ORGANIZATION</text>
+<text x="64" y="291" fill="#20E8FF" font-size="12" font-family="monospace" font-weight="700">Synapx</text>
+<rect x="384" y="260" width="316" height="40" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
+<text x="396" y="276" fill="#7693A8" font-size="10" font-family="monospace" font-weight="600">LOCATION</text>
+<text x="396" y="291" fill="#FF4BA8" font-size="12" font-family="monospace" font-weight="700">Bangalore, India</text>
+<rect x="52" y="308" width="316" height="40" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
+<text x="64" y="324" fill="#7693A8" font-size="10" font-family="monospace" font-weight="600">EDUCATION</text>
+<text x="64" y="339" fill="#20E8FF" font-size="12" font-family="monospace" font-weight="700">Dr. Ambedkar Inst. of Tech (2022-26)</text>
+<rect x="384" y="308" width="316" height="40" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
+<text x="396" y="324" fill="#7693A8" font-size="10" font-family="monospace" font-weight="600">SYSTEM STATUS</text>
+<text x="396" y="339" fill="#00FF9D" font-size="12" font-family="monospace" font-weight="700">ACTIVE // DEPLOYED IN PROD</text>
+<text x="52" y="354" fill="#5F7D95" font-size="11" font-family="monospace">CORE FOCUS: AI SYSTEMS · BACKEND INFRASTRUCTURE · CLOUD &amp; DATA PIPELINES</text>
+<path d="M 774 36 H 1454 L 1472 54 V 352 L 1454 370 H 774 L 756 352 V 54 Z" fill="#080D17" stroke="#20E8FF" stroke-width="1.6" opacity="0.95"/><path d="M 758 68 H 1470" stroke="#20E8FF" stroke-width="0.8" opacity="0.4"/><path d="M 762 52 L 772 42" stroke="#20E8FF" stroke-width="2" fill="none"/><path d="M 1456 364 L 1466 354" stroke="#20E8FF" stroke-width="2" fill="none"/><text x="780" y="59" fill="#20E8FF" font-size="14" font-weight="700" font-family="monospace" letter-spacing="1.5">PANEL 02 // TECHNOLOGY CAPABILITY MATRIX</text><text x="1448" y="59" fill="#6C879B" font-size="11" font-weight="600" font-family="monospace" text-anchor="end" letter-spacing="1">CAP-MATRIX.SYS</text>
+<text x="780" y="102" fill="#FF168A" font-size="12" font-weight="700" font-family="monospace" letter-spacing="1">LANGUAGES</text>
+<text x="780" y="122" fill="#E2F0FB" font-size="12" font-family="monospace">Python  ·  JavaScript  ·  Java  ·  TypeScript  ·  HTML  ·  CSS</text>
+<path d="M 780 130 H 1448" stroke="#1A2D3E" stroke-width="0.8"/>
+<text x="780" y="156" fill="#20E8FF" font-size="12" font-weight="700" font-family="monospace" letter-spacing="1">FRAMEWORKS</text>
+<text x="780" y="176" fill="#E2F0FB" font-size="12" font-family="monospace">Django  ·  Flask  ·  React  ·  Node.js  ·  Tailwind CSS</text>
+<path d="M 780 184 H 1448" stroke="#1A2D3E" stroke-width="0.8"/>
+<text x="780" y="210" fill="#00FF9D" font-size="12" font-weight="700" font-family="monospace" letter-spacing="1">AI &amp; MACHINE LEARNING</text>
+<text x="780" y="230" fill="#E2F0FB" font-size="12" font-family="monospace">OpenAI API  ·  Claude API  ·  Gemini API  ·  LangChain  ·  LangGraph  ·  CrewAI</text>
+<path d="M 780 238 H 1448" stroke="#1A2D3E" stroke-width="0.8"/>
+<text x="780" y="264" fill="#20E8FF" font-size="12" font-weight="700" font-family="monospace" letter-spacing="1">CLOUD &amp; DATA</text>
+<text x="780" y="284" fill="#E2F0FB" font-size="12" font-family="monospace">AWS  ·  MySQL  ·  MongoDB  ·  Firebase  ·  Docker  ·  Kubernetes</text>
+<path d="M 780 292 H 1448" stroke="#1A2D3E" stroke-width="0.8"/>
+<text x="780" y="318" fill="#FF4BA8" font-size="12" font-weight="700" font-family="monospace" letter-spacing="1">ENGINEERING &amp; DEVOPS</text>
+<text x="780" y="338" fill="#E2F0FB" font-size="12" font-family="monospace">Linux  ·  Git  ·  GitHub Actions  ·  Nginx  ·  PM2  ·  REST APIs</text>
+<path d="M 780 346 H 1448" stroke="#1A2D3E" stroke-width="0.8"/>
+<path d="M 46 396 H 946 L 964 414 V 994 L 946 1012 H 46 L 28 994 V 414 Z" fill="#080D17" stroke="#FF168A" stroke-width="1.6" opacity="0.95"/><path d="M 30 428 H 962" stroke="#FF168A" stroke-width="0.8" opacity="0.4"/><path d="M 34 412 L 44 402" stroke="#20E8FF" stroke-width="2" fill="none"/><path d="M 948 1006 L 958 996" stroke="#20E8FF" stroke-width="2" fill="none"/><text x="52" y="419" fill="#FF168A" font-size="14" font-weight="700" font-family="monospace" letter-spacing="1.5">PANEL 03 // CLASSIFIED PROJECT ARCHIVE</text><text x="940" y="419" fill="#6C879B" font-size="11" font-weight="600" font-family="monospace" text-anchor="end" letter-spacing="1">6 CORE BUILDS</text>
+<rect x="52" y="444" width="286" height="264" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
+<rect x="52" y="444" width="286" height="3" fill="#FF168A"/>
+<text x="64" y="468" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace">SYS-01</text>
+<text x="326" y="468" fill="#FF4BA8" font-size="10" font-weight="700" font-family="monospace" text-anchor="end">COMPUTER VISION / IOT</text>
+<text x="64" y="496" fill="#FFFFFF" font-size="15" font-weight="700" font-family="system-ui, sans-serif">AI-Powered Pesticide</text>
+<text x="64" y="515" fill="#FFFFFF" font-size="15" font-weight="700" font-family="system-ui, sans-serif">Spraying Robot</text>
+<text x="64" y="540" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">Solar-powered autonomous</text>
+<text x="64" y="557" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">agricultural robot for plant</text>
+<text x="64" y="574" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">disease detection and precision</text>
+<rect x="62" y="654" width="266" height="22" rx="3" fill="#132032"/>
+<text x="68" y="669" fill="#20E8FF" font-size="10" font-weight="600" font-family="monospace">Python · YOLOv8 · PyTorch</text>
+<text x="64" y="694" fill="#FF168A" font-size="11" font-weight="700" font-family="monospace">OPEN REPOSITORY ↗</text>
+<rect x="356" y="444" width="286" height="264" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
+<rect x="356" y="444" width="286" height="3" fill="#FF168A"/>
+<text x="368" y="468" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace">SYS-02</text>
+<text x="630" y="468" fill="#FF4BA8" font-size="10" font-weight="700" font-family="monospace" text-anchor="end">GENERATIVE AI</text>
+<text x="368" y="496" fill="#FFFFFF" font-size="15" font-weight="700" font-family="system-ui, sans-serif">GenAI Banking Agent</text>
+<text x="368" y="540" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">Conversational AI banking</text>
+<text x="368" y="557" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">assistant designed to support</text>
+<text x="368" y="574" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">intelligent banking</text>
+<rect x="366" y="654" width="266" height="22" rx="3" fill="#132032"/>
+<text x="372" y="669" fill="#20E8FF" font-size="10" font-weight="600" font-family="monospace">Python · Generative AI · LLMs</text>
+<text x="368" y="694" fill="#FF168A" font-size="11" font-weight="700" font-family="monospace">OPEN REPOSITORY ↗</text>
+<rect x="660" y="444" width="286" height="264" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
+<rect x="660" y="444" width="286" height="3" fill="#FF168A"/>
+<text x="672" y="468" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace">SYS-03</text>
+<text x="934" y="468" fill="#FF4BA8" font-size="10" font-weight="700" font-family="monospace" text-anchor="end">AI LEARNING</text>
+<text x="672" y="496" fill="#FFFFFF" font-size="15" font-weight="700" font-family="system-ui, sans-serif">StudyMind</text>
+<text x="672" y="540" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">AI-powered learning platform</text>
+<text x="672" y="557" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">designed to improve learning</text>
+<text x="672" y="574" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">through intelligent study</text>
+<rect x="670" y="654" width="266" height="22" rx="3" fill="#132032"/>
+<text x="676" y="669" fill="#20E8FF" font-size="10" font-weight="600" font-family="monospace">Python · Generative AI · JavaScript</text>
+<text x="672" y="694" fill="#FF168A" font-size="11" font-weight="700" font-family="monospace">OPEN REPOSITORY ↗</text>
+<rect x="52" y="726" width="286" height="264" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
+<rect x="52" y="726" width="286" height="3" fill="#20E8FF"/>
+<text x="64" y="750" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace">SYS-04</text>
+<text x="326" y="750" fill="#FF4BA8" font-size="10" font-weight="700" font-family="monospace" text-anchor="end">MULTI-AGENT AI</text>
+<text x="64" y="778" fill="#FFFFFF" font-size="15" font-weight="700" font-family="system-ui, sans-serif">HireLens AI</text>
+<text x="64" y="822" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">Multi-agent job rejection</text>
+<text x="64" y="839" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">analyzer that extracts insights</text>
+<text x="64" y="856" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">from recruitment outcomes.</text>
+<rect x="62" y="936" width="266" height="22" rx="3" fill="#132032"/>
+<text x="68" y="951" fill="#20E8FF" font-size="10" font-weight="600" font-family="monospace">Python · Streamlit · CrewAI</text>
+<text x="64" y="976" fill="#FF168A" font-size="11" font-weight="700" font-family="monospace">OPEN REPOSITORY ↗</text>
+<rect x="356" y="726" width="286" height="264" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
+<rect x="356" y="726" width="286" height="3" fill="#20E8FF"/>
+<text x="368" y="750" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace">SYS-05</text>
+<text x="630" y="750" fill="#FF4BA8" font-size="10" font-weight="700" font-family="monospace" text-anchor="end">AI LEARNING</text>
+<text x="368" y="778" fill="#FFFFFF" font-size="15" font-weight="700" font-family="system-ui, sans-serif">Lumiq</text>
+<text x="368" y="822" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">Transforms study materials into</text>
+<text x="368" y="839" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">summaries, flashcards, quizzes</text>
+<text x="368" y="856" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">and mind maps.</text>
+<rect x="366" y="936" width="266" height="22" rx="3" fill="#132032"/>
+<text x="372" y="951" fill="#20E8FF" font-size="10" font-weight="600" font-family="monospace">AI · Python · JavaScript</text>
+<text x="368" y="976" fill="#FF168A" font-size="11" font-weight="700" font-family="monospace">OPEN REPOSITORY ↗</text>
+<rect x="660" y="726" width="286" height="264" rx="6" fill="#0C1524" stroke="#22394F" stroke-width="1.2"/>
+<rect x="660" y="726" width="286" height="3" fill="#20E8FF"/>
+<text x="672" y="750" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace">SYS-06</text>
+<text x="934" y="750" fill="#FF4BA8" font-size="10" font-weight="700" font-family="monospace" text-anchor="end">WORKFLOW AUTOMATION</text>
+<text x="672" y="778" fill="#FFFFFF" font-size="15" font-weight="700" font-family="system-ui, sans-serif">AI Resume Analyzer</text>
+<text x="672" y="822" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">Automated resume analysis</text>
+<text x="672" y="839" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">workflow using AI-powered</text>
+<text x="672" y="856" fill="#A6BFD2" font-size="11.5" font-family="system-ui, sans-serif">processing and structured</text>
+<rect x="670" y="936" width="266" height="22" rx="3" fill="#132032"/>
+<text x="676" y="951" fill="#20E8FF" font-size="10" font-weight="600" font-family="monospace">n8n · LLMs · Workflow Automation</text>
+<text x="672" y="976" fill="#FF168A" font-size="11" font-weight="700" font-family="monospace">OPEN REPOSITORY ↗</text>
+<path d="M 1006 396 H 1454 L 1472 414 V 994 L 1454 1012 H 1006 L 988 994 V 414 Z" fill="#080D17" stroke="#20E8FF" stroke-width="1.6" opacity="0.95"/><path d="M 990 428 H 1470" stroke="#20E8FF" stroke-width="0.8" opacity="0.4"/><path d="M 994 412 L 1004 402" stroke="#20E8FF" stroke-width="2" fill="none"/><path d="M 1456 1006 L 1466 996" stroke="#20E8FF" stroke-width="2" fill="none"/><text x="1012" y="419" fill="#20E8FF" font-size="14" font-weight="700" font-family="monospace" letter-spacing="1.5">PANEL 04 // GITHUB TELEMETRY</text><text x="1448" y="419" fill="#6C879B" font-size="11" font-weight="600" font-family="monospace" text-anchor="end" letter-spacing="1">LIVE METRICS</text>
+<rect x="1012" y="444" width="208" height="76" rx="6" fill="#0C1524" stroke="#1F3347" stroke-width="1.2"/>
+<text x="1026" y="466" fill="#7B9BB2" font-size="10" font-weight="700" font-family="monospace">PUBLIC REPOSITORIES</text>
+<text x="1026" y="502" fill="#20E8FF" font-size="30" font-weight="800" font-family="monospace">15</text>
+<rect x="1240" y="444" width="208" height="76" rx="6" fill="#0C1524" stroke="#1F3347" stroke-width="1.2"/>
+<text x="1254" y="466" fill="#7B9BB2" font-size="10" font-weight="700" font-family="monospace">TOTAL STARS</text>
+<text x="1254" y="502" fill="#FF168A" font-size="30" font-weight="800" font-family="monospace">0</text>
+<rect x="1012" y="534" width="208" height="76" rx="6" fill="#0C1524" stroke="#1F3347" stroke-width="1.2"/>
+<text x="1026" y="556" fill="#7B9BB2" font-size="10" font-weight="700" font-family="monospace">FOLLOWERS</text>
+<text x="1026" y="592" fill="#20E8FF" font-size="30" font-weight="800" font-family="monospace">1</text>
+<rect x="1240" y="534" width="208" height="76" rx="6" fill="#0C1524" stroke="#1F3347" stroke-width="1.2"/>
+<text x="1254" y="556" fill="#7B9BB2" font-size="10" font-weight="700" font-family="monospace">FOLLOWING</text>
+<text x="1254" y="592" fill="#00FF9D" font-size="30" font-weight="800" font-family="monospace">4</text>
+<text x="1012" y="640" fill="#FF168A" font-size="13" font-weight="700" font-family="monospace" letter-spacing="1">CODEBASE LANGUAGE DISTRIBUTION</text>
+<text x="1012" y="684" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">Python</text>
+<text x="1158" y="684" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">89.7%</text>
+<rect x="1172" y="674" width="240" height="10" rx="5" fill="#142132"/>
+<rect x="1172" y="674" width="215" height="10" rx="5" fill="url(#glow-magenta)"/>
+<text x="1012" y="726" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">C++</text>
+<text x="1158" y="726" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">5.0%</text>
+<rect x="1172" y="716" width="240" height="10" rx="5" fill="#142132"/>
+<rect x="1172" y="716" width="12" height="10" rx="5" fill="url(#glow-cyan)"/>
+<text x="1012" y="768" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">HTML</text>
+<text x="1158" y="768" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">2.3%</text>
+<rect x="1172" y="758" width="240" height="10" rx="5" fill="#142132"/>
+<rect x="1172" y="758" width="6" height="10" rx="5" fill="url(#glow-magenta)"/>
+<text x="1012" y="810" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">Cython</text>
+<text x="1158" y="810" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">2.0%</text>
+<rect x="1172" y="800" width="240" height="10" rx="5" fill="#142132"/>
+<rect x="1172" y="800" width="6" height="10" rx="5" fill="url(#glow-cyan)"/>
+<text x="1012" y="852" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">C</text>
+<text x="1158" y="852" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">0.6%</text>
+<rect x="1172" y="842" width="240" height="10" rx="5" fill="#142132"/>
+<rect x="1172" y="842" width="6" height="10" rx="5" fill="url(#glow-magenta)"/>
+<text x="1012" y="894" fill="#FFFFFF" font-size="12" font-weight="600" font-family="system-ui, sans-serif">PHP</text>
+<text x="1158" y="894" fill="#20E8FF" font-size="11" font-weight="700" font-family="monospace" text-anchor="end">0.1%</text>
+<rect x="1172" y="884" width="240" height="10" rx="5" fill="#142132"/>
+<rect x="1172" y="884" width="6" height="10" rx="5" fill="url(#glow-cyan)"/>
+<rect x="1012" y="930" width="436" height="64" rx="4" fill="#0C1524" stroke="#1F3347" stroke-width="1"/>
+<text x="1024" y="950" fill="#00FF9D" font-size="10" font-weight="700" font-family="monospace">● NODE STATUS: ONLINE [200 OK]</text>
+<text x="1024" y="968" fill="#7B9BB2" font-size="10" font-family="monospace">ENGINE: PYTHON 3.12 // GITHUB ACTIONS</text>
+<text x="1024" y="984" fill="#7B9BB2" font-size="10" font-family="monospace">SYNC: 2026-11-15 06:52 UTC</text>
+</svg>
