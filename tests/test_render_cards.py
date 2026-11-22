@@ -29,7 +29,7 @@ class RenderedCards(unittest.TestCase):
         render(static=False)  # leave the animated versions on disk
 
     def test_cards_exist(self):
-        for name in ["hero.svg", "heatmap.svg", "activity.svg", "build.svg", "ai.svg", "secure.svg",
+        for name in ["hero.svg", "heatmap.svg", "activity.svg", "portfolio.svg", "ai.svg", "linkedin.svg",
                      "title-coding-light.svg", "title-coding-dark.svg"]:
             self.assertIn(name, self.cards)
         self.assertEqual(sum(n.startswith("repo-") for n in self.cards), 3)
