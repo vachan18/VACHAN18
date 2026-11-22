@@ -10,7 +10,6 @@
   "linkedin": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128",
   "portfolio": "https://vachanmyportfolio.netlify.app/",
   "devfolio": "https://devfolio.co/@Vachanus",
-  "refresh_hours": 6,
   "skills": {
     "Languages": [
       "Python",
@@ -165,6 +164,50 @@
         "Workflow Automation"
       ],
       "url": "https://github.com/vachan18/ai-resume-analyzer-n8n"
+    }
+  ],
+  "featured_repos": [
+    "Revora",
+    "HirelensAi",
+    "AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION"
+  ],
+  "repo_titles": {
+    "AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION": "Agro Vision Robot",
+    "HirelensAi": "HireLens AI"
+  },
+  "tiles": [
+    {
+      "id": "build",
+      "label": "BUILD",
+      "color": "blue",
+      "value": "auto:public_repos",
+      "suffix": "",
+      "unit": "public repos",
+      "line": "Full-stack apps, shipped end to end",
+      "cta": "Portfolio",
+      "url": "https://vachanmyportfolio.netlify.app/"
+    },
+    {
+      "id": "ai",
+      "label": "AI",
+      "color": "red",
+      "value": 8,
+      "suffix": "+",
+      "unit": "AI & agent builds",
+      "line": "GenAI, CrewAI, LangGraph, YOLOv8",
+      "cta": "See Revora",
+      "url": "https://github.com/vachan18/Revora"
+    },
+    {
+      "id": "secure",
+      "label": "SECURE",
+      "color": "yellow",
+      "value": 30,
+      "suffix": "",
+      "unit": "CPE credits",
+      "line": "Ethical hacking & web app security",
+      "cta": "LinkedIn",
+      "url": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128"
     }
   ]
 }
