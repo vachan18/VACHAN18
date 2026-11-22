@@ -360,11 +360,24 @@ def tile(t: dict, idx: int) -> str:
     W = H = 290
     PAD = 5
     bg, fg, soft = TILE[t["color"]]
-    value = DATA["public_repos"] if t["value"] == "auto:public_repos" else int(t["value"])
-    label = f'{t["label"]}: {value}{t.get("suffix", "")} {t["unit"]}. {t["line"]}'
     start = 2.9 + idx * .18
+    if "headline" in t:  # words instead of a number, e.g. a contact tile
+        words = t["headline"].split()
+        lines = [t["headline"]] if measure(t["headline"], "serif", 64) <= W - 48 else \
+            [" ".join(words[:len(words) // 2 or 1]), " ".join(words[len(words) // 2 or 1:])]
+        size = min(64, min((W - 48) / max(measure(ln, "serif", 1) for ln in lines), 64))
+        main = "".join(
+            f'<text class="r" {d(start + .35 + i * .12)} x="22" y="{170 - (len(lines) - 1 - i) * size * .92:.1f}" '
+            f'font-family="{SERIF}" font-size="{size:.1f}" fill="{fg}"'
+            f'{" font-style=\"italic\"" if i == len(lines) - 1 and len(lines) > 1 else ""}>{esc(ln)}</text>'
+            for i, ln in enumerate(lines))
+        label = f'{t["label"]}: {t["headline"]}. {t["unit"]}, {t["line"]}'
+    else:
+        value = DATA["public_repos"] if t["value"] == "auto:public_repos" else int(t["value"])
+        label = f'{t["label"]}: {value}{t.get("suffix", "")} {t["unit"]}. {t["line"]}'
+        num_attrs = f'font-family="{SERIF}" font-size="112" fill="{fg}" letter-spacing="-2"'
+        main = count_up(20, 170, value, num_attrs, begin=start + .35, suffix=t.get("suffix", ""))
 
-    num_attrs = f'font-family="{SERIF}" font-size="112" fill="{fg}" letter-spacing="-2"'
     body = [f'<clipPath id="c{idx}"><rect width="{W}" height="{H}" rx="20"/></clipPath>']
     g = [f'<rect width="{W}" height="{H}" rx="20" fill="{bg}"/>',
          f'<circle class="ring" style="animation-delay:{start + 1.2:.2f}s" cx="{W - 26}" cy="26" r="40" '
@@ -373,7 +386,7 @@ def tile(t: dict, idx: int) -> str:
          f'{esc(t["label"])}</text>',
          f'<g class="nudge"><path d="M{W - 34} 38 L{W - 20} 24 M{W - 31} 24 H{W - 20} V35" '
          f'stroke="{fg}" stroke-width="2" fill="none" stroke-linecap="round"/></g>',
-         count_up(20, 170, value, num_attrs, begin=start + .35, suffix=t.get("suffix", "")),
+         main,
          f'<text x="24" y="204" font-family="{SANS}" font-weight="600" font-size="17" fill="{fg}">'
          f'{esc(t["unit"])}</text>',
          f'<text x="24" y="228" font-family="{SANS}" font-size="13" fill="{soft}">'

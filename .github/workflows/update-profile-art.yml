@@ -34,6 +34,8 @@ jobs:
 
       - name: Fetch contributions and repo stats
         env:
+          # Optional repo secret: a fine-grained/classic PAT so private contributions count.
+          PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/fetch_contributions.py
 

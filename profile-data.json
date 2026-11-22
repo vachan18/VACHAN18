@@ -7,8 +7,8 @@
   "education": "B.Tech Computer Science & Engineering \u00b7 Dr. Ambedkar Institute of Technology \u00b7 2022\u20132026",
   "bio": "Building intelligent applications, engineering reliable systems, and exploring the next generation of software.",
   "email": "vachan.us@gmail.com",
-  "linkedin": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128",
-  "portfolio": "https://vachanmyportfolio.netlify.app/",
+  "linkedin": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128/",
+  "portfolio": "https://vachanportfolio.sryze.cc",
   "devfolio": "https://devfolio.co/@Vachanus",
   "skills": {
     "Languages": [
@@ -167,25 +167,26 @@
     }
   ],
   "featured_repos": [
-    "Revora",
+    "Lumiq---Smart-Learning-Platforms",
     "HirelensAi",
     "AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION"
   ],
   "repo_titles": {
     "AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION": "Agro Vision Robot",
-    "HirelensAi": "HireLens AI"
+    "HirelensAi": "HireLens AI",
+    "Lumiq---Smart-Learning-Platforms": "Lumiq"
   },
   "tiles": [
     {
-      "id": "build",
-      "label": "BUILD",
+      "id": "portfolio",
+      "label": "PORTFOLIO",
       "color": "blue",
       "value": "auto:public_repos",
       "suffix": "",
-      "unit": "public repos",
-      "line": "Full-stack apps, shipped end to end",
-      "cta": "Portfolio",
-      "url": "https://vachanmyportfolio.netlify.app/"
+      "unit": "projects on GitHub",
+      "line": "vachanportfolio.sryze.cc",
+      "cta": "Open portfolio",
+      "url": "https://vachanportfolio.sryze.cc"
     },
     {
       "id": "ai",
@@ -195,19 +196,18 @@
       "suffix": "+",
       "unit": "AI & agent builds",
       "line": "GenAI, CrewAI, LangGraph, YOLOv8",
-      "cta": "See Revora",
-      "url": "https://github.com/vachan18/Revora"
+      "cta": "Browse repos",
+      "url": "https://github.com/vachan18?tab=repositories"
     },
     {
-      "id": "secure",
-      "label": "SECURE",
+      "id": "linkedin",
+      "label": "LINKEDIN",
       "color": "yellow",
-      "value": 30,
-      "suffix": "",
-      "unit": "CPE credits",
-      "line": "Ethical hacking & web app security",
-      "cta": "LinkedIn",
-      "url": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128"
+      "headline": "Let\u2019s connect",
+      "unit": "Vachan U S",
+      "line": "Software Engineer at Synapx",
+      "cta": "linkedin.com/in/vachan-u-s",
+      "url": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128/"
     }
   ]
 }

@@ -2,7 +2,8 @@
 """Fetch the last year of GitHub contributions + featured repo metadata.
 
 Writes data/contributions.json, which render_readme_cards.py reads.
-Token: GITHUB_TOKEN env var, falling back to `gh auth token` locally.
+Token: PROFILE_TOKEN (a personal token, so private contributions are counted),
+then GITHUB_TOKEN, then `gh auth token` locally.
 """
 from __future__ import annotations
 
@@ -26,6 +27,7 @@ QUERY = """
 query($login: String!) {
   user(login: $login) {
     contributionsCollection {
+      restrictedContributionsCount
       contributionCalendar {
         totalContributions
         weeks { contributionDays { date contributionCount weekday } }
@@ -38,7 +40,7 @@ query($login: String!) {
 
 
 def get_token() -> str:
-    token = os.getenv("GITHUB_TOKEN", "").strip()
+    token = (os.getenv("PROFILE_TOKEN") or os.getenv("GITHUB_TOKEN") or "").strip()
     if not token and shutil.which("gh"):
         try:
             token = subprocess.check_output(
@@ -51,7 +53,7 @@ def get_token() -> str:
     return token
 
 
-def request(url: str, token: str, body: dict | None = None) -> dict:
+def request(url: str, token: str, body: dict | None = None, optional: bool = False) -> dict | None:
     data = json.dumps(body).encode() if body is not None else None
     req = urllib.request.Request(
         url,
@@ -67,6 +69,8 @@ def request(url: str, token: str, body: dict | None = None) -> dict:
         with urllib.request.urlopen(req, timeout=30) as resp:
             return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as err:
+        if optional and err.code in (403, 404):
+            return None
         sys.exit(f"GitHub API HTTP {err.code} on {url}: {err.read()[:300]!r}")
 
 
@@ -121,7 +125,10 @@ def main() -> None:
 
     repos = []
     for name in PROFILE["featured_repos"]:
-        r = request(f"https://api.github.com/repos/{USER}/{name}", token)
+        r = request(f"https://api.github.com/repos/{USER}/{name}", token, optional=True)
+        if r is None or r.get("private"):
+            print(f"::warning::skipping featured repo {name}: private or not found")
+            continue
         repos.append({
             "name": r["name"],
             "description": r.get("description") or "",
@@ -142,7 +149,9 @@ def main() -> None:
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
-    print(f"wrote {OUT.relative_to(ROOT)}: {out['total']} contributions, "
+    private = user["contributionsCollection"]["restrictedContributionsCount"]
+    print(f"wrote {OUT.relative_to(ROOT)}: {out['total']} contributions "
+          f"({private} private visible to this token), "
           f"streak {out['current_streak']}, {len(repos)} repos")
 
 
