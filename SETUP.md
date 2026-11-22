@@ -1,70 +1,36 @@
-# VACHAN.EXE — Cyberpunk GitHub Profile Dashboard
+# Profile cards: how this works
 
-Automated, code-generated Cyberpunk Engineering Dossier for GitHub Profile.
+The README is a column of animated SVG images. Each SVG embeds its own fonts (base64 WOFF)
+and animates with inline CSS keyframes and SMIL, the only techniques that survive GitHub's
+`<img>` sandbox (no scripts, no external requests). The layout lives in `README.md`.
 
-## 1. Directory Structure
+| Path | What |
+|---|---|
+| `profile-data.json` | Your text: name, role, bio, tiles, featured repos |
+| `scripts/fetch_contributions.py` | GitHub API to `data/contributions.json` (calendar, streaks, repo stats) |
+| `scripts/render_readme_cards.py` | Draws every card into `cards/` |
+| `scripts/make_ascii.py` | `source-photo.png` to `data/ascii.txt` (hero portrait) |
+| `scripts/subset_fonts.py` | One-off: rebuilds `fonts/*.woff` subsets |
+| `.github/workflows/update-profile-art.yml` | Daily: fetch, render, commit |
+| `legacy/` | The previous cyberpunk README, kept for reference |
 
-```text
-vachan18/
-├── .github/
-│   └── workflows/
-│       ├── refresh-dashboard.yml    # Auto-refreshes SVG dossier and README every 6 hours
-│       └── snake.yml                # Generates contribution snake animation to 'output' branch
-├── assets/
-│   ├── dossier.svg                  # Primary 1500x1040 Cyberpunk Engineering Dossier
-│   └── telemetry.svg                # Standalone 800x420 Live GitHub Telemetry HUD
-├── scripts/
-│   └── generate_dashboard.py        # Python SVG/Markdown generator with GitHub API integration
-├── profile-data.json                # Single source of truth for operator details & projects
-├── README.md                        # Rendered GitHub profile page
-├── SETUP.md                         # Architecture, automation, and operational guide
-└── .gitignore                       # Standard Python and environment ignore rules
-```
-
----
-
-## 2. Automated Telemetry Updates
-
-The GitHub Actions workflow (`.github/workflows/refresh-dashboard.yml`) executes:
-- **Scheduled:** Automatically every 6 hours (`17 */6 * * *`).
-- **Push Trigger:** On any commit modifying `profile-data.json`, `scripts/**`, or `.github/workflows/refresh-dashboard.yml` on the `main` branch.
-- **Manual Trigger:** On-demand via `workflow_dispatch` in the GitHub Actions console.
-
-### Permissions
-The workflow uses the standard built-in `GITHUB_TOKEN` with:
-```yaml
-permissions:
-  contents: write
-```
-No external or personal access tokens (PAT) are required.
-
----
-
-## 3. Local Testing & Verification
-
-To run and verify the generator locally:
+## Common tasks
 
 ```bash
-# Make sure you are in the repository root
-cd C:\Users\vacha\vachan18
-
-# Execute the generator
-python scripts/generate_dashboard.py
+pip install -r scripts/requirements.txt
+python scripts/fetch_contributions.py           # uses GITHUB_TOKEN or `gh auth token`
+python scripts/render_readme_cards.py           # animated cards
+STATIC=1 python scripts/render_readme_cards.py  # end-state cards, for screenshots
+python -m unittest discover -s tests -v
 ```
 
-The generator will:
-1. Connect to GitHub API (utilizing `gh auth token` or unauthenticated public rate limits).
-2. Query user profile telemetry and compute star totals.
-3. Query language byte weights across all public repositories.
-4. Render `assets/dossier.svg` and `assets/telemetry.svg` as valid XML.
-5. Generate `README.md` with links and updated timestamps.
+**Change your photo:** save it as `source-photo.png` in the repo root, then run
+`python scripts/make_ascii.py` and render again. A plain light background and a front-facing
+face work best. Tune with `--cols 100 --contrast 1.8 --threshold 225`.
 
----
+**Change tiles or featured repos:** edit `tiles` / `featured_repos` in `profile-data.json`,
+then fetch and render. If a repo card file name changes, update its `<img>` in `README.md`.
+The tests fail if the README points at a card that doesn't exist.
 
-## 4. Customization Guide
-
-- **Profile & Projects:** Edit `profile-data.json` to update your role, bio, location, education, skills, career history, or featured projects.
-- **Visual Design:** Edit `scripts/generate_dashboard.py` to customize the cyberpunk HUD colors, panel layouts, or typographic elements.
-- **Automatic vs Manual:**
-  - **Automatic (GitHub API):** Public repositories, followers, following, stars, and language distribution.
-  - **Manual (`profile-data.json`):** Operator bio, role, company, education, skill matrices, and project descriptions.
+**Gotcha:** keep the `<div align="center">` block in README.md free of blank lines, and keep
+each row of three cards on a single line with no spaces between tags.
