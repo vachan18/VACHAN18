@@ -24,9 +24,17 @@ STATIC=1 python scripts/render_readme_cards.py  # end-state cards, for screensho
 python -m unittest discover -s tests -v
 ```
 
-**Change your photo:** save it as `source-photo.png` in the repo root, then run
-`python scripts/make_ascii.py` and render again. A plain light background and a front-facing
-face work best. Tune with `--cols 100 --contrast 1.8 --threshold 225`.
+**Change your photo:** save it as `source-photo.png` in the repo root, then regenerate the
+portrait and render again. The current portrait was made with:
+
+```bash
+pip install opencv-python   # only needed for --cutout (background removal)
+python scripts/make_ascii.py --crop 270,50,690,500 --cutout --cols 110 --contrast 1.25
+python scripts/render_readme_cards.py
+```
+
+`--crop` is `x0,y0,x1,y1` in photo pixels (head and shoulders reads best). `--cutout` removes a
+busy background with OpenCV GrabCut. More `--cols` gives more detail but smaller glyphs.
 
 **Change tiles or featured repos:** edit `tiles` / `featured_repos` in `profile-data.json`,
 then fetch and render. If a repo card file name changes, update its `<img>` in `README.md`.

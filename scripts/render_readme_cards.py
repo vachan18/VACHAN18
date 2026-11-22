@@ -227,18 +227,23 @@ def hero() -> str:
              f'<tspan fill="{BLUE}">GENAI · BACKEND · SECURITY</tspan></text>')
 
     # ASCII portrait, printed row by row.
-    rows = (ROOT / "data" / "ascii.txt").read_text(encoding="utf-8").rstrip("\n").split("\n")
+    rows = (ROOT / "data" / "ascii.txt").read_text(encoding="utf-8").rstrip().splitlines()
     cols = max(len(r) for r in rows)
     box_x, box_y, box_w, box_h = 480, 30, 370, H - 60
     lh = min(box_h / len(rows), box_w / (cols * 0.6))
     fs = round(lh, 3)
     px = box_x + (box_w - cols * 0.6 * lh) / 2
     py = box_y + (box_h - len(rows) * lh) / 2 + lh * 0.8
-    b.append(f'<g font-family="{MONO}" font-size="{fs}" fill="{INK}" xml:space="preserve">')
+    # Browsers disagree on xml:space / white-space in SVG, so never rely on spaces:
+    # leading spaces become an x offset, inner spaces become no-break spaces.
+    b.append(f'<g font-family="{MONO}" font-size="{fs}" fill="{INK}">')
+    cw = 0.6 * lh
     for i, row in enumerate(rows):
-        if row.strip():
-            b.append(f'<text class="t" {d(.35 + i * .018)} x="{px:.1f}" y="{py + i * lh:.2f}">'
-                     f'{esc(row)}</text>')
+        body = row.strip()
+        if body:
+            indent = len(row) - len(row.lstrip())
+            b.append(f'<text class="t" {d(.35 + i * .018)} x="{px + indent * cw:.1f}" '
+                     f'y="{py + i * lh:.2f}">{esc(body).replace(" ", chr(0xA0))}</text>')
     b.append("</g>")
 
     defs = shine_gradient("shine", INK, BLUE, 420, begin=1.6)

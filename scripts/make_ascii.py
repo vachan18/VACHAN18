@@ -38,19 +38,54 @@ def placeholder(text: str = "V") -> Image.Image:
     return img.filter(ImageFilter.GaussianBlur(6))
 
 
+def cutout(img: Image.Image) -> Image.Image:
+    """Remove a busy background with OpenCV GrabCut (subject assumed centred in frame)."""
+    import cv2
+    import numpy as np
+    rgb = np.array(img.convert("RGB"))[:, :, ::-1].copy()
+    h, w = rgb.shape[:2]
+    mask = np.zeros((h, w), np.uint8)
+    rect = (int(w * .05), int(h * .04), int(w * .90), int(h * .96))
+    bgd, fgd = np.zeros((1, 65), np.float64), np.zeros((1, 65), np.float64)
+    cv2.grabCut(rgb, mask, rect, bgd, fgd, 8, cv2.GC_INIT_WITH_RECT)
+    fg = np.where((mask == cv2.GC_FGD) | (mask == cv2.GC_PR_FGD), 255, 0).astype(np.uint8)
+    # keep only the largest blob (the person), smooth the edge
+    n, labels, stats, _ = cv2.connectedComponentsWithStats(fg)
+    if n > 1:
+        big = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
+        fg = np.where(labels == big, 255, 0).astype(np.uint8)
+    fg = cv2.morphologyEx(fg, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+    out = img.convert("RGBA")
+    out.putalpha(Image.fromarray(fg))
+    return out
+
+
 def to_ascii(img: Image.Image, cols: int, contrast: float, threshold: int) -> list[str]:
-    img = ImageOps.exif_transpose(img).convert("L")
-    img = ImageOps.autocontrast(img, cutoff=1)
-    img = ImageEnhance.Contrast(img).enhance(contrast)
-    rows = max(1, round(cols * img.height / img.width * CELL_ASPECT))
-    img = img.resize((cols, rows), Image.LANCZOS)
-    px = img.load()
+    img = ImageOps.exif_transpose(img)
+    alpha = img.getchannel("A") if img.mode == "RGBA" else None
+    gray = img.convert("L")
+    if alpha is not None:
+        # Equalise tones over the subject only, so dark clothing keeps its folds
+        # instead of collapsing into a solid block of '@'.
+        subject = alpha.point(lambda v: 255 if v >= 128 else 0)
+        gray = ImageOps.equalize(gray, mask=subject)
+        gray = Image.composite(gray, Image.new("L", gray.size, 255), subject)
+    else:
+        gray = ImageOps.autocontrast(gray, cutoff=1)
+    gray = ImageEnhance.Contrast(gray).enhance(contrast)
+    rows = max(1, round(cols * gray.height / gray.width * CELL_ASPECT))
+    gray = gray.resize((cols, rows), Image.LANCZOS)
+    a = alpha.resize((cols, rows), Image.LANCZOS).load() if alpha is not None else None
+    px = gray.load()
     lines = []
     for y in range(rows):
         row = ""
         for x in range(cols):
             v = px[x, y]
-            row += " " if v >= threshold else RAMP[min(len(RAMP) - 1, v * len(RAMP) // 256)]
+            if (a is not None and a[x, y] < 128) or v >= threshold:
+                row += " "
+            else:
+                row += RAMP[min(len(RAMP) - 1, v * len(RAMP) // 256)]
         lines.append(row.rstrip())
     while lines and not lines[0].strip():
         lines.pop(0)
@@ -65,15 +100,21 @@ def main() -> None:
     ap.add_argument("--cols", type=int, default=110)
     ap.add_argument("--contrast", type=float, default=1.6)
     ap.add_argument("--threshold", type=int, default=235)
+    ap.add_argument("--crop", help="x0,y0,x1,y1 in source pixels, e.g. head and shoulders")
+    ap.add_argument("--cutout", action="store_true", help="remove background (needs opencv-python)")
     a = ap.parse_args()
 
     photo = Path(a.photo)
     img = Image.open(photo) if photo.exists() else placeholder()
     if not photo.exists():
         print(f"{photo.name} not found: writing monogram placeholder")
+    if a.crop:
+        img = img.crop(tuple(int(v) for v in a.crop.split(",")))
+    if a.cutout:
+        img = cutout(img)
     lines = to_ascii(img, a.cols, a.contrast, a.threshold)
     OUT.parent.mkdir(exist_ok=True)
-    OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    OUT.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print(f"wrote {OUT.relative_to(ROOT)}: {len(lines)} rows x {a.cols} cols")
 
 
