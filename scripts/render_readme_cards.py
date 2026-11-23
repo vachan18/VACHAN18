@@ -304,7 +304,7 @@ def heatmap() -> str:
     b.append(f'<text x="{lx + 5 * (cell + gap) + 4:.1f}" y="{ly + 9.5}" font-family="{MONO}" font-size="9.5" '
              f'fill="{MUTED}">more</text>')
     b.append(f'<text x="{x0}" y="{ly + 9.5}" font-family="{MONO}" font-size="9.5" fill="{MUTED}">'
-             f'@{esc(DATA["username"])} · updated daily</text>')
+             f'@{esc(DATA["username"])} · updated every 4h</text>')
     return svg(W, H, label, "".join(b), ("serif", "serif-i", "sans", "mono"))
 
 
