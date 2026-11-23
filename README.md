@@ -1,6 +1,6 @@
 <!--
   Every card below is an animated SVG drawn by scripts/render_readme_cards.py
-  and refreshed daily by .github/workflows/update-profile-art.yml.
+  and refreshed every 4 hours by .github/workflows/update-profile-art.yml.
   Keep this block free of blank lines, and keep each row of three cards on ONE
   line with no spaces between the tags, or GitHub will break the row.
 -->
