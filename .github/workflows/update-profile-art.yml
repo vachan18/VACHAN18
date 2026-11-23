@@ -2,7 +2,10 @@ name: Update profile art
 
 "on":
   schedule:
-    - cron: "17 2-22/4 * * *"   # every 4 hours: 7:47, 11:47, 15:47, 19:47, 23:47, 3:47 IST
+    # Every 4 hours: 7:47, 11:47, 15:47, 19:47, 23:47, 3:47 IST.
+    # No [skip ci] in the bot commit below: a [skip ci] head commit on main
+    # can stop GitHub from firing scheduled runs at all.
+    - cron: "17 2-22/4 * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -50,6 +53,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes."
           else
-            git commit -m "chore: refresh profile cards [skip ci]"
+            git commit -m "chore: refresh profile cards"
             git push
           fi
