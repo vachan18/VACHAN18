@@ -176,6 +176,12 @@
     "HirelensAi": "HireLens AI",
     "Lumiq---Smart-Learning-Platforms": "Lumiq"
   },
+  "links": [
+    { "label": "Portfolio", "url": "https://vachanportfolio.sryze.cc" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128/" },
+    { "label": "Devfolio", "url": "https://devfolio.co/@Vachanus" },
+    { "label": "Email", "url": "mailto:vachan.us@gmail.com" }
+  ],
   "tiles": [
     {
       "id": "portfolio",

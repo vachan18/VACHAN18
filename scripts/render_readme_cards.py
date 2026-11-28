@@ -309,34 +309,57 @@ def heatmap() -> str:
     return svg(W, H, label, "".join(b), ("serif", "serif-i", "sans", "mono"))
 
 
+ACTIVITY_WEEKS = 8
+NUMBER_WORDS = {6: "Six", 8: "Eight", 10: "Ten", 12: "Twelve"}
+
+
+def weekly_totals(days: list[dict], n: int = ACTIVITY_WEEKS) -> list[dict]:
+    """Last n calendar weeks (Sunday start, like the heatmap) as {"start", "count"}."""
+    today = date.today().isoformat()
+    weeks: list[dict] = []
+    for day in sorted(days, key=lambda x: x["date"]):
+        if day["date"] > today:
+            break
+        if day["weekday"] == 0 or not weeks:
+            weeks.append({"start": day["date"], "count": 0})
+        weeks[-1]["count"] += day["count"]
+    return weeks[-n:]
+
+
 def activity() -> str:
     W, H = 880, 300
-    months = DATA["months"]
-    peak = max((m["count"] for m in months), default=0) or 1
-    best = max(range(len(months)), key=lambda i: months[i]["count"])
+    weeks = weekly_totals(DATA["days"])
+    n = len(weeks)
+    peak = max((w["count"] for w in weeks), default=0) or 1
+    best = max(range(n), key=lambda i: weeks[i]["count"]) if n else -1
     busiest = DATA["busiest_day"]
-    label = (f'Monthly contributions for the last 12 months. Current streak {DATA["current_streak"]} days, '
-             f'{DATA["active_days"]} active days, busiest day {busiest["count"]} contributions.')
+    total = sum(w["count"] for w in weeks)
+    label = (f'Weekly contributions for the last {n} weeks ({total} in total). Current streak '
+             f'{DATA["current_streak"]} days, {DATA["active_days"]} active days, '
+             f'busiest day {busiest["count"]} contributions.')
 
     b = [card_bg(W, H)]
     b.append(f'<text class="f" {d(2.0)} x="48" y="52" font-family="{MONO}" font-size="12" '
-             f'letter-spacing="1.6" fill="{MUTED}">ACTIVITY</text>')
+             f'letter-spacing="1.6" fill="{MUTED}">ACTIVITY · {total:,} IN {n} WEEKS</text>')
     b.append(f'<text class="r" {d(2.05)} x="48" y="88" font-family="{SERIF}" font-size="32" fill="{INK}">'
-             f'Twelve months, <tspan font-style="italic">one bar each</tspan></text>')
-    base_y, max_h, bx, bw, bgap = 252, 120, 48, 30, 13
-    for i, m in enumerate(months):
+             f'{NUMBER_WORDS.get(n, n)} weeks, <tspan font-style="italic">one bar each</tspan></text>')
+    # Bars fill the 528px left of the stats column whatever n is.
+    base_y, max_h, bx, span = 252, 120, 48, 528
+    bgap = 16
+    bw = (span - (n - 1) * bgap) / max(n, 1)
+    for i, w in enumerate(weeks):
         x = bx + i * (bw + bgap)
-        h = max(3, max_h * m["count"] / peak)
-        col = BLUE if i == best and m["count"] else (INK if m["count"] else LINE)
-        b.append(f'<rect class="g" {d(2.2 + i * .06)} x="{x}" y="{base_y - h:.1f}" width="{bw}" '
-                 f'height="{h:.1f}" rx="4" fill="{col}"/>')
-        b.append(f'<text x="{x + bw / 2}" y="{base_y + 20}" text-anchor="middle" font-family="{MONO}" '
+        h = max(3, max_h * w["count"] / peak)
+        col = BLUE if i == best and w["count"] else (INK if w["count"] else LINE)
+        b.append(f'<rect class="g" {d(2.2 + i * .07)} x="{x:.1f}" y="{base_y - h:.1f}" width="{bw:.1f}" '
+                 f'height="{h:.1f}" rx="4" fill="{col}"><title>Week of {w["start"]}: {w["count"]}</title></rect>')
+        b.append(f'<text x="{x + bw / 2:.1f}" y="{base_y + 20}" text-anchor="middle" font-family="{MONO}" '
                  f'font-size="10.5" fill="{BLUE if i == best else MUTED}">'
-                 f'{date.fromisoformat(m["month"] + "-01"):%b}</text>')
-        if i == best and m["count"]:
-            b.append(f'<text class="p" {d(2.2 + 12 * .06 + .3)} x="{x + bw / 2}" y="{base_y - h - 9:.1f}" '
-                     f'text-anchor="middle" font-family="{SANS}" font-weight="600" font-size="13" '
-                     f'fill="{BLUE}">{m["count"]}</text>')
+                 f'{date.fromisoformat(w["start"]):%b %d}</text>')
+        if w["count"]:  # every non-empty week gets its count; the best one in blue
+            b.append(f'<text class="p" {d(2.2 + n * .07 + .3 + i * .04)} x="{x + bw / 2:.1f}" '
+                     f'y="{base_y - h - 9:.1f}" text-anchor="middle" font-family="{SANS}" font-weight="600" '
+                     f'font-size="13" fill="{BLUE if i == best else INK}">{w["count"]}</text>')
     # stats column
     sx = 600
     b.append(f'<line x1="{sx - 24}" y1="40" x2="{sx - 24}" y2="{H - 40}" stroke="{LINE}"/>')
@@ -478,6 +501,22 @@ def repo_card(r: dict, idx: int) -> str:
     return svg(W + 2 * PAD, H + 2 * PAD, label, inner, ("serif", "sans", "mono"))
 
 
+def link_pill(link: dict, idx: int) -> str:
+    """Small footer button: mono label + arrow, same paper style as the repo cards."""
+    W, H, PAD = 200, 52, 4
+    start = 4.6 + idx * .08
+    text = link["label"].upper()
+    tw = measure(text, "mono", 12) + 1.6 * (len(text) - 1)  # include letter-spacing
+    x0 = (W - tw - 22) / 2
+    b = [card_bg(W, H),
+         f'<text x="{x0:.1f}" y="{H / 2 + 4.5}" font-family="{MONO}" font-size="12" letter-spacing="1.6" '
+         f'fill="{INK}">{esc(text)}</text>',
+         f'<g class="nudge"><path d="M{x0 + tw + 12:.1f} {H / 2 + 5} l9 -9 m-7 0 h7 v7" stroke="{BLUE}" '
+         f'stroke-width="1.7" fill="none" stroke-linecap="round"/></g>']
+    inner = f'<g class="f" {d(start)} transform="translate({PAD} {PAD})">{"".join(b)}</g>'
+    return svg(W + 2 * PAD, H + 2 * PAD, link["label"], inner, ("mono",))
+
+
 def slug(name: str) -> str:
     return "".join(c if c.isalnum() else "-" for c in name.lower()).strip("-")[:40]
 
@@ -490,6 +529,8 @@ def main() -> None:
         out[f'{t["id"]}.svg'] = tile(t, i)
     for i, r in enumerate(DATA["repos"]):
         out[f'repo-{slug(r["name"])}.svg'] = repo_card(r, i)
+    for i, link in enumerate(PROFILE.get("links", [])):
+        out[f'link-{slug(link["label"])}.svg'] = link_pill(link, i)
     stale = {p.name for p in CARDS.glob("*.svg")} - set(out)
     for name in stale:
         (CARDS / name).unlink()
