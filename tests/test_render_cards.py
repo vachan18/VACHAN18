@@ -33,7 +33,7 @@ class RenderedCards(unittest.TestCase):
                      "linkedin.svg",
                      "title-coding.svg"]:
             self.assertIn(name, self.cards)
-        self.assertEqual(sum(n.startswith("repo-") for n in self.cards), 3)
+        self.assertEqual(sum(n.startswith("repo-") for n in self.cards), 4)
         for name in ["link-portfolio.svg", "link-linkedin.svg", "link-devfolio.svg", "link-email.svg"]:
             self.assertIn(name, self.cards)
 

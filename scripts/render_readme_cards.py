@@ -474,7 +474,7 @@ def repo_card(r: dict, idx: int) -> str:
     PAD = 5
     titles = PROFILE.get("repo_titles", {})
     name = titles.get(r["name"], r["name"])
-    desc = r["description"] or next(
+    desc = PROFILE.get("repo_descriptions", {}).get(r["name"]) or r["description"] or next(
         (p["description"] for p in PROFILE.get("projects", []) if p["url"].rstrip("/").lower() == r["url"].lower()),
         "")
     lines = wrap(desc, "sans", 13, W - 48, 3)
