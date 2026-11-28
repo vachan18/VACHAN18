@@ -41,6 +41,7 @@ TILE = {  # bg, fg, soft
     "blue": (BLUE, "#ffffff", "rgba(255,255,255,.72)"),
     "red": (RED, "#ffffff", "rgba(255,255,255,.75)"),
     "yellow": (YELLOW, INK, "rgba(17,17,17,.68)"),
+    "paper": (PAPER, INK, "rgba(17,17,17,.62)"),
 }
 HEAT = ["#e4e4df", "#c7d2ff", "#8ea4ff", "#5577ff", BLUE, "#1d38c9"]
 LANG = {"Python": "#3572A5", "JavaScript": "#f1e05a", "TypeScript": "#3178c6",
@@ -304,7 +305,7 @@ def heatmap() -> str:
     b.append(f'<text x="{lx + 5 * (cell + gap) + 4:.1f}" y="{ly + 9.5}" font-family="{MONO}" font-size="9.5" '
              f'fill="{MUTED}">more</text>')
     b.append(f'<text x="{x0}" y="{ly + 9.5}" font-family="{MONO}" font-size="9.5" fill="{MUTED}">'
-             f'@{esc(DATA["username"])} · updated every 4h</text>')
+             f'@{esc(DATA["username"])} · updated every 2h</text>')
     return svg(W, H, label, "".join(b), ("serif", "serif-i", "sans", "mono"))
 
 
@@ -356,6 +357,23 @@ def activity() -> str:
     return svg(W, H, label, "".join(b), ("serif", "serif-i", "sans", "sans-b", "mono"))
 
 
+OPEN_SOURCE_HEADLINE_AT = 5
+
+
+def pr_tile(prs: dict) -> tuple[int, str, str]:
+    """(value, unit, line) for the PR tile. Open source takes the headline once it's substantial."""
+    merged = int(prs.get("merged") or 0)
+    ext = int(prs.get("external_merged") or 0)
+    repos = int(prs.get("repos") or 0)
+    if ext >= OPEN_SOURCE_HEADLINE_AT:
+        orgs = int(prs.get("external_orgs") or 0)
+        return ext, "open-source PRs merged", f"{orgs} orgs · {merged} PRs merged in total"
+    line = f"across {repos} repo{'s' if repos != 1 else ''}"
+    if ext:
+        line += f" · {ext} open-source"
+    return merged, "PRs merged", line
+
+
 def tile(t: dict, idx: int) -> str:
     W = H = 290
     PAD = 5
@@ -373,7 +391,13 @@ def tile(t: dict, idx: int) -> str:
             for i, ln in enumerate(lines))
         label = f'{t["label"]}: {t["headline"]}. {t["unit"]}, {t["line"]}'
     else:
-        value = DATA["public_repos"] if t["value"] == "auto:public_repos" else int(t["value"])
+        if t["value"] == "auto:prs":
+            value, unit, line = pr_tile(DATA.get("prs") or {})
+            t = {**t, "unit": unit, "line": line}
+        elif t["value"] == "auto:public_repos":
+            value = DATA["public_repos"]
+        else:
+            value = int(t["value"])
         label = f'{t["label"]}: {value}{t.get("suffix", "")} {t["unit"]}. {t["line"]}'
         num_attrs = f'font-family="{SERIF}" font-size="112" fill="{fg}" letter-spacing="-2"'
         main = count_up(20, 170, value, num_attrs, begin=start + .35, suffix=t.get("suffix", ""))

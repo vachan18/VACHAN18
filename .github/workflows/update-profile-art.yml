@@ -2,10 +2,10 @@ name: Update profile art
 
 "on":
   schedule:
-    # Every 4 hours: 7:47, 11:47, 15:47, 19:47, 23:47, 3:47 IST.
+    # Every 2 hours, at :47 IST on odd hours (5:47, 7:47, ...).
     # No [skip ci] in the bot commit below: a [skip ci] head commit on main
     # can stop GitHub from firing scheduled runs at all.
-    - cron: "17 2-22/4 * * *"
+    - cron: "17 */2 * * *"
   workflow_dispatch:
   push:
     branches: [main]

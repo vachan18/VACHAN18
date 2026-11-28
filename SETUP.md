@@ -11,7 +11,7 @@ and animates with inline CSS keyframes and SMIL, the only techniques that surviv
 | `scripts/render_readme_cards.py` | Draws every card into `cards/` |
 | `scripts/make_ascii.py` | `source-photo.png` to `data/ascii.txt` (hero portrait) |
 | `scripts/subset_fonts.py` | One-off: rebuilds `fonts/*.woff` subsets |
-| `.github/workflows/update-profile-art.yml` | Daily: fetch, render, commit |
+| `.github/workflows/update-profile-art.yml` | Every 2 hours: fetch, render, commit |
 | `legacy/` | The previous cyberpunk README, kept for reference |
 
 ## Common tasks
@@ -40,5 +40,11 @@ busy background with OpenCV GrabCut. More `--cols` gives more detail but smaller
 then fetch and render. If a repo card file name changes, update its `<img>` in `README.md`.
 The tests fail if the README points at a card that doesn't exist.
 
+**Pull Requests tile (`cards/prs.svg`):** counts your merged PRs and open-source PRs (merged
+into public repos you don't own). Open source replaces merged PRs as the headline once it
+reaches 5. Private repos count toward the totals only when the `PROFILE_TOKEN` repo secret
+(a PAT) is set, and their names are never written out. With only `GITHUB_TOKEN`, the totals
+count public repos only.
+
 **Gotcha:** keep the `<div align="center">` block in README.md free of blank lines, and keep
-each row of three cards on a single line with no spaces between tags.
+each row of cards on a single line with no spaces between tags.

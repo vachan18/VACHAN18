@@ -29,7 +29,8 @@ class RenderedCards(unittest.TestCase):
         render(static=False)  # leave the animated versions on disk
 
     def test_cards_exist(self):
-        for name in ["hero.svg", "heatmap.svg", "activity.svg", "portfolio.svg", "ai.svg", "linkedin.svg",
+        for name in ["hero.svg", "heatmap.svg", "activity.svg", "portfolio.svg", "ai.svg", "prs.svg",
+                     "linkedin.svg",
                      "title-coding-light.svg", "title-coding-dark.svg"]:
             self.assertIn(name, self.cards)
         self.assertEqual(sum(n.startswith("repo-") for n in self.cards), 3)
@@ -64,6 +65,33 @@ class RenderedCards(unittest.TestCase):
             self.assertIn("*{animation:none!important}", src, p.name)
             self.assertNotIn("<set ", src, p.name)
             self.assertNotIn("<animateTransform", src, p.name)
+
+
+class PrTileLogic(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(RENDER.parent))
+        from render_readme_cards import pr_tile
+        cls.pr_tile = staticmethod(pr_tile)
+
+    def test_no_open_source_yet(self):
+        value, unit, line = self.pr_tile({"merged": 144, "repos": 5, "external_merged": 0})
+        self.assertEqual((value, unit, line), (144, "PRs merged", "across 5 repos"))
+        self.assertNotIn("open-source", line)
+
+    def test_some_open_source(self):
+        value, _, line = self.pr_tile({"merged": 150, "repos": 7, "external_merged": 2})
+        self.assertEqual(value, 150)
+        self.assertIn("· 2 open-source", line)
+
+    def test_open_source_takes_headline(self):
+        value, unit, line = self.pr_tile({"merged": 160, "repos": 9, "external_merged": 7, "external_orgs": 3})
+        self.assertEqual(value, 7)
+        self.assertIn("open-source", unit)
+        self.assertIn("160", line)
+
+    def test_missing_data(self):
+        self.assertEqual(self.pr_tile({})[0], 0)
 
 
 if __name__ == "__main__":
