@@ -496,8 +496,7 @@ def repo_card(r: dict, idx: int) -> str:
              f'<line x1="24" y1="{H - 42}" x2="{W - 24}" y2="{H - 42}" stroke="{LINE}"/>'
              f'<circle cx="29" cy="{H - 21}" r="5" fill="{LANG.get(lang, BLUE)}"/>'
              f'<text x="41" y="{H - 17}" font-family="{MONO}" font-size="11" fill="{BODY}">{esc(lang)}</text>'
-             f'<text x="{W - 24}" y="{H - 17}" text-anchor="end" font-family="{MONO}" font-size="11" '
-             f'fill="{BODY}">★ {r["stars"]}</text></g>')
+             f'</g>')  # no star count: every featured repo is at 0 for now
     inner = f'<g transform="translate({PAD} {PAD})">{"".join(b)}</g>'
     return svg(W + 2 * PAD, H + 2 * PAD, label, inner, ("serif", "sans", "mono"))
 
