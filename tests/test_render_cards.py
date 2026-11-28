@@ -31,7 +31,7 @@ class RenderedCards(unittest.TestCase):
     def test_cards_exist(self):
         for name in ["hero.svg", "heatmap.svg", "activity.svg", "portfolio.svg", "ai.svg", "prs.svg",
                      "linkedin.svg",
-                     "title-coding-light.svg", "title-coding-dark.svg"]:
+                     "title-coding.svg"]:
             self.assertIn(name, self.cards)
         self.assertEqual(sum(n.startswith("repo-") for n in self.cards), 3)
         for name in ["link-portfolio.svg", "link-linkedin.svg", "link-devfolio.svg", "link-email.svg"]:
@@ -71,12 +71,21 @@ class RenderedCards(unittest.TestCase):
 
 
 class ReadmeLayout(unittest.TestCase):
-    def test_title_follows_github_theme(self):
-        src = README.read_text(encoding="utf-8")
-        self.assertIn("title-coding-light.svg#gh-light-mode-only", src)
-        self.assertIn("title-coding-dark.svg#gh-dark-mode-only", src)
-        body = re.sub(r"<!--.*?-->", "", src, flags=re.S)
-        self.assertNotIn("<picture>", body)  # <picture> follows the OS theme, not GitHub's
+    def test_title_is_theme_independent(self):
+        # One title card with its own background, no light/dark variants: those break when
+        # a browser extension darkens a light-mode GitHub page.
+        body = re.sub(r"<!--.*?-->", "", README.read_text(encoding="utf-8"), flags=re.S)
+        self.assertIn('src="./cards/title-coding.svg"', body)
+        self.assertNotIn("<picture>", body)
+        self.assertNotIn("mode-only", body)
+
+    def test_title_card_has_background(self):
+        render(static=True)
+        try:
+            src = (CARDS / "title-coding.svg").read_text(encoding="utf-8")
+            self.assertRegex(src, r'<rect x="\.5" y="\.5"[^>]*fill="#f3f3f1"')
+        finally:
+            render(static=False)
 
 
 class WeeklyActivity(unittest.TestCase):

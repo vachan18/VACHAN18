@@ -452,19 +452,20 @@ def tile(t: dict, idx: int) -> str:
     return svg(W + 2 * PAD, H + 2 * PAD, label, "".join(body), ("serif", "sans", "sans-b", "mono"))
 
 
-def title(dark: bool) -> str:
-    W, H = 880, 84
-    fg = "#e6edf3" if dark else INK
-    muted = "#9198a1" if dark else MUTED
+def title() -> str:
+    """Section header on its own paper card, so it reads on any page background
+    (GitHub light/dark, or a browser extension that darkens the page)."""
+    W, H = 880, 96
     label = "What I'm coding"
-    b = [f'<text class="r" {d(3.6)} x="2" y="56" font-family="{SERIF}" font-size="40" fill="{fg}">'
-         f'What I’m <tspan font-style="italic" fill="{BLUE if not dark else "#6f8cff"}">coding</tspan></text>',
-         f'<g class="f" {d(3.9)}><rect class="caret" '
-         f'x="{2 + measure("What I’m ", "serif", 40) + measure("coding", "serif-i", 40) + 6:.1f}" '
-         f'y="26" width="3" height="34" fill="{fg}"/></g>',
-         f'<text class="f" {d(3.8)} x="{W - 2}" y="54" text-anchor="end" font-family="{MONO}" '
-         f'font-size="11.5" letter-spacing="1" fill="{muted}">FEATURED REPOS ↓</text>',
-         f'<line class="f" {d(3.8)} x1="2" y1="76" x2="{W - 2}" y2="76" stroke="{fg}" stroke-opacity=".14"/>']
+    x0, base = 48, 62
+    caret_x = x0 + measure("What I’m ", "serif", 40) + measure("coding", "serif-i", 40) + 6
+    b = [f'<g class="f" {d(3.5)}>{card_bg(W, H)}</g>',
+         f'<text class="r" {d(3.6)} x="{x0}" y="{base}" font-family="{SERIF}" font-size="40" fill="{INK}">'
+         f'What I’m <tspan font-style="italic" fill="{BLUE}">coding</tspan></text>',
+         f'<g class="f" {d(3.9)}><rect class="caret" x="{caret_x:.1f}" y="{base - 30}" width="3" '
+         f'height="34" fill="{INK}"/></g>',
+         f'<text class="f" {d(3.8)} x="{W - x0}" y="{base - 2}" text-anchor="end" font-family="{MONO}" '
+         f'font-size="11.5" letter-spacing="1" fill="{MUTED}">FEATURED REPOS ↓</text>']
     return svg(W, H, label, "".join(b), ("serif", "serif-i", "mono"))
 
 
@@ -524,7 +525,7 @@ def slug(name: str) -> str:
 def main() -> None:
     CARDS.mkdir(exist_ok=True)
     out = {"hero.svg": hero(), "heatmap.svg": heatmap(), "activity.svg": activity(),
-           "title-coding-light.svg": title(False), "title-coding-dark.svg": title(True)}
+           "title-coding.svg": title()}
     for i, t in enumerate(PROFILE["tiles"]):
         out[f'{t["id"]}.svg'] = tile(t, i)
     for i, r in enumerate(DATA["repos"]):
