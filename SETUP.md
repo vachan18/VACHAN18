@@ -46,5 +46,13 @@ reaches 5. Private repos count toward the totals only when the `PROFILE_TOKEN` r
 (a PAT) is set, and their names are never written out. With only `GITHUB_TOKEN`, the totals
 count public repos only.
 
+**Tech stack strip (`cards/tech-stack.svg`):** two endlessly scrolling rows of brand logos.
+To add a technology, put its [Simple Icons](https://simpleicons.org) slug in `tech_stack.top`
+or `tech_stack.bottom` in `profile-data.json`, then run `python scripts/vendor_icons.py`
+(the only step that needs the network) and render again. Icons are stored locally in
+`data/icons.json`: Simple Icons (CC0) and, for OpenAI, Lobe Icons (MIT). Logos whose brand
+colour is too pale for the off-white card (JavaScript, React) get a dark backplate automatically.
+Only list technologies a repo actually uses.
+
 **Gotcha:** keep the `<div align="center">` block in README.md free of blank lines, and keep
 each row of cards on a single line with no spaces between tags.
