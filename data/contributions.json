@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-28T14:17:26+00:00",
+ "generated_at": "2026-11-28T14:44:25+00:00",
  "username": "vachan18",
- "total": 817,
+ "total": 818,
  "public_repos": 17,
  "days": [
   {
@@ -1856,7 +1856,7 @@
   },
   {
    "date": "2026-11-28",
-   "count": 5,
+   "count": 6,
    "weekday": 6
   }
  ],
@@ -1907,7 +1907,7 @@
   },
   {
    "month": "2026-11",
-   "count": 689
+   "count": 690
   }
  ],
  "current_streak": 3,
@@ -1943,5 +1943,35 @@
    "forks": 0,
    "url": "https://github.com/vachan18/AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION"
   }
- ]
+ ],
+ "prs": {
+  "opened": 146,
+  "merged": 144,
+  "repos": 11,
+  "top_public": [
+   {
+    "name": "Revora",
+    "count": 83
+   },
+   {
+    "name": "Sahayak",
+    "count": 15
+   },
+   {
+    "name": "VACHAN18",
+    "count": 7
+   },
+   {
+    "name": "Lumiq---Smart-Learning-Platforms",
+    "count": 1
+   },
+   {
+    "name": "StudyMind",
+    "count": 1
+   }
+  ],
+  "external_merged": 0,
+  "external_repos": 0,
+  "external_orgs": 0
+ }
 }

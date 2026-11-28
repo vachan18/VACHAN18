@@ -38,6 +38,20 @@ query($login: String!) {
 }
 """
 
+PR_QUERY = """
+query($q: String!, $cursor: String) {
+  search(query: $q, type: ISSUE, first: 100, after: $cursor) {
+    issueCount
+    pageInfo { hasNextPage endCursor }
+    nodes { ... on PullRequest { repository { name isPrivate owner { login } } } }
+  }
+}
+"""
+
+COUNT_QUERY = """
+query($q: String!) { search(query: $q, type: ISSUE, first: 1) { issueCount } }
+"""
+
 
 def get_token() -> str:
     token = (os.getenv("PROFILE_TOKEN") or os.getenv("GITHUB_TOKEN") or "").strip()
@@ -110,6 +124,62 @@ def summarise(days: list[dict]) -> dict:
     }
 
 
+def _gql(token: str, query: str, variables: dict) -> dict:
+    res = request("https://api.github.com/graphql", token, {"query": query, "variables": variables},
+                  optional=True)
+    if not res or "errors" in res:
+        raise RuntimeError(res.get("errors") if res else "no response")
+    return res["data"]
+
+
+def summarise_prs(nodes: list[dict], merged: int, opened: int) -> dict:
+    """Aggregate merged PRs per repo. Private repo names never leave this function."""
+    per_repo: dict[tuple[str, str], dict] = {}
+    for n in nodes:
+        repo = (n or {}).get("repository")
+        if not repo:
+            continue
+        key = (repo["owner"]["login"], repo["name"])
+        entry = per_repo.setdefault(key, {"private": repo["isPrivate"], "count": 0})
+        entry["count"] += 1
+    external = {k: v for k, v in per_repo.items()
+                if k[0].lower() != USER.lower() and not v["private"]}
+    public = sorted(((k, v) for k, v in per_repo.items() if not v["private"]),
+                    key=lambda kv: -kv[1]["count"])
+    return {
+        "opened": opened,
+        "merged": merged,
+        "repos": len(per_repo),
+        "top_public": [{"name": k[1] if k[0].lower() == USER.lower() else f"{k[0]}/{k[1]}",
+                        "count": v["count"]} for k, v in public[:5]],
+        "external_merged": sum(v["count"] for v in external.values()),
+        "external_repos": len(external),
+        "external_orgs": len({k[0].lower() for k in external}),
+    }
+
+
+def fetch_prs(token: str) -> dict:
+    """Merged/opened PR stats. On failure, keep the last known numbers so the card never drops to 0."""
+    try:
+        q = f"is:pr author:{USER} is:merged"
+        nodes, cursor, merged = [], None, 0
+        while True:
+            s = _gql(token, PR_QUERY, {"q": q, "cursor": cursor})["search"]
+            merged = s["issueCount"]
+            nodes += s["nodes"]
+            if not s["pageInfo"]["hasNextPage"]:
+                break
+            cursor = s["pageInfo"]["endCursor"]
+        opened = _gql(token, COUNT_QUERY, {"q": f"is:pr author:{USER}"})["search"]["issueCount"]
+        return summarise_prs(nodes, merged, opened)
+    except Exception as err:  # noqa: BLE001 - any failure falls back to cached data
+        print(f"::warning::PR stats unavailable ({err}); keeping previous values")
+        try:
+            return json.loads(OUT.read_text(encoding="utf-8")).get("prs") or {}
+        except Exception:
+            return {}
+
+
 def main() -> None:
     token = get_token()
     gql = request("https://api.github.com/graphql", token, {"query": QUERY, "variables": {"login": USER}})
@@ -146,13 +216,16 @@ def main() -> None:
         "days": days,
         **summarise(days),
         "repos": repos,
+        "prs": fetch_prs(token),
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
     private = user["contributionsCollection"]["restrictedContributionsCount"]
     print(f"wrote {OUT.relative_to(ROOT)}: {out['total']} contributions "
           f"({private} private visible to this token), "
-          f"streak {out['current_streak']}, {len(repos)} repos")
+          f"streak {out['current_streak']}, {len(repos)} repos, "
+          f"{out['prs'].get('merged', '?')} PRs merged "
+          f"({out['prs'].get('external_merged', '?')} open-source)")
 
 
 if __name__ == "__main__":
