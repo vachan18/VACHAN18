@@ -34,6 +34,8 @@ class RenderedCards(unittest.TestCase):
                      "title-coding-light.svg", "title-coding-dark.svg"]:
             self.assertIn(name, self.cards)
         self.assertEqual(sum(n.startswith("repo-") for n in self.cards), 3)
+        for name in ["link-portfolio.svg", "link-linkedin.svg", "link-devfolio.svg", "link-email.svg"]:
+            self.assertIn(name, self.cards)
 
     def test_valid_xml_with_accessible_label(self):
         for name, src in self.cards.items():
@@ -53,7 +55,8 @@ class RenderedCards(unittest.TestCase):
             self.assertLess(len(src.encode()), 150_000, name)
 
     def test_readme_references_existing_cards(self):
-        refs = re.findall(r'(?:src|srcset)="\./cards/([^"]+)"', README.read_text(encoding="utf-8"))
+        # Strip GitHub's #gh-light-mode-only / #gh-dark-mode-only theme fragments.
+        refs = re.findall(r'(?:src|srcset)="\./cards/([^"#]+)', README.read_text(encoding="utf-8"))
         self.assertTrue(refs)
         for ref in refs:
             self.assertIn(ref, self.cards, f"README points at missing card {ref}")
@@ -65,6 +68,33 @@ class RenderedCards(unittest.TestCase):
             self.assertIn("*{animation:none!important}", src, p.name)
             self.assertNotIn("<set ", src, p.name)
             self.assertNotIn("<animateTransform", src, p.name)
+
+
+class ReadmeLayout(unittest.TestCase):
+    def test_title_follows_github_theme(self):
+        src = README.read_text(encoding="utf-8")
+        self.assertIn("title-coding-light.svg#gh-light-mode-only", src)
+        self.assertIn("title-coding-dark.svg#gh-dark-mode-only", src)
+        body = re.sub(r"<!--.*?-->", "", src, flags=re.S)
+        self.assertNotIn("<picture>", body)  # <picture> follows the OS theme, not GitHub's
+
+
+class WeeklyActivity(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(RENDER.parent))
+        from render_readme_cards import weekly_totals
+        cls.weekly_totals = staticmethod(weekly_totals)
+
+    def test_groups_by_sunday_week_and_keeps_last_n(self):
+        # 2026-01-04 is a Sunday. Three full weeks with 1, 2 and 3 contributions per day.
+        from datetime import date, timedelta
+        start = date(2026, 1, 4)
+        days = [{"date": (start + timedelta(i)).isoformat(), "weekday": i % 7, "count": i // 7 + 1}
+                for i in range(21)]
+        weeks = self.weekly_totals(days, n=2)
+        self.assertEqual([w["count"] for w in weeks], [14, 21])
+        self.assertEqual(weeks[0]["start"], "2026-01-11")
 
 
 class PrTileLogic(unittest.TestCase):
