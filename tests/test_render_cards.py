@@ -37,6 +37,11 @@ class RenderedCards(unittest.TestCase):
         for name in ["link-portfolio.svg", "link-linkedin.svg", "link-devfolio.svg", "link-email.svg"]:
             self.assertIn(name, self.cards)
 
+    def test_repo_cards_hide_star_count(self):
+        for name, src in self.cards.items():
+            if name.startswith("repo-"):
+                self.assertNotIn("★", src, name)
+
     def test_valid_xml_with_accessible_label(self):
         for name, src in self.cards.items():
             root = ET.fromstring(src)
