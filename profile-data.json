@@ -167,20 +167,42 @@
     }
   ],
   "featured_repos": [
-    "Lumiq---Smart-Learning-Platforms",
-    "HirelensAi",
+    "Sahayak",
+    "Gen-AI-banking-agent",
+    "StudyMind",
     "AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION"
   ],
   "repo_titles": {
     "AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION": "Agro Vision Robot",
+    "Gen-AI-banking-agent": "GenAI Banking Agent",
+    "Sahayak": "Sahayak",
+    "StudyMind": "StudyMind",
     "HirelensAi": "HireLens AI",
     "Lumiq---Smart-Learning-Platforms": "Lumiq"
   },
+  "repo_descriptions": {
+    "Sahayak": "Voice-first, multilingual engine that finds government welfare schemes you qualify for, in your own language.",
+    "Gen-AI-banking-agent": "Conversational banking assistant on Yellow.ai, automating customer chats with Python webhook APIs.",
+    "StudyMind": "AI study coach in a single browser app: personalised schedules, active recall tests and gamified focus tools.",
+    "AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION": "Solar-powered robot that detects plant disease with YOLOv8 and sprays pesticide only where it's needed."
+  },
   "links": [
-    { "label": "Portfolio", "url": "https://vachanportfolio.sryze.cc" },
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128/" },
-    { "label": "Devfolio", "url": "https://devfolio.co/@Vachanus" },
-    { "label": "Email", "url": "mailto:vachan.us@gmail.com" }
+    {
+      "label": "Portfolio",
+      "url": "https://vachanportfolio.sryze.cc"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/vachan-u-s-0a5aa8128/"
+    },
+    {
+      "label": "Devfolio",
+      "url": "https://devfolio.co/@Vachanus"
+    },
+    {
+      "label": "Email",
+      "url": "mailto:vachan.us@gmail.com"
+    }
   ],
   "tiles": [
     {

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-28T14:55:42+00:00",
+ "generated_at": "2026-11-28T14:59:55+00:00",
  "username": "vachan18",
  "total": 827,
  "public_repos": 17,
@@ -1920,20 +1920,28 @@
  },
  "repos": [
   {
-   "name": "Lumiq---Smart-Learning-Platforms",
-   "description": "An AI-powered, all-in-one personalized learning platform that transforms your PDFs and study notes into summaries, flashcards, quizzes, mind maps, and more \u2014 right in your browser. No backend required.",
-   "language": "HTML",
+   "name": "Sahayak",
+   "description": "SAHAYAK (\u0cb8\u0cb9\u0cbe\u0caf\u0c95 / \u0938\u0939\u093e\u092f\u0915) \u2014 Government Schemes in Your Language. Pixelcraft 2026 track DS-02 entry. A sovereign, voice-first, multilingual welfare discovery and eligibility engine for Bharat.",
+   "language": "TypeScript",
    "stars": 0,
    "forks": 0,
-   "url": "https://github.com/vachan18/Lumiq---Smart-Learning-Platforms"
+   "url": "https://github.com/vachan18/Sahayak"
   },
   {
-   "name": "HirelensAi",
-   "description": "",
+   "name": "Gen-AI-banking-agent",
+   "description": "GenAI-powered live banking assistant using Yellow.ai, automating customer interactions with intelligent conversational workflows and Python webhook APIs.",
    "language": "Python",
    "stars": 0,
    "forks": 0,
-   "url": "https://github.com/vachan18/HirelensAi"
+   "url": "https://github.com/vachan18/Gen-AI-banking-agent"
+  },
+  {
+   "name": "StudyMind",
+   "description": "StudyMind Pro is a zero-dependency, single-file browser application that brings together an AI coach, personalized daily schedules, active recall testing, and gamified productivity tools into a unified workspace.",
+   "language": "HTML",
+   "stars": 0,
+   "forks": 0,
+   "url": "https://github.com/vachan18/StudyMind"
   },
   {
    "name": "AI-POWERED-PESTICIDE-SPRAYING-ROBOT-WITH-DISEASE-DETECTION",
