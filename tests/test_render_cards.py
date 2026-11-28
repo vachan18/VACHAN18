@@ -1,4 +1,5 @@
 """Checks that the rendered cards are safe and valid for GitHub's <img> sandbox."""
+import json
 import os
 import re
 import subprocess
@@ -31,7 +32,7 @@ class RenderedCards(unittest.TestCase):
     def test_cards_exist(self):
         for name in ["hero.svg", "heatmap.svg", "activity.svg", "portfolio.svg", "ai.svg", "prs.svg",
                      "linkedin.svg",
-                     "title-coding.svg"]:
+                     "title-coding.svg", "tech-stack.svg"]:
             self.assertIn(name, self.cards)
         self.assertEqual(sum(n.startswith("repo-") for n in self.cards), 4)
         for name in ["link-portfolio.svg", "link-linkedin.svg", "link-devfolio.svg", "link-email.svg"]:
@@ -73,6 +74,49 @@ class RenderedCards(unittest.TestCase):
             self.assertIn("*{animation:none!important}", src, p.name)
             self.assertNotIn("<set ", src, p.name)
             self.assertNotIn("<animateTransform", src, p.name)
+
+
+class TechStack(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(RENDER.parent))
+        import render_readme_cards as m
+        cls.m = m
+        cls.icons = json.loads((ROOT / "data" / "icons.json").read_text(encoding="utf-8"))
+        cls.rows = m.marquee_rows()
+        render(static=False)
+        cls.src = (CARDS / "tech-stack.svg").read_text(encoding="utf-8")
+
+    def test_every_slug_has_a_vendored_icon(self):
+        for r in self.rows:
+            for slug in r["slugs"]:
+                self.assertIn(slug, self.icons, f"run scripts/vendor_icons.py for {slug}")
+
+    def test_icons_defined_once_and_each_row_drawn_twice(self):
+        for slug in {s for r in self.rows for s in r["slugs"]}:
+            self.assertEqual(self.src.count(f'<symbol id="i-{slug}"'), 1, slug)
+        for r in self.rows:
+            self.assertEqual(self.src.count(f'href="#{r["id"]}-set"'), 2, r["id"])
+
+    def test_loop_distance_equals_one_set_so_it_is_seamless(self):
+        for r in self.rows:
+            self.assertEqual(r["width"], len(r["slugs"]) * self.m.PITCH)
+            self.assertGreater(r["width"], 880, "a set narrower than the card leaves a gap")
+            kf = re.search(rf'@keyframes {r["id"]}\{{from\{{transform:translateX\((-?\d+)px\)\}}'
+                           rf'to\{{transform:translateX\((-?\d+)px\)\}}\}}', self.src)
+            self.assertIsNotNone(kf, r["id"])
+            self.assertEqual(abs(int(kf.group(1)) - int(kf.group(2))), r["width"], r["id"])
+
+    def test_rows_move_in_opposite_directions(self):
+        top, bottom = self.rows
+        self.assertEqual((top["direction"], bottom["direction"]), ("right", "left"))
+        self.assertIn(f'@keyframes mq1{{from{{transform:translateX(-{top["width"]}px)}}', self.src)
+        self.assertIn("@keyframes mq2{from{transform:translateX(0px)}", self.src)
+
+    def test_every_icon_readable_on_its_backdrop(self):
+        for slug, icon in self.icons.items():
+            backdrop = self.m.INK if self.m.needs_plate(icon) else self.m.PAPER
+            self.assertGreaterEqual(self.m.contrast(icon["hex"], backdrop), self.m.MIN_CONTRAST, slug)
 
 
 class ReadmeLayout(unittest.TestCase):

@@ -204,6 +204,14 @@
       "url": "mailto:vachan.us@gmail.com"
     }
   ],
+  "tech_stack": {
+    "top": ["python", "typescript", "javascript", "html5", "css", "php", "react", "astro", "vite",
+            "tailwindcss", "framer", "nodedotjs", "fastapi", "flask", "streamlit", "sqlalchemy",
+            "pydantic", "nginx"],
+    "bottom": ["openai", "claude", "googlegemini", "ollama", "crewai", "ultralytics", "opencv",
+               "pandas", "numpy", "postgresql", "redis", "mysql", "sqlite", "supabase", "firebase",
+               "docker", "githubactions", "vercel", "n8n"]
+  },
   "tiles": [
     {
       "id": "portfolio",

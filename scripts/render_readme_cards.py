@@ -501,6 +501,96 @@ def repo_card(r: dict, idx: int) -> str:
     return svg(W + 2 * PAD, H + 2 * PAD, label, inner, ("serif", "sans", "mono"))
 
 
+# ---- tech stack marquee ----------------------------------------------------
+ICON, PITCH = 44, 80          # icon size and centre-to-centre spacing, px
+MARQUEE_SPEED = 40            # px per second
+MIN_CONTRAST = 1.6            # below this vs PAPER, an icon gets an INK backplate
+
+
+def _luminance(hex_: str) -> float:
+    h = hex_.lstrip("#")
+    c = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    c = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in c]
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+
+
+def contrast(a: str, b: str) -> float:
+    """WCAG contrast ratio between two hex colours."""
+    hi, lo = sorted((_luminance(a), _luminance(b)), reverse=True)
+    return (hi + 0.05) / (lo + 0.05)
+
+
+def needs_plate(icon: dict) -> bool:
+    return contrast(icon["hex"], PAPER) < MIN_CONTRAST
+
+
+def icon_symbol(slug: str, icon: dict) -> str:
+    """<symbol> in the icons' native 24x24 grid, brand colour baked in."""
+    path = f'fill="{icon["hex"]}" fill-rule="{icon["rule"]}" d="{icon["path"]}"'
+    if needs_plate(icon):
+        # Full-bleed logos (the JS square) sit flush on the plate so its cut-out letters
+        # read as ink, exactly like the official mark; others get an inset.
+        full = icon["path"].startswith("M0 0h24v24H0")
+        inner = f'<path {path}/>' if full else f'<path transform="translate(4.5 4.5) scale(.625)" {path}/>'
+        return (f'<symbol id="i-{slug}" viewBox="0 0 24 24"><rect width="24" height="24" '
+                f'rx="{0 if full else 5}" fill="{INK}"/>{inner}</symbol>')
+    return f'<symbol id="i-{slug}" viewBox="0 0 24 24"><path {path}/></symbol>'
+
+
+def marquee_rows() -> list[dict]:
+    """Row geometry, shared by the renderer and the tests."""
+    stack = PROFILE["tech_stack"]
+    rows = []
+    for i, (key, direction) in enumerate((("top", "right"), ("bottom", "left"))):
+        slugs = stack[key]
+        width = len(slugs) * PITCH
+        rows.append({"id": f"mq{i + 1}", "slugs": slugs, "width": width, "direction": direction,
+                     "duration": round(width / MARQUEE_SPEED, 2)})
+    return rows
+
+
+def tech_stack() -> str:
+    W, H = 880, 268
+    icons = json.loads((ROOT / "data" / "icons.json").read_text(encoding="utf-8"))
+    rows = marquee_rows()
+    slugs = list(dict.fromkeys(s for r in rows for s in r["slugs"]))
+    titles = [icons[s]["title"] for s in slugs]
+    label = f'Tech stack: {", ".join(titles)}.'
+
+    defs = ["".join(icon_symbol(s, icons[s]) for s in slugs)]
+    css = []
+    for r in rows:
+        x0 = (PITCH - ICON) / 2
+        defs.append(f'<g id="{r["id"]}-set">' + "".join(
+            f'<use href="#i-{s}" x="{x0 + i * PITCH:g}" y="0" width="{ICON}" height="{ICON}"/>'
+            for i, s in enumerate(r["slugs"])) + "</g>")
+        frm, to = (f'-{r["width"]}px', "0px") if r["direction"] == "right" else ("0px", f'-{r["width"]}px')
+        css.append(f'@keyframes {r["id"]}{{from{{transform:translateX({frm})}}to{{transform:translateX({to})}}}}'
+                   f'.{r["id"]}{{animation:{r["id"]} {r["duration"]}s linear infinite}}')
+    # Fade icons in/out at the card edges; clip to the rounded card.
+    edge = 72 / W
+    defs.append(f'<linearGradient id="edge" x1="0" x2="1" y1="0" y2="0">'
+                f'<stop offset="0" stop-color="#fff" stop-opacity="0"/>'
+                f'<stop offset="{edge:.3f}" stop-color="#fff"/><stop offset="{1 - edge:.3f}" stop-color="#fff"/>'
+                f'<stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
+                f'<mask id="fade"><rect width="{W}" height="{H}" fill="url(#edge)"/></mask>'
+                f'<clipPath id="card"><rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="17"/></clipPath>')
+
+    b = [card_bg(W, H)]
+    b.append(f'<text class="f" {d(3.3)} x="48" y="52" font-family="{MONO}" font-size="12" '
+             f'letter-spacing="1.6" fill="{MUTED}">TECH STACK · {len(slugs)} TOOLS</text>')
+    b.append(f'<text class="r" {d(3.35)} x="48" y="88" font-family="{SERIF}" font-size="32" fill="{INK}">'
+             f'The stack, <tspan font-style="italic">end to end</tspan></text>')
+    b.append(f'<text class="f" {d(3.4)} x="{W - 48}" y="52" text-anchor="end" font-family="{MONO}" '
+             f'font-size="11" letter-spacing=".6" fill="{MUTED}">VERIFIED FROM MY REPOS</text>')
+    rows_svg = "".join(
+        f'<g transform="translate(0 {116 + i * 76})"><g class="{r["id"]}">'
+        f'<use href="#{r["id"]}-set"/><use href="#{r["id"]}-set" x="{r["width"]}"/></g></g>'
+        for i, r in enumerate(rows))
+    b.append(f'<g class="f" {d(3.45)} clip-path="url(#card)"><g mask="url(#fade)">{rows_svg}</g></g>')
+    return svg(W, H, label, "".join(b), ("serif", "serif-i", "mono"), css="".join(css), defs="".join(defs))
+
+
 def link_pill(link: dict, idx: int) -> str:
     """Small footer button: mono label + arrow, same paper style as the repo cards."""
     W, H, PAD = 200, 52, 4
@@ -524,7 +614,7 @@ def slug(name: str) -> str:
 def main() -> None:
     CARDS.mkdir(exist_ok=True)
     out = {"hero.svg": hero(), "heatmap.svg": heatmap(), "activity.svg": activity(),
-           "title-coding.svg": title()}
+           "title-coding.svg": title(), "tech-stack.svg": tech_stack()}
     for i, t in enumerate(PROFILE["tiles"]):
         out[f'{t["id"]}.svg'] = tile(t, i)
     for i, r in enumerate(DATA["repos"]):
